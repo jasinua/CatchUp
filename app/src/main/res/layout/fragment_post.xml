@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".postFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background = "#618265">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background = "#618265"
+            android:padding="4sp"
+            android:layout_marginTop="8sp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@drawable/roundimage"
+                app:strokeColor="#618265"
+                app:strokeWidth="1sp"
+                android:layout_height="50sp"
+                android:layout_width="50sp"
+                android:layout_margin="4sp"
+                android:src="@drawable/logo"
+                />
+
+            <EditText
+                android:id="@+id/PostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:hint="Enter a title..."
+                android:textSize="25sp"
+                android:gravity = "left|center"
+                android:paddingStart ="10sp"
+                android:paddingEnd ="10sp"
+                android:textColorHint="#618265"
+                android:textColor="#618265"
+                android:background = "@drawable/roundborder"
+                android:layout_margin="4sp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background = "#618265"
+            android:paddingBottom = "5sp">
+
+            <EditText
+                android:id="@+id/PostContext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write here..."
+                android:textSize="20sp"
+                android:lines="15"
+                android:gravity="top"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingTop = "5sp"
+                android:background = "@drawable/roundborder"
+                android:inputType="textMultiLine"
+                android:textColorHint = "#618265"
+                android:textColor = "#618265"
+                android:layout_margin="4sp"
+                />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background = "#618265"
+            android:paddingBottom="15sp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="4sp"
+                android:padding = "3sp"
+                android:background ="@drawable/roundborder"
+                android:id="@+id/imageLayout"
+                >
+
+
+                <ImageView
+                    android:id="@+id/insertImage"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_weight="0"
+                    android:src="@drawable/baseline_image_24" />
+
+                <TextView
+                    android:id="@+id/insertImageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:gravity="left|center"
+                    android:textSize = "25sp"
+                    android:textColor="#618265"
+                    android:layout_weight="1"
+                    android:text="Insert Image" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="4sp"
+                android:padding = "3sp"
+                android:background ="@drawable/roundborder"
+                android:id="@+id/fileLayout"
+                >
+
+
+                <ImageView
+                    android:id="@+id/insertDoc"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_weight="0"
+                    android:src="@drawable/baseline_attach_file_24" />
+
+                <TextView
+                    android:id="@+id/insertDocText"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:gravity="left|center"
+                    android:textSize = "25sp"
+                    android:textColor="#618265"
+                    android:layout_weight="1"
+                    android:text="Insert File" />
+
+
+            </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="4sp"
+                    android:padding = "3sp"
+                    android:background ="@drawable/roundborder"
+                    android:id="@+id/cameraLayout"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/insertCameraImage"
+                        android:layout_width="50sp"
+                        android:layout_height="50sp"
+                        android:layout_weight="0"
+                        android:src="@drawable/camera" />
+
+                    <TextView
+                        android:id="@+id/insertCameraImageText"
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:gravity="left|center"
+                        android:textSize = "25sp"
+                        android:textColor="#618265"
+                        android:layout_weight="1"
+                        android:text="Open Camera" />
+
+
+                </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/postButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                app:layout_constraintRight_toRightOf="parent"
+                android:backgroundTint="#d9f8d1"
+                android:textColor="#618265"
+                android:textSize="25sp"
+                android:layout_margin="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+<!--      ^  vertical layouti-->
+
+</FrameLayout>
