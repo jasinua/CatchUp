@@ -27,16 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in)
 
-        val login = findViewById<Button>(R.id.logInButton)
-
-        val database = Firebase.database
-        var auth = FirebaseAuth.getInstance();
-
-        val emailText = findViewById<EditText>(R.id.idInput)
-        val passwordText = findViewById<EditText>(R.id.passwordInput)
-
-
-        print("gejuc")
 
     }
 }
