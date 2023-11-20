@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val passwordText = findViewById<EditText>(R.id.passwordInput)
 
 
-
+        print("gejuc")
 
     }
 }
