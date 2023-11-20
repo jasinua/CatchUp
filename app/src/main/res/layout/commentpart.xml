@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/commentlayout"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="7sp"
     android:background="@drawable/roundborderdark">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding = "7sp"
-        android:background="@drawable/roundborderdark"
-        >
 
-
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/commentLogo"
             android:layout_width="50sp"
             android:layout_height="50sp"
@@ -26,20 +20,18 @@
             android:id="@+id/commentText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingLeft = "7sp"
-            android:text="Text"
-            android:textSize="20sp"
-            android:gravity="center|left"
-            android:textColor="@color/darkGrey"
-            android:background="@drawable/roundborder"
             android:layout_margin="5sp"
+            android:layout_weight="1"
+            android:background="@drawable/roundborder"
+            android:gravity="center|left"
+            android:paddingLeft="7sp"
+            android:text="Text"
+            android:textColor="@color/darkGrey"
+            android:textSize="20sp"
 
             />
 
 
-
-
-    </LinearLayout>
+        <!--    </LinearLayout>-->
 
 </LinearLayout>
