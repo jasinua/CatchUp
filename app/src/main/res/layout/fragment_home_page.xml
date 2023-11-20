@@ -48,9 +48,8 @@
                     app:layout_constraintRight_toLeftOf="@id/quesetion"
                     android:layout_margin="0dp"
                     app:layout_constraintWidth_percent="0.1"
-                    android:background="#b0d9b1"
                     android:padding="1dp"
-                    android:src="@drawable/image"
+                    android:src="@drawable/logo"
                    />
 
                 <TextView

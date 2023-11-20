@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".postedFragment"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background = "@drawable/roundborderdark"
+        android:paddingBottom="7sp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal"
+            android:padding="4sp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="4sp"
+                android:src="@drawable/logo"
+                app:shapeAppearanceOverlay="@drawable/roundimage"
+                app:strokeColor="@color/darkGrey"
+                app:strokeWidth="1sp" />
+
+            <TextView
+                android:id="@+id/PostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_margin="4sp"
+                android:background="@drawable/roundborder"
+                android:gravity="left|center"
+                android:text="Title"
+                android:paddingStart="10sp"
+                android:paddingEnd="10sp"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background = "@color/darkGrey"
+            android:paddingBottom = "5sp">
+
+            <TextView
+                android:id="@+id/PostContext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:textSize="20sp"
+                android:lines="5"
+                android:gravity="top"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingTop = "5sp"
+                android:background = "@drawable/roundborder"
+                android:inputType="textMultiLine"
+                android:textColor = "@color/darkGrey"
+                android:layout_margin="4sp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5sp"
+
+            >
+
+
+
+            <TextView
+                android:id="@+id/likeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Likes"
+                android:textColor="@color/blue"
+                android:gravity = "center"
+                android:textSize = "15sp"
+
+                />
+
+            <ImageView
+                android:id="@+id/likeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:src="@drawable/thumbsup"
+                android:gravity = "center"
+
+                />
+
+            <TextView
+                android:id="@+id/commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:text="Comments"
+                android:textColor="@color/blue"
+                android:gravity = "center"
+                android:textSize = "15sp"
+
+                />
+
+            <ImageView
+                android:id="@+id/commentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:src="@drawable/comment"
+
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding = "7sp"
+            >
+
+
+            <ImageView
+                android:id="@+id/commentLogo"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_weight="0"
+                android:src="@drawable/logo"
+                />
+
+            <EditText
+                android:id="@+id/commentText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Leave a comment..."
+                android:paddingLeft = "7sp"
+                android:textSize="15sp"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/darkGrey"
+                android:background="@drawable/roundborder"
+                android:layout_margin="5sp"
+
+                />
+
+            <Button
+                android:id="@+id/postCommentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:backgroundTint="@color/blue"
+                android:textColor = "@color/darkGrey"
+
+                />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+<!--    vertical layout ^-->
+
+</FrameLayout>

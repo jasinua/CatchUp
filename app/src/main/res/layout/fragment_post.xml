@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background = "#618265">
+        android:background = "@color/darkGrey">
 
 
 
@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background = "#618265"
+            android:background = "@color/darkGrey"
             android:padding="4sp"
             android:layout_marginTop="8sp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@drawable/roundimage"
-                app:strokeColor="#618265"
+                app:strokeColor="@color/darkGrey"
                 app:strokeWidth="1sp"
                 android:layout_height="50sp"
                 android:layout_width="50sp"
@@ -44,8 +44,8 @@
                 android:gravity = "left|center"
                 android:paddingStart ="10sp"
                 android:paddingEnd ="10sp"
-                android:textColorHint="#618265"
-                android:textColor="#618265"
+                android:textColorHint="@color/darkGrey"
+                android:textColor="@color/darkGrey"
                 android:background = "@drawable/roundborder"
                 android:layout_margin="4sp"
 
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background = "#618265"
+            android:background = "@color/darkGrey"
             android:paddingBottom = "5sp">
 
             <EditText
@@ -72,8 +72,8 @@
                 android:paddingTop = "5sp"
                 android:background = "@drawable/roundborder"
                 android:inputType="textMultiLine"
-                android:textColorHint = "#618265"
-                android:textColor = "#618265"
+                android:textColorHint = "@color/darkGrey"
+                android:textColor = "@color/darkGrey"
                 android:layout_margin="4sp"
                 />
 
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background = "#618265"
+            android:background = "@color/darkGrey"
             android:paddingBottom="15sp">
 
 
@@ -106,7 +106,10 @@
                     android:layout_width="50sp"
                     android:layout_height="50sp"
                     android:layout_weight="0"
-                    android:src="@drawable/baseline_image_24" />
+                    android:src="@drawable/insertimage"
+                    android:background="@drawable/roundborderdark"
+                    android:padding= "3sp"
+                    />
 
                 <TextView
                     android:id="@+id/insertImageText"
@@ -114,9 +117,11 @@
                     android:layout_height="50sp"
                     android:gravity="left|center"
                     android:textSize = "25sp"
-                    android:textColor="#618265"
+                    android:textColor="@color/darkGrey"
                     android:layout_weight="1"
-                    android:text="Insert Image" />
+                    android:text="Insert Image"
+                    android:paddingLeft= "10sp"
+                    />
 
 
             </LinearLayout>
@@ -138,7 +143,10 @@
                     android:layout_width="50sp"
                     android:layout_height="50sp"
                     android:layout_weight="0"
-                    android:src="@drawable/baseline_attach_file_24" />
+                    android:src="@drawable/insertfile"
+                    android:background="@drawable/roundborderdark"
+                    android:padding= "3sp"
+                    />
 
                 <TextView
                     android:id="@+id/insertDocText"
@@ -146,9 +154,12 @@
                     android:layout_height="50sp"
                     android:gravity="left|center"
                     android:textSize = "25sp"
-                    android:textColor="#618265"
+                    android:textColor="@color/darkGrey"
                     android:layout_weight="1"
-                    android:text="Insert File" />
+                    android:text="Insert File"
+                    android:paddingLeft= "10sp"
+
+                    />
 
 
             </LinearLayout>
@@ -171,7 +182,10 @@
                         android:layout_width="50sp"
                         android:layout_height="50sp"
                         android:layout_weight="0"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera"
+                        android:background="@drawable/roundborderdark"
+                        android:padding= "3sp"
+                        />
 
                     <TextView
                         android:id="@+id/insertCameraImageText"
@@ -179,9 +193,12 @@
                         android:layout_height="50sp"
                         android:gravity="left|center"
                         android:textSize = "25sp"
-                        android:textColor="#618265"
+                        android:textColor="@color/darkGrey"
                         android:layout_weight="1"
-                        android:text="Open Camera" />
+                        android:text="Open Camera"
+                        android:paddingLeft= "10sp"
+
+                        />
 
 
                 </LinearLayout>
@@ -201,8 +218,8 @@
                 android:layout_height="wrap_content"
                 android:text="Post"
                 app:layout_constraintRight_toRightOf="parent"
-                android:backgroundTint="#d9f8d1"
-                android:textColor="#618265"
+                android:backgroundTint="@color/blue"
+                android:textColor="@color/darkGrey"
                 android:textSize="25sp"
                 android:layout_margin="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"/>
