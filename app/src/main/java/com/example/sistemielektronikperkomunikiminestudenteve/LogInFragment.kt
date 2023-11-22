@@ -25,25 +25,6 @@ class LogInFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
 
-        binding  = FragmentLogInBinding.inflate(layoutInflater)
-
-                dbHelper = DBHandler(this.context)
-//
-//        val db = dbHelper.writableDatabase
-
-
-        var inputEmail = binding.idInput
-        var inputPassword = binding.passwordInput
-        var button = binding.logInButton
-
-        var text = binding.logInText
-
-        button.setOnClickListener{
-
-            dbHelper.addNewStudent(inputEmail.text.toString(), inputPassword.text.toString())
-
-
-        }
 
         // Inflate the layout for this fragment
         return binding.root
