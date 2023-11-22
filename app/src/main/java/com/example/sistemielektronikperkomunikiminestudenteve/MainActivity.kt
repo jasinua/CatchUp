@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val loginEmail = findViewById<EditText>(R.id.idInput)
         val loginPass = findViewById<EditText>(R.id.passwordInput)
 
-        val emailPattern = ".*@student.uni-pr.edu"
+        val emailPattern = ".*\\..*@student.uni-pr.edu"
 
         login.setOnClickListener(){
         var exists = false
