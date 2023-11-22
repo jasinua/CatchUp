@@ -57,20 +57,11 @@ class MainActivity : AppCompatActivity() {
 
 
                     }
-
-                    for(dataSnapshot1 : DataSnapshot in dataSnapshot.getChildren()){
-
-                        var email = dataSnapshot1.child("EMAIL").getValue().toString()
-                        var pass = dataSnapshot1.child("PASS").getValue().toString()
-
-                        if(!exists){
+                    if(!exists){
                                 ref.child(count.toString()).child("EMAIL")
                                     .setValue(loginEmail.text.toString())
                                 ref.child(count.toString()).child("PASS")
                                     .setValue(loginPass.text.toString())
-
-                        }
-
                     }
 
 
@@ -81,11 +72,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
-
-
         }
-
-
     }
-
 }
