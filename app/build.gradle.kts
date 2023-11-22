@@ -49,9 +49,9 @@ android {
 dependencies {
 
 
-    implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.0")
     val fragment_version = "1.6.1"
 
     val nav_version = "2.7.5"

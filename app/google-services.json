@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "553945323557",
-    "firebase_url": "https://seks-b513e-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "seks-b513e",
-    "storage_bucket": "seks-b513e.appspot.com"
+    "project_number": "1084488790517",
+    "firebase_url": "https://seks-f1000-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "seks-f1000",
+    "storage_bucket": "seks-f1000.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:553945323557:android:1f92b7e2bed96fe3b847cc",
+        "mobilesdk_app_id": "1:1084488790517:android:03ac4be0a88106eaa3f0bc",
         "android_client_info": {
           "package_name": "com.example.sistemielektronikperkomunikiminestudenteve"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfIyqmATQ-FyYVBz2gZ2yncveXiv2OTOE"
+          "current_key": "AIzaSyAjcr_puvy_gVPkruYW0-8p4yW3S2Xo4NM"
         }
       ],
       "services": {
