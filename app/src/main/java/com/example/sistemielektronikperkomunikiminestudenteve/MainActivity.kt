@@ -34,70 +34,58 @@ class MainActivity : AppCompatActivity() {
 
 
         val login = findViewById<Button>(R.id.logInButton)
-        val loginEmail = findViewById<EditText>(R.id.idInput)
+        val loginID = findViewById<EditText>(R.id.idInput)
         val loginPass = findViewById<EditText>(R.id.passwordInput)
 
-        val emailPattern = ".*\\..*@student.uni-pr.edu"
+        val idLength = 12;
 
         login.setOnClickListener(){
-        var exists = false
             ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val count = dataSnapshot.childrenCount
-                    if (loginEmail.text.toString().equals("")) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Please enter a student email",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+
+                    if (loginID.text.toString().equals("")) {
+
+                        Toast.makeText(applicationContext, "Please enter a student email", Toast.LENGTH_SHORT).show()
+
+
                     } else if (loginPass.text.toString().equals("")) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Please enter a password",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                        Toast.makeText(applicationContext,"Please enter a password", Toast.LENGTH_SHORT).show()
+
                     } else {
+
+
                         for (dataSnapshot1: DataSnapshot in dataSnapshot.getChildren()) {
 
-                            var email = dataSnapshot1.child("EMAIL").getValue().toString()
-                            var pass = dataSnapshot1.child("PASS").getValue().toString()
+                            val id = dataSnapshot1.key.toString()
+                            val pass = dataSnapshot1.child("PASS").getValue().toString()
 
 
-                            if (!exists) {
-
-                                if (email.equals(loginEmail.text.toString()) && pass.equals(
-                                        loginPass.text.toString()
-                                    )
-                                ) {
-                                    exists = true
-                                    Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT)
-                                        .show()
+                                if (id.equals(loginID.text.toString()) && pass.equals(loginPass.text.toString())) {
+                                    Log.d("TAG","login works")
+                                    Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
                                     setContentView(R.layout.fragment_home_page)
                                 }
-                            }
+
+
                         }
-                        if (!exists && loginEmail.text.toString().matches(Regex(emailPattern))) {
 
-                            ref.child(count.toString()).child("EMAIL")
-                                .setValue(loginEmail.text.toString())
-                            ref.child(count.toString()).child("PASS")
-                                .setValue(loginPass.text.toString())
+                         if(!(loginID.text.toString().length==idLength)){
+                            Toast.makeText(applicationContext, "Invalid student ID", Toast.LENGTH_SHORT).show()
+                         }
 
-                            Toast.makeText(applicationContext, "Register successful", Toast.LENGTH_SHORT)
-                                .show()
-
-                        } else if(!loginEmail.text.toString().matches(Regex(emailPattern))){
-                            Toast.makeText(applicationContext, "Invalid student email", Toast.LENGTH_SHORT)
-                                .show()
-                        }
 
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
 
                 }
-            })
+
+                })
+            }
+
         }
+
     }
-}
