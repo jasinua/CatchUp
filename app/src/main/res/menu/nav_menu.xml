@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu"
+    android:visibility="invisible"
+    >
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="Home"
+        android:iconTint="@color/icon"
+
+        />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/bell"
+        android:title="Notifications"
+        android:iconTint="@color/icon"
+
+        />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        android:title="Profile"
+        android:iconTint="@color/icon"
+
+        />
+
+    <item
+        android:id="@+id/documnets"
+        android:icon="@drawable/docs"
+        android:title="Documents"
+        android:iconTint="@color/icon"
+
+        />
+    <item
+        android:id="@+id/post"
+        android:icon="@drawable/add"
+        android:title="Post"
+        android:iconTint="@color/icon"
+
+        />
+
+
+</menu>
