@@ -6,7 +6,7 @@ plugins {
 
 
 
-
+// build.gradle.kts
 
 android {
     namespace = "com.example.sistemielektronikperkomunikiminestudenteve"
@@ -21,6 +21,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {
@@ -48,7 +50,7 @@ android {
 
 dependencies {
 
-
+    implementation("com.github.Zhuinden:fragmentviewbindingdelegate-kt:1.0.2")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-database:20.3.0")
