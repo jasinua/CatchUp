@@ -2,29 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_nav"
-    >
+    android:id="@+id/my_nav">
 
-    <fragment
-        android:id="@+id/postFragment"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postFragment"
-        android:label="Post"
-        tools:layout="@layout/fragment_post" />
 
-    <fragment
-        android:id="@+id/postedFragment"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postedFragment"
-        android:label="Posted"
-        tools:layout="@layout/fragment_posted" >
-        <action
-            android:id="@+id/action_postedFragment_to_postFragment"
-            app:destination="@id/postFragment" />
-        <action
-            android:id="@+id/action_postedFragment_to_logInFragment"
-          />
-    </fragment>
-    <fragment
-        android:id="@+id/focusedPost"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.focusedPost"
-        android:label="Focus" />
+
 </navigation>

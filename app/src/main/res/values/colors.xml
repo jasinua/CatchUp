@@ -5,4 +5,6 @@
     <color name="darkGrey">#33383d</color>
     <color name="blue">#9DB3C1</color>
     <color name="icon">#DFE6EE</color>
+    <color name="menu">#1D2023</color>
+    <color name="background">#131416</color>
 </resources>

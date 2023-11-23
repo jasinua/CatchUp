@@ -1,5 +1,6 @@
 package com.example.sistemielektronikperkomunikiminestudenteve
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,18 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 
-class LogInFragment : Fragment() {
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-    }
-
-
-
+@SuppressLint("ResourceType")
+class LogInFragment : Fragment(R.layout.fragment_log_in) {
 
 }
