@@ -7,4 +7,14 @@
     <color name="icon">#DFE6EE</color>
     <color name="menu">#1D2023</color>
     <color name="background">#131416</color>
+
+    <!-- Primary brand color.   -->
+    <color name="colorPrimary">@color/blue</color>
+    <color name="colorPrimaryVariant">@color/darkGrey</color>
+    <color name="colorOnPrimary">@color/blue</color>
+    <!-- Secondary brand color. -->
+    <color name="colorSecondary">@color/blue</color>
+    <color name="colorSecondaryVariant">@color/menu</color>
+    <color name="colorOnSecondary">@color/black</color>
+
 </resources>

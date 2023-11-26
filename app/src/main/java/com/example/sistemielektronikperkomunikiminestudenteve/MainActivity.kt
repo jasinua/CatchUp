@@ -91,36 +91,9 @@ class MainActivity : AppCompatActivity() {
                                         "Login successful",
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                    loggedIn = true
-                                    setContentView(R.layout.activity_main)
-                                    navigation = findViewById(R.id.bottomNavigationView)
-                                    setCurrentFragment(HomePageFragment())
 
-
-                                    navigation.setOnNavigationItemSelectedListener() {
-
-
-                                        val homePage = HomePageFragment()
-                                        val notificationPage = NotificationFragment()
-//            val profilePage=ProfileFragment()
-//            val documentPage=DocumentFragment()
-                                        val postPage = postFragment()
-
-
-                                        when (it.itemId) {
-                                            R.id.home -> setCurrentFragment(homePage)
-                                            R.id.notification -> setCurrentFragment(notificationPage)
-//                    R.id.settings -> setCurrentFragment(profilePage)
-//                    R.id.person -> setCurrentFragment(documnetPage)
-                                            R.id.post -> setCurrentFragment(postPage)
-
-                                        }
-                                        true
-
-                                    }
+                                    startNavBar()
                                 }
-
-
                             }
 
                             if (!(loginID.text.toString().length == idLength)) {
@@ -145,9 +118,38 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun setCurrentFragment(fragment:Fragment)=
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment,fragment)
-            commit()
+        private fun setCurrentFragment(fragment:Fragment)=
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment,fragment)
+                commit()
+            }
+
+    private fun startNavBar(){
+        setContentView(R.layout.activity_main)
+        navigation = findViewById(R.id.bottomNavigationView)
+        setCurrentFragment(HomePageFragment())
+
+
+        navigation.setOnNavigationItemSelectedListener() {
+
+
+            val homePage = HomePageFragment()
+            val notificationPage = NotificationFragment()
+//                                      val profilePage=ProfileFragment()
+            val documentPage=DocumentsFragment()
+            val postPage = postFragment()
+
+
+            when (it.itemId) {
+                R.id.home -> setCurrentFragment(homePage)
+                R.id.notification -> setCurrentFragment(notificationPage)
+//                                          R.id.settings -> setCurrentFragment(profilePage)
+                R.id.documnets -> setCurrentFragment(documentPage)
+                R.id.post -> setCurrentFragment(postPage)
+
+            }
+            true
+
         }
+    }
 }

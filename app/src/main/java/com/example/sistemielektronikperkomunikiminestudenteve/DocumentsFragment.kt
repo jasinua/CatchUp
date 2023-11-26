@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class NotificationFragment : Fragment(R.layout.fragment_focused_post) {
 
+class DocumentsFragment : Fragment(R.layout.fragment_documents) {
 
 }

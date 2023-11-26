@@ -41,7 +41,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/nav_menu"
-
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         />
 
 </RelativeLayout>
