@@ -25,7 +25,6 @@ import com.google.firebase.database.database
 import com.google.firebase.database.getValue
 import org.w3c.dom.DocumentFragment
 
-//je kan tu munu me e nrreq mu ba switch me navigation bar se nuk te bajke the when() - 2:44am
 class MainActivity : AppCompatActivity() {
 
     lateinit var navigation: BottomNavigationView

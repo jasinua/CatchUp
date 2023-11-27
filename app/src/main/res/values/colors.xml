@@ -2,11 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="darkGrey">#33383d</color>
-    <color name="blue">#9DB3C1</color>
-    <color name="icon">#DFE6EE</color>
-    <color name="menu">#1D2023</color>
-    <color name="background">#131416</color>
+    <color name="darkGrey">#3A3131</color>
+    <color name="blue">#FFD1D1</color>
+    <color name="icon">#EDDEDE</color>
+    <color name="menu">#211B1B</color>
+    <color name="background">#141111</color>
 
     <!-- Primary brand color.   -->
     <color name="colorPrimary">@color/blue</color>

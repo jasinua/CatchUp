@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProfileFragment"
+    android:background="@color/background">
+
+
+    <LinearLayout
+        android:id="@+id/MainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/topMenuStuff"
+            android:layout_width="match_parent"
+            android:layout_height="75sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/menu"
+            >
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:layout_margin="0sp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:padding="1sp"
+                android:src="@drawable/logo"
+                android:layout_marginLeft="10sp"
+
+                />
+
+            <TextView
+                android:id="@+id/quesetion"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Your Profile"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/font_one"
+                android:padding="10sp"
+                android:paddingEnd="10sp"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:gravity = "center|left"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_weight="1"
+                />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+<!--    Vertical layout ^ -->
+
+</FrameLayout>
