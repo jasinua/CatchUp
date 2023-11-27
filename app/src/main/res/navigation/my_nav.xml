@@ -2,8 +2,45 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_nav">
-
-
-
+    android:id="@+id/my_nav"
+    app:startDestination="@id/logInFragment">
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_homePageFragment2"
+            app:destination="@id/homePageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePageFragment2"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment2_to_postFragment"
+            app:destination="@id/postFragment" />
+        <action
+            android:id="@+id/action_homePageFragment2_to_postedFragment"
+            app:destination="@id/postedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_postFragment_to_homePageFragment2"
+            app:destination="@id/homePageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/postedFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postedFragment"
+        android:label="fragment_focused_post"
+        tools:layout="@layout/fragment_focused_post" >
+        <action
+            android:id="@+id/action_postedFragment_to_homePageFragment2"
+            app:destination="@id/homePageFragment2" />
+    </fragment>
 </navigation>
