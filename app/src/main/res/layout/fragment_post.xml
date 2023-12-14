@@ -21,9 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background = "@color/darkGrey"
+            android:background = "@color/menu"
             android:padding="4sp"
-            android:layout_marginTop="8sp">
+            >
 
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@drawable/roundimage"
@@ -33,6 +33,7 @@
                 android:layout_width="50sp"
                 android:layout_margin="4sp"
                 android:src="@drawable/logo"
+                android:background="@drawable/roundborder"
                 />
 
             <EditText
@@ -44,8 +45,8 @@
                 android:gravity = "left|center"
                 android:paddingStart ="10sp"
                 android:paddingEnd ="10sp"
-                android:textColorHint="@color/darkGrey"
-                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/"
+                android:textColor="@color/black"
                 android:background = "@drawable/roundborder"
                 android:layout_margin="4sp"
 
@@ -74,7 +75,7 @@
                 android:inputType="textMultiLine"
                 android:textColorHint = "@color/darkGrey"
                 android:textColor = "@color/darkGrey"
-                android:layout_margin="4sp"
+                android:layout_margin="5sp"
                 />
 
 
@@ -218,8 +219,8 @@
                 android:layout_height="wrap_content"
                 android:text="Post"
                 app:layout_constraintRight_toRightOf="parent"
-                android:backgroundTint="@color/blue"
-                android:textColor="@color/darkGrey"
+                android:backgroundTint="@color/menu"
+                android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:layout_margin="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"/>

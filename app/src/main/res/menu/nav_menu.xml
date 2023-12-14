@@ -8,21 +8,21 @@
         android:id="@+id/home"
         android:icon="@drawable/home"
         android:title="Home"
-        android:iconTint="@color/icon"
+        android:iconTint="@color/menu"
 
         />
     <item
         android:id="@+id/notification"
         android:icon="@drawable/bell"
         android:title="Notifications"
-        android:iconTint="@color/icon"
+        android:iconTint="@color/menu"
 
         />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/profile"
         android:title="Profile"
-        android:iconTint="@color/icon"
+        android:iconTint="@color/menu"
 
         />
 
@@ -30,14 +30,14 @@
         android:id="@+id/documnets"
         android:icon="@drawable/docs"
         android:title="Documents"
-        android:iconTint="@color/icon"
+        android:iconTint="@color/menu"
 
         />
     <item
         android:id="@+id/post"
         android:icon="@drawable/add"
         android:title="Post"
-        android:iconTint="@color/icon"
+        android:iconTint="@color/menu"
 
         />
 

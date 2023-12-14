@@ -29,6 +29,7 @@
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
                 android:src="@drawable/logo"
+                android:background="@drawable/roundborder"
                 app:shapeAppearanceOverlay="@drawable/roundimage"
                 app:strokeColor="@color/darkGrey"
                 app:strokeWidth="1sp" />
@@ -147,6 +148,7 @@
                 android:layout_height="50sp"
                 android:layout_weight="0"
                 android:src="@drawable/logo"
+                android:background="@drawable/roundborder"
                 />
 
             <EditText

@@ -22,14 +22,15 @@
 
             <ImageView
                 android:id="@+id/profileImage"
-                android:layout_width="60sp"
+                android:layout_width="50sp"
                 android:layout_height="60sp"
-                android:layout_margin="0sp"
                 android:layout_gravity="center"
+                android:layout_margin="10sp"
+                android:layout_marginLeft="10sp"
                 android:layout_weight="0.1"
+                android:background="@drawable/roundborder"
                 android:padding="1sp"
                 android:src="@drawable/logo"
-                android:layout_marginLeft="10sp"
 
                 />
 
@@ -77,7 +78,7 @@
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
+                        android:background="@drawable/roundborder"
                         android:padding="10sp"
 
                         />
@@ -86,9 +87,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ligjerata"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
-                        android:layout_gravity="center">
+                        android:layout_weight="0.05"
+                        android:layout_gravity="center"
+
+                        >
 
                     </TextView>
 
@@ -110,7 +114,7 @@
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
+                        android:background="@drawable/roundborder"
                         android:padding="10sp"
 
                         />
@@ -119,8 +123,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Afate"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
+                        android:layout_weight="0.05"
                         android:layout_gravity="center">
 
                     </TextView>
@@ -148,7 +153,7 @@
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
+                        android:background="@drawable/roundborder"
                         android:padding="10sp"
 
                         />
@@ -157,8 +162,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Projekte"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
+                        android:layout_weight="0.05"
                         android:layout_gravity="center">
 
                     </TextView>
@@ -181,7 +187,7 @@
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
+                        android:background="@drawable/roundborder"
                         android:padding="10sp"
 
                         />
@@ -190,8 +196,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kuiz"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
+                        android:layout_weight="0.05"
                         android:layout_gravity="center">
 
                     </TextView>
@@ -217,8 +224,8 @@
                         android:layout_weight="0.5"
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
+                        android:background="@drawable/roundborder"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
                         android:padding="10sp"
 
                         />
@@ -227,8 +234,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Libra"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
+                        android:layout_weight="0.05"
                         android:layout_gravity="center">
 
                     </TextView>
@@ -239,7 +247,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="0.75">
+                    android:layout_weight="0.75"
+                    >
 
                     <ImageButton
                         android:id="@+id/docs"
@@ -250,7 +259,7 @@
                         android:layout_margin="10sp"
                         android:scaleType="fitCenter"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/roundborderdark"
+                        android:background="@drawable/roundborder"
                         android:padding="10sp"
 
                         />
@@ -259,8 +268,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bin"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
+                        android:layout_weight="0.05"
                         android:layout_gravity="center">
 
                     </TextView>
