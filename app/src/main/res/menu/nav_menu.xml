@@ -18,13 +18,15 @@
         android:iconTint="@color/menu"
 
         />
-    <item
-        android:id="@+id/profile"
-        android:icon="@drawable/profile"
-        android:title="Profile"
-        android:iconTint="@color/menu"
 
-        />
+    <item
+    android:id="@+id/post"
+    android:icon="@drawable/add"
+    android:title="Post"
+    android:iconTint="@color/menu"
+
+    />
+
 
     <item
         android:id="@+id/documnets"
@@ -33,10 +35,12 @@
         android:iconTint="@color/menu"
 
         />
+
+
     <item
-        android:id="@+id/post"
-        android:icon="@drawable/add"
-        android:title="Post"
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        android:title="Profile"
         android:iconTint="@color/menu"
 
         />
