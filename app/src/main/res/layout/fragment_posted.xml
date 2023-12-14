@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background = "@drawable/roundborderdark"
+        android:background = "@drawable/roundborder"
         android:paddingBottom="7sp"
 
         >
@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background = "@color/darkGrey"
-            android:paddingBottom = "5sp">
+            android:paddingBottom = "5sp"
+            android:layout_margin="5sp">
 
             <TextView
                 android:id="@+id/PostContext"
@@ -70,6 +71,7 @@
                 android:inputType="textMultiLine"
                 android:textColor = "@color/darkGrey"
                 android:layout_margin="4sp"
+
                 />
 
 
@@ -91,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Likes"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
                 android:gravity = "center"
                 android:textSize = "15sp"
 
@@ -113,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:text="Comments"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
                 android:gravity = "center"
                 android:textSize = "15sp"
 
@@ -167,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comment"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="@color/menu"
                 android:textColor = "@color/darkGrey"
 
                 />

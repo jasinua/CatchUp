@@ -4,18 +4,18 @@
 
     <item android:state_enabled="true" android:state_focused="true">
         <shape  android:shape="rectangle">
-            <solid android:color="#618265"/>
+            <solid android:color="@color/menu"/>
             <corners android:radius="10sp" />
-            <stroke android:color="@color/darkGrey" android:width="1sp" />
+            <stroke android:color="@color/menu" android:width="1sp" />
         </shape>
     </item>
 
 
     <item android:state_enabled="true" >
         <shape  android:shape="rectangle">
-            <solid android:color="@color/darkGrey"/>
+            <solid android:color="@color/menu"/>
             <corners android:radius="10sp" />
-            <stroke android:color="@color/darkGrey" android:width="1.5sp" />
+            <stroke android:color="@color/menu" android:width="1.5sp" />
         </shape>
     </item>
 

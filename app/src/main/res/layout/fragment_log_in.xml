@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/icon"
+        android:background="@color/blue"
         >
 
 
@@ -97,11 +97,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/menu"
             android:fontFamily="@font/font_one"
             android:padding="5dp"
             android:text="Log in"
-            android:textColor="@color/menu"
+            android:textColor="@color/blue"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
