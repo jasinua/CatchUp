@@ -11,20 +11,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue"
-        >
+        android:background="@color/blue">
 
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_marginTop="70dp"
             android:src="@drawable/logo"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="70dp"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -48,10 +46,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
             android:background="@drawable/roundborder"
-            android:padding="10dp"
             android:drawableLeft="@drawable/id"
-            android:paddingLeft="20dp"
             android:hint="ID"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
             android:textColor="@color/menu"
             android:textColorHint="@color/menu"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -65,11 +63,12 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="30dp"
             android:background="@drawable/roundborder"
-            android:padding="10dp"
             android:drawableLeft="@drawable/lock"
-            android:paddingLeft="20dp"
-            android:inputType="textPassword"
             android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+
             android:textColor="@color/menu"
             android:textColorHint="@color/menu"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -111,6 +110,17 @@
 
             />
 
+        <ImageView
+            android:id="@+id/showPass"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:background="@drawable/roundborder"
+            android:src="@drawable/eye"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/passwordInput"
+            app:layout_constraintTop_toTopOf="@+id/passwordInput" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

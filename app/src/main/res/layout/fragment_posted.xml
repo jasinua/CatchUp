@@ -28,11 +28,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/logo"
-                android:background="@drawable/roundborder"
-                app:shapeAppearanceOverlay="@drawable/roundimage"
-                app:strokeColor="@color/darkGrey"
-                app:strokeWidth="1sp" />
+                android:src="@drawable/profile"
+                android:background="@drawable/roundborderdark"/>
 
             <TextView
                 android:id="@+id/PostTitle"
@@ -44,7 +41,7 @@
                 android:text="Title"
                 android:paddingStart="10sp"
                 android:paddingEnd="10sp"
-                android:textColor="@color/darkGrey"
+                android:textColor="@color/menu"
                 android:textSize="25sp" />
 
         </LinearLayout>
@@ -70,7 +67,7 @@
                 android:paddingTop = "5sp"
                 android:background = "@drawable/roundborder"
                 android:inputType="textMultiLine"
-                android:textColor = "@color/darkGrey"
+                android:textColor = "@color/menu"
                 android:layout_margin="4sp"
 
                 />
@@ -94,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Likes"
-                android:textColor="@color/black"
+                android:textColor="@color/menu"
                 android:gravity = "center"
                 android:textSize = "15sp"
 
@@ -116,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:text="Comments"
-                android:textColor="@color/black"
+                android:textColor="@color/menu"
                 android:gravity = "center"
                 android:textSize = "15sp"
 
@@ -147,8 +144,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:src="@drawable/logo"
-                android:background="@drawable/roundborder"
+                android:src="@drawable/profile"
+                android:background="@drawable/roundborderdark"
                 />
 
             <EditText
@@ -159,8 +156,7 @@
                 android:hint="Leave a comment..."
                 android:paddingLeft = "7sp"
                 android:textSize="15sp"
-                android:textColor="@color/darkGrey"
-                android:textColorHint="@color/darkGrey"
+                android:textColor="@color/menu"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
 

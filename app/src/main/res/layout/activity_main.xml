@@ -24,7 +24,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:background="@color/white"
+        android:background="@color/menu"
         android:layout_width="match_parent"
         android:layout_height="75sp"
         android:layout_alignParentBottom="true"
@@ -33,7 +33,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/nav_menu"
-        app:itemIconTint="@drawable/bottom_navigation_selector"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:itemActiveIndicatorStyle="@color/white"
         />
 
 </RelativeLayout>

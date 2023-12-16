@@ -3,6 +3,9 @@ package com.example.sistemielektronikperkomunikiminestudenteve
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.service.voice.VoiceInteractionSession.VisibleActivityCallback
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.Menu
 import android.view.View
@@ -39,15 +42,25 @@ class MainActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.logInButton)
         val loginID = findViewById<EditText>(R.id.idInput)
         val loginPass = findViewById<EditText>(R.id.passwordInput)
-
-
+        val showPass = findViewById<ImageView>(R.id.showPass)
         val idLength = 12
 
-        val menu: Menu
+        var switchPass = 1
 
         var loggedIn = false
 
-        Log.d("TAG", "LOGGED IN O FALSE")
+        showPass.setOnClickListener(){
+            if(switchPass==1) {
+
+                loginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                switchPass = 0
+
+            }else{
+
+                loginPass.setTransformationMethod(PasswordTransformationMethod.getInstance())
+                switchPass = 1
+            }
+        }
 
         if (!loggedIn) {
             login.setOnClickListener {
@@ -61,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
                             Toast.makeText(
                                 applicationContext,
-                                "Please enter a student email",
+                                "Please enter a student ID",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -76,15 +89,13 @@ class MainActivity : AppCompatActivity() {
 
                         } else {
 
-
-                            for (dataSnapshot1: DataSnapshot in dataSnapshot.children) {
-
-                                val id = dataSnapshot1.key.toString()
-                                val pass = dataSnapshot1.child("PASS").value.toString()
-
+                            var count = 0
+                            for (user: DataSnapshot in dataSnapshot.children) {
+                                count++
+                                val id = user.key.toString()
+                                val pass = user.child("PASS").value.toString()
 
                                 if (id.equals(loginID.text.toString()) && pass.equals(loginPass.text.toString())) {
-                                    Log.d("TAG", "login works")
                                     Toast.makeText(
                                         applicationContext,
                                         "Login successful",
@@ -92,7 +103,15 @@ class MainActivity : AppCompatActivity() {
                                     ).show()
 
                                     startNavBar()
+                                    break
+                                }else if(!id.equals(loginID.text.toString()) && !pass.equals(loginPass.text.toString()) && count==dataSnapshot.childrenCount.toInt()){
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "User doesn't exsist",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
+
                             }
 
                             if (!(loginID.text.toString().length == idLength)) {
@@ -134,7 +153,7 @@ class MainActivity : AppCompatActivity() {
 
             val homePage = HomePageFragment()
             val notificationPage = NotificationFragment()
-//                                      val profilePage=ProfileFragment()
+            val profilePage=ProfileFragment()
             val documentPage=DocumentsFragment()
             val postPage = postFragment()
 
@@ -142,7 +161,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> setCurrentFragment(homePage)
                 R.id.notification -> setCurrentFragment(notificationPage)
-//                                          R.id.settings -> setCurrentFragment(profilePage)
+                R.id.profile -> setCurrentFragment(profilePage)
                 R.id.documnets -> setCurrentFragment(documentPage)
                 R.id.post -> setCurrentFragment(postPage)
 

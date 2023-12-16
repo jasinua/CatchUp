@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".postedFragment"
+    android:orientation="vertical"
     >
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundborder"
         android:orientation="vertical"
-        android:background = "@color/menu"
-        android:paddingBottom="7sp"
+        android:layout_margin="10sp"
+
 
         >
 
@@ -21,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/darkGrey"
             android:padding="4sp">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -40,10 +41,10 @@
                 android:layout_margin="4sp"
                 android:background="@drawable/roundborder"
                 android:gravity="left|center"
-                android:text="Title"
                 android:paddingStart="10sp"
                 android:paddingEnd="10sp"
-                android:textColor="@color/darkGrey"
+                android:hint="Title"
+                android:textColor="@color/menu"
                 android:textSize="25sp" />
 
         </LinearLayout>
@@ -51,28 +52,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:background = "@color/darkGrey"
-            android:paddingBottom = "5sp"
-            android:gravity ="bottom"
-            android:padding="10sp"
-            >
+            android:padding="5sp">
 
             <TextView
                 android:id="@+id/PostContext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Text"
-                android:textSize="20sp"
-                android:lines="10"
+                android:layout_marginTop="10sp"
+                android:background="@drawable/roundborder"
                 android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="10"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
-                android:layout_marginTop="10sp"
-                android:background = "@drawable/roundborder"
-                android:inputType="textMultiLine"
-                android:textColor = "@color/darkGrey"
-                />
+                android:hint="Context"
+                android:textColor="@color/darkGrey"
+                android:textSize="20sp"
+                android:layout_margin="3sp"/>
 
 
         </LinearLayout>
@@ -82,10 +80,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5sp"
-            android:background = "@color/darkGrey"
 
             >
-
 
 
             <TextView
@@ -93,10 +89,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:gravity="center"
                 android:text="Likes"
-                android:textColor="@color/blue"
-                android:gravity = "center"
-                android:textSize = "15sp"
+                android:textColor="@color/menu"
+                android:textSize="15sp"
 
                 />
 
@@ -105,8 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
+                android:gravity="center"
                 android:src="@drawable/thumbsup"
-                android:gravity = "center"
 
                 />
 
@@ -115,10 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
+                android:gravity="center"
                 android:text="Comments"
-                android:textColor="@color/blue"
-                android:gravity = "center"
-                android:textSize = "15sp"
+                android:textColor="@color/menu"
+                android:textSize="15sp"
 
                 />
 
@@ -138,9 +134,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding = "7sp"
-            android:background = "@color/darkGrey"
-            >
+            android:background="@drawable/roundborder"
+            android:padding="7sp"
+
+            android:layout_margin="10sp">
 
 
             <ImageView
@@ -148,21 +145,19 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:src="@drawable/logo"
-                />
+                android:src="@drawable/logo" />
 
             <EditText
                 android:id="@+id/commentText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Leave a comment..."
-                android:paddingLeft = "7sp"
-                android:textSize="15sp"
-                android:textColor="@color/darkGrey"
-                android:textColorHint="@color/darkGrey"
-                android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
+                android:layout_weight="1"
+                android:background="@drawable/roundborder"
+                android:hint="Add a comment"
+                android:paddingLeft="7sp"
+                android:textColor="@color/menu"
+                android:textSize="15sp"
 
                 />
 
@@ -170,104 +165,112 @@
                 android:id="@+id/postCommentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@drawable/roundborderdark"
                 android:text="Comment"
-                android:backgroundTint="@color/blue"
-                android:textColor = "@color/darkGrey"
+                android:textColor="@color/white"
 
                 />
 
 
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background = "@color/menu">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    >
-                    <include layout="@layout/commentpart"></include>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    app:cardCornerRadius="15sp"
-                    ><include layout = "@layout/commentpart"></include>
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-        </ScrollView>
-
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="15sp">
+
+                <include layout="@layout/commentpart"></include>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
     <!--    vertical layout ^-->
 
-</FrameLayout>
+</LinearLayout>
