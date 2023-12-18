@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="7sp"
-    android:background="@drawable/roundborderdark">
+    android:background="@drawable/roundborder">
 
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -13,7 +13,7 @@
             android:layout_width="50sp"
             android:layout_height="50sp"
             android:layout_weight="0"
-            android:src="@drawable/profile"
+            android:src="@drawable/personred"
             />
 
         <TextView
@@ -27,6 +27,7 @@
             android:paddingLeft="7sp"
             android:hint="Add a comment"
             android:textColor="@color/menu"
+            android:fontFamily="@font/gotham_light"
             android:textSize="20sp"
 
             />

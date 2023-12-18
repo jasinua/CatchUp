@@ -2,31 +2,22 @@ package com.example.sistemielektronikperkomunikiminestudenteve
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.service.voice.VoiceInteractionSession.VisibleActivityCallback
-import android.text.InputType
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
-import android.util.Log
-import android.view.Menu
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.sistemielektronikperkomunikiminestudenteve.databinding.ActivityMainBinding
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.DocumentsFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.NotificationFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.ProfileFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
-import com.google.firebase.database.getValue
-import org.w3c.dom.DocumentFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,26 +32,26 @@ class MainActivity : AppCompatActivity() {
 
         val login = findViewById<Button>(R.id.logInButton)
         val loginID = findViewById<EditText>(R.id.idInput)
-        val loginPass = findViewById<EditText>(R.id.passwordInput)
-        val showPass = findViewById<ImageView>(R.id.showPass)
+        val loginPass = findViewById<EditText>(R.id.identity)
+//        val showPass = findViewById<ImageView>(R.id.showPass)
         val idLength = 12
 
         var switchPass = 1
 
         var loggedIn = false
 
-        showPass.setOnClickListener(){
-            if(switchPass==1) {
-
-                loginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                switchPass = 0
-
-            }else{
-
-                loginPass.setTransformationMethod(PasswordTransformationMethod.getInstance())
-                switchPass = 1
-            }
-        }
+//        showPass.setOnClickListener(){
+//            if(switchPass==1) {
+//
+//                loginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                switchPass = 0
+//
+//            }else{
+//
+//                loginPass.setTransformationMethod(PasswordTransformationMethod.getInstance())
+//                switchPass = 1
+//            }
+//        }
 
         if (!loggedIn) {
             login.setOnClickListener {
@@ -153,8 +144,8 @@ class MainActivity : AppCompatActivity() {
 
             val homePage = HomePageFragment()
             val notificationPage = NotificationFragment()
-            val profilePage=ProfileFragment()
-            val documentPage=DocumentsFragment()
+            val profilePage= ProfileFragment()
+            val documentPage= DocumentsFragment()
             val postPage = postFragment()
 
 

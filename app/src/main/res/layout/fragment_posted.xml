@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".postedFragment"
+    tools:context=".Fragments.postedFragment"
     >
 
 
@@ -14,7 +14,8 @@
         android:orientation="vertical"
         android:background = "@drawable/roundborder"
         android:paddingBottom="7sp"
-
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="5dp"
         >
 
         <LinearLayout
@@ -40,6 +41,7 @@
                 android:gravity="left|center"
                 android:text="Title"
                 android:paddingStart="10sp"
+                android:fontFamily="@font/gotham_light"
                 android:paddingEnd="10sp"
                 android:textColor="@color/menu"
                 android:textSize="25sp" />
@@ -65,6 +67,7 @@
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
                 android:paddingTop = "5sp"
+                android:fontFamily="@font/gotham_light"
                 android:background = "@drawable/roundborder"
                 android:inputType="textMultiLine"
                 android:textColor = "@color/menu"
@@ -92,6 +95,7 @@
                 android:layout_weight="0.5"
                 android:text="Likes"
                 android:textColor="@color/menu"
+                android:fontFamily="@font/gotham_bold"
                 android:gravity = "center"
                 android:textSize = "15sp"
 
@@ -116,6 +120,7 @@
                 android:textColor="@color/menu"
                 android:gravity = "center"
                 android:textSize = "15sp"
+                android:fontFamily="@font/gotham_bold"
 
                 />
 
@@ -159,6 +164,7 @@
                 android:textColor="@color/menu"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
+                android:fontFamily="@font/gotham_light"
 
                 />
 
@@ -167,6 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comment"
+                android:fontFamily="@font/gotham_light"
                 android:backgroundTint="@color/menu"
                 android:textColor = "@color/darkGrey"
 

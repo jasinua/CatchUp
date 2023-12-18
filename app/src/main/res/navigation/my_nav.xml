@@ -6,7 +6,7 @@
     app:startDestination="@id/logInFragment">
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.LogInFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.Fragments.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/homePageFragment2"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.HomePageFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postFragment"
         android:label="fragment_post"
         tools:layout="@layout/fragment_post" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/postedFragment"
-        android:name="com.example.sistemielektronikperkomunikiminestudenteve.postedFragment"
+        android:name="com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postedFragment"
         android:label="fragment_focused_post"
         tools:layout="@layout/fragment_focused_post" >
         <action

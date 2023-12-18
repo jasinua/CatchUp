@@ -4,22 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ProfileFragment"
-    android:background="@color/background">
+    tools:context=".Fragments.ProfileFragment">
 
 
     <LinearLayout
         android:id="@+id/MainMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/catchup"
+
+        >
 
 
         <LinearLayout
             android:id="@+id/topMenuStuff"
             android:layout_width="match_parent"
             android:layout_height="176dp"
-            android:background="@drawable/halfcolor"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -37,15 +38,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150sp"
+                android:layout_height="160dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/quesetion"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/font_one"
+                    android:fontFamily="@font/gotham_bold"
                     android:layout_gravity="left"
                     android:gravity = "bottom"
                     android:padding="10sp"
@@ -76,7 +77,7 @@
                 android:layout_width="65sp"
                 android:layout_height="65sp"
                 android:layout_gravity="center"
-                android:src="@drawable/book"
+                android:src="@drawable/book2"
                 android:layout_marginRight="10sp"
 
                 />
@@ -89,6 +90,7 @@
                 android:padding="15sp"
                 android:text="Drejtimi"
                 android:textSize="25sp"
+                android:fontFamily="@font/gotham_light"
                 android:textColor="@color/menu"
                 android:background="@drawable/roundborder"
                 android:paddingLeft = "20sp"
@@ -109,7 +111,7 @@
                 android:layout_height="65sp"
                 android:layout_gravity="center"
                 android:padding="5sp"
-                android:src="@drawable/id"
+                android:src="@drawable/personn"
                 android:layout_marginRight="10sp"
 
                 />
@@ -123,6 +125,7 @@
                 android:text="ID"
                 android:textSize="25sp"
                 android:textColor="@color/menu"
+                android:fontFamily="@font/gotham_light"
                 android:background="@drawable/roundborder"
                 android:paddingLeft = "20sp"
                 android:paddingTop = "18sp"
@@ -145,7 +148,7 @@
                 android:layout_height="65sp"
                 android:layout_gravity="center"
                 android:padding="6sp"
-                android:src="@drawable/email"
+                android:src="@drawable/emaill"
                 android:layout_marginRight="10sp"
 
                 />
@@ -159,6 +162,7 @@
                 android:text="Email"
                 android:textSize="25sp"
                 android:textColor="@color/menu"
+                android:fontFamily="@font/gotham_light"
                 android:background="@drawable/roundborder"
                 android:paddingLeft = "20sp"
                 android:paddingTop = "18sp"
@@ -180,7 +184,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="10sp"
                 android:padding="5sp"
-                android:src="@drawable/calendar"
+                android:src="@drawable/calendarr"
 
                 />
 
@@ -192,6 +196,7 @@
                 android:background="@drawable/roundborder"
                 android:padding="15sp"
                 android:paddingLeft="20sp"
+                android:fontFamily="@font/gotham_light"
                 android:paddingTop="18sp"
                 android:text="Birthday"
                 android:textColor="@color/menu"

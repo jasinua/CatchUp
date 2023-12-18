@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".postedFragment"
+    tools:context=".Fragments.postedFragment"
     android:orientation="vertical"
+    android:background="@drawable/catchup"
     >
 
 
@@ -44,6 +45,7 @@
                 android:paddingStart="10sp"
                 android:paddingEnd="10sp"
                 android:hint="Title"
+                android:fontFamily="@font/gotham_light"
                 android:textColor="@color/menu"
                 android:textSize="25sp" />
 
@@ -68,6 +70,7 @@
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
                 android:hint="Context"
+                android:fontFamily="@font/gotham_light"
                 android:textColor="@color/darkGrey"
                 android:textSize="20sp"
                 android:layout_margin="3sp"/>
@@ -91,6 +94,7 @@
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="Likes"
+                android:fontFamily="@font/gotham_bold"
                 android:textColor="@color/menu"
                 android:textSize="15sp"
 
@@ -113,6 +117,7 @@
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="Comments"
+                android:fontFamily="@font/gotham_bold"
                 android:textColor="@color/menu"
                 android:textSize="15sp"
 
@@ -155,6 +160,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/roundborder"
                 android:hint="Add a comment"
+                android:fontFamily="@font/gotham_light"
                 android:paddingLeft="7sp"
                 android:textColor="@color/menu"
                 android:textSize="15sp"
@@ -165,7 +171,8 @@
                 android:id="@+id/postCommentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@drawable/roundborderdark"
+                android:backgroundTint="@color/red2_new_background"
+                android:fontFamily="@font/gotham_light"
                 android:text="Comment"
                 android:textColor="@color/white"
 
@@ -179,8 +186,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"

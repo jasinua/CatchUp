@@ -7,6 +7,12 @@
     <color name="icon">#920709</color>
     <color name="menu">#920709</color>
     <color name="background">#ffffff</color>
+    <color name="red1_new_background">#5E0005</color>
+    <color name="red2_new_background">#740110</color>
+    <color name="red3_new_background">#7B0216</color>
+    <color name="red4_new_background">#790212</color>
+
+
 
     <!-- Primary brand color.   -->
     <color name="colorPrimary">@color/blue</color>
