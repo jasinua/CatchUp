@@ -20,8 +20,10 @@ import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var idList:ArrayList<GetPostsModel>
+    private lateinit var postList:ArrayList<GetPostsModel>
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var mAdapter : PostsAdapter
+
 
     private val binding by viewBinding(FragmentLogInBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +32,9 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         recyclerView = view.findViewById(R.id.recyclerViewPosts)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
-        idList = arrayListOf<GetPostsModel>()
+        postList = arrayListOf<GetPostsModel>()
+        mAdapter = PostsAdapter(postList)
+        recyclerView.adapter = mAdapter
 
         getListData()
 
@@ -43,21 +47,38 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         databaseReference.addValueEventListener(object :ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                idList.clear()
+
 
                 if (snapshot.exists()) {
-                    for (snap in snapshot.children) {
-                        val title = snap.child("POSTS").child("0").child("TITLE").getValue().toString()
-                        val desc = snap.child("POSTS").child("0").child("DESC").getValue().toString()
-                        val likes = snap.child("POSTS").child("0").child("LIKES").getValue().toString()
-                        val comments = snap.child("POSTS").child("0").child("COMMENTS").getValue().toString()
-                        idList.add(GetPostsModel(title,desc,likes,comments))
+
+                    postList.clear()
+
+                    for (snap in snapshot.children) {//for loopi per users
+                        for (snap2 in snap.child("POSTS").children) {//for loopi per user posts
+
+                                val title =
+                                    snap.child("POSTS").child("" + snap2.key).child("TITLE")
+                                        .getValue().toString()
+                                val desc =
+                                    snap.child("POSTS").child("" + snap2.key).child("DESC")
+                                        .getValue().toString()
+                                val likes =
+                                    snap.child("POSTS").child("" + snap2.key).child("LIKES")
+                                        .getValue().toString()
+                                val comments =
+                                    snap.child("POSTS").child("" + snap2.key).child("COMMENTS")
+                                        .getValue()
+                                        .toString()
+                                val key = snap2.key.toString()
+
+                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,key))) {
+                                postList.add(GetPostsModel(title, desc, likes, comments, key))
+                            }
+                        }
                     }
-                    val mAdapter = PostsAdapter(idList)
-                    recyclerView.adapter = mAdapter
+                    mAdapter.notifyDataSetChanged()
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }

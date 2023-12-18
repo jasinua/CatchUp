@@ -7,5 +7,6 @@ data class GetPostsModel (
     var TITLE: String? = null,
     var DESC: String? = null,
     var LIKES: String? = null,
-    var COMMENTS: String? = null
+    var COMMENTS: String? = null,
+    var key: String? = null
 )
