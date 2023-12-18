@@ -18,7 +18,10 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentID = idList[position]
-        holder.idpost.text = currentID.PASS
+        holder.postTitle.text = currentID.TITLE
+        holder.postText.text = currentID.DESC
+        holder.postLikes.text = currentID.LIKES
+        holder.postComments.text = currentID.COMMENTS
     }
 
     override fun getItemCount(): Int {
@@ -26,7 +29,11 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val idpost: TextView = itemView.findViewById(R.id.PostTitle)
+        val postTitle: TextView = itemView.findViewById(R.id.PostTitle)
+        val postText: TextView = itemView.findViewById(R.id.PostContext)
+        val postLikes: TextView = itemView.findViewById(R.id.likeCount)
+        val postComments: TextView = itemView.findViewById(R.id.commentCount)
+
     }
 
 

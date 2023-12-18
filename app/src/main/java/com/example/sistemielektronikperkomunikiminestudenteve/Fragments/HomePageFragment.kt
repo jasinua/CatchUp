@@ -41,13 +41,17 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         databaseReference = FirebaseDatabase.getInstance().getReference("USERS")
 
         databaseReference.addValueEventListener(object :ValueEventListener{
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 idList.clear()
 
                 if (snapshot.exists()) {
                     for (snap in snapshot.children) {
-                        val value = snap.getValue(GetPostsModel::class.java)
-                        idList.add(value!!)
+                        val title = snap.child("POSTS").child("0").child("TITLE").getValue().toString()
+                        val desc = snap.child("POSTS").child("0").child("DESC").getValue().toString()
+                        val likes = snap.child("POSTS").child("0").child("LIKES").getValue().toString()
+                        val comments = snap.child("POSTS").child("0").child("COMMENTS").getValue().toString()
+                        idList.add(GetPostsModel(title,desc,likes,comments))
                     }
                     val mAdapter = PostsAdapter(idList)
                     recyclerView.adapter = mAdapter
@@ -55,7 +59,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })

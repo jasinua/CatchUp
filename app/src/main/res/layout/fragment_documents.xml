@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/background"
+        android:background="@drawable/catchup"
         >
 
 
@@ -17,7 +17,6 @@
             android:id="@+id/topMenuStuff"
             android:layout_width="match_parent"
             android:layout_height="75sp"
-            android:background="@color/menu"
             >
 
             <ImageView
@@ -28,9 +27,8 @@
                 android:layout_margin="10sp"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="0.1"
-                android:background="@drawable/roundborder"
                 android:padding="1sp"
-                android:src="@drawable/logo"
+                android:src="@drawable/logo2"
 
                 />
 
@@ -39,12 +37,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Documents"
-                android:textColor="@color/blue"
-                android:fontFamily="@font/font_one"
+                android:textColor="@color/white"
                 android:padding="10sp"
                 android:paddingEnd="10sp"
                 android:textSize="35sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/gotham_bold"
                 android:gravity = "center|left"
                 android:layout_weight="1"
                 />
@@ -87,10 +85,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ligjerata"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
 
                         >
 
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="0.75"
+                    android:layout_weight="1"
                     >
 
                     <ImageButton
@@ -123,10 +123,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Afate"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
+                        >
 
                     </TextView>
 
@@ -162,10 +165,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Projekte"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
+                        >
 
                     </TextView>
 
@@ -175,7 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="0.75"
+                    android:layout_weight="1"
                     >
 
                     <ImageButton
@@ -196,10 +202,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kuiz"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
+                        >
 
                     </TextView>
 
@@ -234,10 +243,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Libra"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
+                        >
 
                     </TextView>
 
@@ -247,7 +259,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="0.75"
+                    android:layout_weight="1"
                     >
 
                     <ImageButton
@@ -268,10 +280,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bin"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:layout_weight="0.05"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gotham_bold"
+                        android:textStyle="bold"
+                        >
 
                     </TextView>
 
