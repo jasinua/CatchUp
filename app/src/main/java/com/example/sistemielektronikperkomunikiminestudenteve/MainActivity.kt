@@ -22,6 +22,7 @@ import com.google.firebase.database.database
 class MainActivity : AppCompatActivity() {
 
     lateinit var navigation: BottomNavigationView
+    lateinit var loginID: EditText
     val database = Firebase.database
     val ref = database.getReference("USERS")
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.fragment_log_in)
 
         val login = findViewById<Button>(R.id.logInButton)
-        val loginID = findViewById<EditText>(R.id.idInput)
+        loginID = findViewById<EditText>(R.id.idInput)
         val loginPass = findViewById<EditText>(R.id.identity)
 //        val showPass = findViewById<ImageView>(R.id.showPass)
         val idLength = 12
@@ -160,5 +161,9 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+    }
+
+    fun getUserId(): String {
+        return loginID.text.toString()
     }
 }

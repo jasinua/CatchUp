@@ -92,7 +92,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/gotham_light"
             android:text="Forgot password?"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/passwordInput2"

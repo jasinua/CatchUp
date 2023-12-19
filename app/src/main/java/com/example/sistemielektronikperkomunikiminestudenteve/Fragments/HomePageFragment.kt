@@ -42,7 +42,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     }
 
     private fun getListData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("USERS")
+        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS")
 
         databaseReference.addValueEventListener(object :ValueEventListener{
 
@@ -53,23 +53,13 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
                     postList.clear()
 
-                    for (snap in snapshot.children) {//for loopi per users
-                        for (snap2 in snap.child("POSTS").children) {//for loopi per user posts
+                    for (snap in snapshot.children) {//for loopi per posts
 
-                                val title =
-                                    snap.child("POSTS").child("" + snap2.key).child("TITLE")
-                                        .getValue().toString()
-                                val desc =
-                                    snap.child("POSTS").child("" + snap2.key).child("DESC")
-                                        .getValue().toString()
-                                val likes =
-                                    snap.child("POSTS").child("" + snap2.key).child("LIKES")
-                                        .getValue().toString()
-                                val comments =
-                                    snap.child("POSTS").child("" + snap2.key).child("COMMENTS")
-                                        .getValue()
-                                        .toString()
-                                val key = snap2.key.toString()
+                                val title =snap.child("TITLE").getValue().toString()
+                                val desc = snap.child("DESC").getValue().toString()
+                                val likes = snap.child("LIKES") .getValue().toString()
+                                val comments = snap.child("COMMENTS").getValue().toString()
+                                val key = snap.key.toString()
 
                             if(!postList.contains(GetPostsModel(title, desc, likes, comments,key))) {
                                 postList.add(GetPostsModel(title, desc, likes, comments, key))
@@ -78,7 +68,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                     }
                     mAdapter.notifyDataSetChanged()
                 }
-            }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
