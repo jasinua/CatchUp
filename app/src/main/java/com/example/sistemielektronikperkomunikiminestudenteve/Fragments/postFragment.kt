@@ -55,7 +55,7 @@ class postFragment : Fragment(R.layout.fragment_post) {
         val postID = databaseReference.push().key!!.toString()
         val post = GetPostsModel(title, description, "0" , "0")
 
-        databaseReference.child(postID).setValue(post)
+            databaseReference.child(postID).setValue(post)
             .addOnCompleteListener{
                 Toast.makeText(context, "" +
                         "Added", Toast.LENGTH_SHORT).show()

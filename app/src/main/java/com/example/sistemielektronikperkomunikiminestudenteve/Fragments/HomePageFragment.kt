@@ -53,22 +53,26 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
                     postList.clear()
 
-                    for (snap in snapshot.children) {//for loopi per posts
+                        for (snap2 in snapshot.children) {//for loopi per user posts
 
-                                val title =snap.child("TITLE").getValue().toString()
-                                val desc = snap.child("DESC").getValue().toString()
-                                val likes = snap.child("LIKES") .getValue().toString()
-                                val comments = snap.child("COMMENTS").getValue().toString()
-                                val key = snap.key.toString()
+                                val title =
+                                    snap2.child("title").getValue().toString()
+                                val desc =
+                                    snap2.child("desc").getValue().toString()
+                                val likes =
+                                    snap2.child("likes").getValue().toString()
+                                val comments =
+                                    snap2.child("comments").getValue().toString()
+                                val key = snap2.key.toString()
 
                             if(!postList.contains(GetPostsModel(title, desc, likes, comments,key))) {
                                 postList.add(GetPostsModel(title, desc, likes, comments, key))
                             }
-                        }
+
                     }
                     mAdapter.notifyDataSetChanged()
                 }
-
+            }
             override fun onCancelled(error: DatabaseError) {
 
             }
