@@ -36,7 +36,7 @@
                 />
 
             <EditText
-                android:id="@+id/PostTitle"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:hint="Enter a title..."
@@ -59,7 +59,7 @@
             android:paddingBottom = "5sp">
 
             <EditText
-                android:id="@+id/PostContext"
+                android:id="@+id/postDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Write here..."

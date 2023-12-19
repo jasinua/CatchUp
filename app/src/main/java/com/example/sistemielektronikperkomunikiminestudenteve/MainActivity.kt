@@ -34,25 +34,12 @@ class MainActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.logInButton)
         loginID = findViewById<EditText>(R.id.idInput)
         val loginPass = findViewById<EditText>(R.id.identity)
-//        val showPass = findViewById<ImageView>(R.id.showPass)
         val idLength = 12
 
         var switchPass = 1
 
         var loggedIn = false
 
-//        showPass.setOnClickListener(){
-//            if(switchPass==1) {
-//
-//                loginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                switchPass = 0
-//
-//            }else{
-//
-//                loginPass.setTransformationMethod(PasswordTransformationMethod.getInstance())
-//                switchPass = 1
-//            }
-//        }
 
         if (!loggedIn) {
             login.setOnClickListener {
