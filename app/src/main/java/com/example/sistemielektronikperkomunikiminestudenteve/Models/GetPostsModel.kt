@@ -4,9 +4,9 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 data class GetPostsModel (
-    var TITLE: String? = null,
-    var DESC: String? = null,
-    var LIKES: String? = null,
-    var COMMENTS: String? = null,
+    var title: String? = null,
+    var desc: String? = null,
+    var likes: String? = null,
+    var comments: String? = null,
     var key: String? = null
 )

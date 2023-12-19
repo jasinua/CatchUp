@@ -18,10 +18,10 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentID = idList[position]
-        holder.postTitle.text = currentID.TITLE
-        holder.postText.text = currentID.DESC
-        holder.postLikes.text = currentID.LIKES
-        holder.postComments.text = currentID.COMMENTS
+        holder.postTitle.text = currentID.title
+        holder.postText.text = currentID.desc
+        holder.postLikes.text = currentID.likes
+        holder.postComments.text = currentID.comments
     }
 
     override fun getItemCount(): Int {
