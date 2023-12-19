@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 
@@ -21,7 +22,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetPostsModel>
-    private lateinit var databaseReference: DatabaseReference
+    private lateinit var databaseReference: Query
     private lateinit var mAdapter : PostsAdapter
 
 
@@ -42,7 +43,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     }
 
     private fun getListData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS")
+        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
 
         databaseReference.addValueEventListener(object :ValueEventListener{
 
@@ -63,13 +64,13 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                                     snap2.child("likes").getValue().toString()
                                 val comments =
                                     snap2.child("comments").getValue().toString()
-                                val key = snap2.key.toString()
 
-                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,key))) {
-                                postList.add(GetPostsModel(title, desc, likes, comments, key))
+                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis()))) {
+                                postList.add(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis()))
                             }
 
                     }
+                    postList.reverse()
                     mAdapter.notifyDataSetChanged()
                 }
             }

@@ -8,5 +8,5 @@ data class GetPostsModel (
     var desc: String? = null,
     var likes: String? = null,
     var comments: String? = null,
-    var key: String? = null
+    var timestamp: Long? = null
 )
