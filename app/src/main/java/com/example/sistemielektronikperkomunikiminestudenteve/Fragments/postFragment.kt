@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
+import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -38,7 +40,6 @@ class postFragment : Fragment(R.layout.fragment_post) {
             savePostData()
         }
 
-
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -49,22 +50,19 @@ class postFragment : Fragment(R.layout.fragment_post) {
 
 
 
+        val postID = databaseReference.push().key!!
 
-
-
-        val postID = databaseReference.push().key!!.toString()
         val post = GetPostsModel(title, description, "0" , "0")
 
-            databaseReference.child(postID).setValue(post)
-            .addOnCompleteListener{
-                Toast.makeText(context, "" +
-                        "Added", Toast.LENGTH_SHORT).show()
+            databaseReference.child(postID).setValue(post).addOnCompleteListener{
+                Toast.makeText(context, "" + "Added", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
             }
 
 
     }
+
 }
 
 
