@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".openDocument">
+    tools:context=".openDocument"
+    android:orientation="vertical"
+    android:background="@drawable/catchup"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/topMenuStuff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="75sp"
+        >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:layout_margin="0sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:padding="1sp"
+            android:src="@drawable/logo2"
+            android:layout_marginLeft="10sp"
+
+            />
+
+        <TextView
+            android:id="@+id/docName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="doc_name_from"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gotham_bold"
+            android:padding="10sp"
+            android:paddingEnd="10sp"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:gravity = "center|left"
+            android:layout_weight="1"
+            />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

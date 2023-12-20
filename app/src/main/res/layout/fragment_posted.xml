@@ -10,12 +10,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background = "@drawable/roundborder"
-        android:paddingBottom="7sp"
-        android:layout_marginVertical="10dp"
+        android:background = "@color/white"
+        android:layout_marginVertical="3dp"
         android:layout_marginHorizontal="5dp"
+
         >
 
         <LinearLayout
@@ -29,7 +29,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/profile"
+                android:src="@drawable/personn"
+                android:iconTint="@color/white"
                 android:background="@drawable/roundborderdark"/>
 
             <TextView
@@ -44,7 +45,10 @@
                 android:fontFamily="@font/gotham_light"
                 android:paddingEnd="10sp"
                 android:textColor="@color/menu"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+
+                />
 
         </LinearLayout>
 
@@ -72,6 +76,7 @@
                 android:inputType="textMultiLine"
                 android:textColor = "@color/menu"
                 android:layout_margin="4sp"
+                android:textStyle="bold"
 
                 />
 
@@ -159,12 +164,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="Leave a comment..."
-                android:paddingLeft = "7sp"
+                android:paddingLeft="7sp"
                 android:textSize="15sp"
                 android:textColor="@color/menu"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
                 android:fontFamily="@font/gotham_light"
+                android:textStyle="bold"
 
                 />
 
@@ -176,7 +182,7 @@
                 android:fontFamily="@font/gotham_light"
                 android:backgroundTint="@color/menu"
                 android:textColor = "@color/darkGrey"
-                android:textType="bold"
+                android:textStyle="bold"
 
                 />
 
