@@ -176,6 +176,7 @@
                 android:fontFamily="@font/gotham_light"
                 android:backgroundTint="@color/menu"
                 android:textColor = "@color/darkGrey"
+                android:textType="bold"
 
                 />
 
