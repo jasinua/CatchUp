@@ -1,97 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/post"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.postedFragment"
-
     >
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background = "@color/white"
-        android:layout_marginVertical="3dp"
-        android:layout_marginHorizontal="5dp"
-
+        android:background="@color/blue"
+        android:layout_marginTop="10dp"
         >
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
             android:orientation="horizontal"
-            android:padding="4sp">
+            android:background="@color/blue"
+            android:layout_marginBottom="3dp"
+
+            >
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/personn"
-                android:iconTint="@color/white"
-                android:background="@drawable/roundborderdark"/>
+                android:src="@drawable/profile"/>
 
-            <TextView
-                android:id="@+id/PostTitle"
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:layout_margin="4sp"
-                android:background="@drawable/roundborder"
-                android:gravity="left|center"
-                android:text="Title"
-                android:paddingStart="10sp"
-                android:fontFamily="@font/gotham_light"
-                android:paddingEnd="10sp"
-                android:textColor="@color/menu"
-                android:textSize="25sp"
-                android:textStyle="bold"
 
-                />
+
+                <TextView
+                    android:id="@+id/PostTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center"
+                    android:text="Emri"
+                    android:fontFamily="@font/gotham_bold"
+                    android:paddingEnd="10sp"
+                    android:textColor="@color/menu"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="25sp"/>
+
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/red2_new_background"
+            android:layout_marginHorizontal="4sp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background = "@color/darkGrey"
+            android:paddingBottom = "5sp"
             android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/PostName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="25sp"
+                android:gravity="top"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingTop = "5sp"
+                android:fontFamily="@font/gotham_bold"
+                android:inputType="textMultiLine"
+                android:textColor = "@color/menu"
+                android:layout_margin="4sp"
+
+                />
 
             <TextView
                 android:id="@+id/PostContext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Text"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:lines="5"
                 android:gravity="top"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
                 android:paddingTop = "5sp"
-                android:fontFamily="@font/gotham_light"
-                android:background = "@drawable/roundborder"
+                android:fontFamily="@font/gotham_bold"
                 android:inputType="textMultiLine"
                 android:textColor = "@color/menu"
                 android:layout_margin="4sp"
-                android:textStyle="bold"
 
                 />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/red2_new_background"
+            android:layout_marginHorizontal="4sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Shkenca Kompjuterike"
+                android:textColor="@color/menu"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/postTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="time"
                 android:gravity="right"
                 android:paddingRight="10sp"
-                android:textStyle="bold"
+                android:layout_weight="1"
+                android:text="time"
                 android:textColor="@color/menu"
-                />
-
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -99,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="5sp"
+            android:padding="2sp"
 
             >
 
@@ -109,12 +149,12 @@
                 android:id="@+id/likeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
                 android:text="Likes"
                 android:textColor="@color/menu"
                 android:fontFamily="@font/gotham_bold"
-                android:gravity = "center"
+                android:gravity = "left"
                 android:textSize = "15sp"
+                android:layout_marginLeft="5sp"
 
                 />
 
@@ -122,10 +162,9 @@
                 android:id="@+id/likeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
                 android:src="@drawable/thumbsup"
                 android:gravity = "center"
-                android:clickable="true"
+                android:layout_marginLeft="5sp"
 
                 />
 
@@ -133,12 +172,12 @@
                 android:id="@+id/commentCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
                 android:text="Comments"
                 android:textColor="@color/menu"
-                android:gravity = "center"
+                android:gravity = "right"
                 android:textSize = "15sp"
                 android:fontFamily="@font/gotham_bold"
+                android:layout_marginLeft="5sp"
 
                 />
 
@@ -146,8 +185,8 @@
                 android:id="@+id/commentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
                 android:src="@drawable/comment"
+                android:layout_marginLeft="5sp"
 
                 />
 
@@ -167,8 +206,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:src="@drawable/personn"
-                android:background="@drawable/roundborderdark"
+                android:src="@drawable/profile"
+
                 />
 
             <EditText
@@ -177,13 +216,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="Leave a comment..."
-                android:paddingLeft="7sp"
+                android:textColorHint="@color/hint"
+                android:paddingLeft = "7sp"
                 android:textSize="15sp"
                 android:textColor="@color/menu"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
-                android:fontFamily="@font/gotham_light"
-                android:textStyle="bold"
+                android:fontFamily="@font/gotham_bold"
 
                 />
 
@@ -192,10 +231,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comment"
-                android:fontFamily="@font/gotham_light"
+                android:fontFamily="@font/gotham_bold"
                 android:backgroundTint="@color/menu"
                 android:textColor = "@color/darkGrey"
-                android:textStyle="bold"
 
                 />
 
@@ -204,6 +242,6 @@
 
 
     </LinearLayout>
-<!--    vertical layout ^-->
+    <!--    vertical layout ^-->
 
 </FrameLayout>

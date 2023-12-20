@@ -20,14 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background = "@color/red1_new_background"
             android:padding="4sp"
             >
 
             <com.google.android.material.imageview.ShapeableImageView
-                app:shapeAppearanceOverlay="@drawable/roundimage"
-                app:strokeColor="@color/darkGrey"
-                app:strokeWidth="1sp"
                 android:layout_height="50sp"
                 android:layout_width="50sp"
                 android:layout_margin="4sp"
@@ -49,6 +45,7 @@
                 android:textStyle="bold"
                 android:background = "@drawable/roundborder"
                 android:layout_margin="4sp"
+                android:textColorHint="@color/hint"
 
                 />
         </LinearLayout>
@@ -76,6 +73,7 @@
                 android:textStyle="bold"
                 android:textColor = "@color/menu"
                 android:layout_margin="5sp"
+                android:textColorHint="@color/hint"
                 />
 
 

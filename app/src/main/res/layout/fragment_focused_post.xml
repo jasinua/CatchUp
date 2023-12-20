@@ -30,8 +30,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/logo"
-                app:shapeAppearanceOverlay="@drawable/roundimage"
+                android:src="@drawable/logo2"
+                android:background="@drawable/roundborderdark"
                 app:strokeColor="@color/darkGrey"
                 app:strokeWidth="1sp" />
 
@@ -44,6 +44,8 @@
                 android:gravity="left|center"
                 android:paddingStart="10sp"
                 android:paddingEnd="10sp"
+                android:textColorHint="@color/hint"
+                android:textStyle="bold"
                 android:hint="Title"
                 android:fontFamily="@font/gotham_light"
                 android:textColor="@color/menu"
@@ -69,7 +71,10 @@
                 android:lines="10"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
+                android:paddingTop="5sp"
+                android:textStyle="bold"
                 android:hint="Context"
+                android:textColorHint="@color/hint"
                 android:fontFamily="@font/gotham_light"
                 android:textColor="@color/darkGrey"
                 android:textSize="20sp"
@@ -140,7 +145,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/roundborder"
             android:padding="7sp"
 
             android:layout_margin="10sp">
@@ -151,7 +155,8 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo2"
+                android:background="@drawable/roundborderdark"/>
 
             <EditText
                 android:id="@+id/commentText"
@@ -161,6 +166,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/roundborder"
                 android:hint="Add a comment"
+                android:textStyle="bold"
+                android:textColorHint="@color/hint"
                 android:fontFamily="@font/gotham_light"
                 android:paddingLeft="7sp"
                 android:textColor="@color/menu"
@@ -176,6 +183,7 @@
                 android:fontFamily="@font/gotham_light"
                 android:text="Comment"
                 android:textColor="@color/white"
+                android:textStyle="bold"
 
                 />
 
