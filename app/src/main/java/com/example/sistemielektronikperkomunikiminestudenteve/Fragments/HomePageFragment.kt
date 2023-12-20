@@ -1,8 +1,10 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,8 +41,9 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
         getListData()
 
-
     }
+
+
 
     private fun getListData() {
         databaseReference = FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
@@ -56,17 +59,14 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
                         for (snap2 in snapshot.children) {//for loopi per user posts
 
-                                val title =
-                                    snap2.child("title").getValue().toString()
-                                val desc =
-                                    snap2.child("desc").getValue().toString()
-                                val likes =
-                                    snap2.child("likes").getValue().toString()
-                                val comments =
-                                    snap2.child("comments").getValue().toString()
+                                val title = snap2.child("title").getValue().toString()
+                                val desc =snap2.child("desc").getValue().toString()
+                                val likes =snap2.child("likes").getValue().toString()
+                                val comments = snap2.child("comments").getValue().toString()
+                                val posttime = snap2.child("posttime").getValue().toString()
 
-                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis()))) {
-                                postList.add(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis()))
+                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis(),posttime))) {
+                                postList.add(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis(),posttime))
                             }
 
                     }

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navigation: BottomNavigationView
     lateinit var loginID: EditText
+    lateinit var idInfo : String
     val database = Firebase.database
     val ref = database.getReference("USERS")
 
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                                         "Login successful",
                                         Toast.LENGTH_SHORT
                                     ).show()
-
+                                    idInfo = loginID.text.toString()
                                     startNavBar()
                                     break
                                 }else if(!id.equals(loginID.text.toString()) && !pass.equals(loginPass.text.toString()) && count==dataSnapshot.childrenCount.toInt()){
@@ -115,11 +116,11 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-        private fun setCurrentFragment(fragment:Fragment)=
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.flFragment,fragment)
-                commit()
-            }
+    private fun setCurrentFragment(fragment:Fragment)=
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment,fragment)
+            commit()
+        }
 
     private fun startNavBar(){
         setContentView(R.layout.activity_main)
@@ -151,6 +152,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getUserId(): String {
-        return loginID.text.toString()
+        return idInfo
     }
 }

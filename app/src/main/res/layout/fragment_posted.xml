@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.postedFragment"
+
     >
 
 
@@ -55,9 +57,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:background = "@color/darkGrey"
-            android:paddingBottom = "5sp"
             android:layout_margin="5sp">
 
             <TextView
@@ -78,6 +79,17 @@
                 android:layout_margin="4sp"
                 android:textStyle="bold"
 
+                />
+
+            <TextView
+                android:id="@+id/postTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="time"
+                android:gravity="right"
+                android:paddingRight="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/menu"
                 />
 
 
@@ -113,6 +125,7 @@
                 android:layout_weight="0.25"
                 android:src="@drawable/thumbsup"
                 android:gravity = "center"
+                android:clickable="true"
 
                 />
 
@@ -154,7 +167,7 @@
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
-                android:src="@drawable/profile"
+                android:src="@drawable/personn"
                 android:background="@drawable/roundborderdark"
                 />
 

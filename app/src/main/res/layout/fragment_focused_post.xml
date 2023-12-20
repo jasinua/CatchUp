@@ -107,6 +107,7 @@
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:src="@drawable/thumbsup"
+                android:clickable="true"
 
                 />
 
