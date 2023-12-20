@@ -35,7 +35,7 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         holder.postText.text = currentID.desc
         holder.postLikes.text = currentID.likes
         holder.postComments.text = currentID.comments
-        holder.postTime.text = currentID.posttime
+//        holder.postTime.text = currentID.posttime
 
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
 
@@ -88,7 +88,7 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         val postText: TextView = itemView.findViewById(R.id.PostContext)
         val postLikes: TextView = itemView.findViewById(R.id.likeCount)
         val postComments: TextView = itemView.findViewById(R.id.commentCount)
-        val postTime: TextView = itemView.findViewById(R.id.postTime)
+//        val postTime: TextView = itemView.findViewById(R.id.)
         val likeButton: ImageView = itemView.findViewById(R.id.likeButton)
     }
 }
