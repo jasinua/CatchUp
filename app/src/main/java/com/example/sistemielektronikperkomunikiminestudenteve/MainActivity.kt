@@ -1,6 +1,5 @@
 package com.example.sistemielektronikperkomunikiminestudenteve
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.DocumentsFragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
-import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.NotificationFragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.ProfileFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.notificationsPage
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun setCurrentFragment(fragment:Fragment)=
+    fun setCurrentFragment(fragment:Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,fragment)
             commit()

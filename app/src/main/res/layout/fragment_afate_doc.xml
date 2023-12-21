@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".openDocument"
+    tools:context=".Fragments.Docs.openBinDocument"
     android:orientation="vertical"
     android:background="@drawable/catchup"
     >
@@ -15,14 +15,14 @@
         >
 
         <ImageView
-            android:id="@+id/profileImage"
+            android:id="@+id/backButton"
             android:layout_width="63dp"
             android:layout_height="60sp"
             android:layout_gravity="center"
-            android:layout_margin="0sp"
             android:layout_marginLeft="10sp"
             android:padding="1sp"
             android:clickable="true"
+            android:paddingLeft="10sp"
             android:src="@drawable/arrow"
 
             />
@@ -31,7 +31,7 @@
             android:id="@+id/docName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="doc_name_from"
+            android:text="Afate"
             android:textColor="@color/white"
             android:fontFamily="@font/gotham_bold"
             android:padding="10sp"
