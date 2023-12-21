@@ -6,6 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class notificationsPage : Fragment() {
+class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
 
 }

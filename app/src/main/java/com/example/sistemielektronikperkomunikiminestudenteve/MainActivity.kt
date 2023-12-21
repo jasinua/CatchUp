@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
 
             val homePage = HomePageFragment()
-            val notificationPage = NotificationFragment()
+            val notificationPage = notificationsPage()
             val profilePage= ProfileFragment()
             val documentPage= DocumentsFragment()
             val postPage = postFragment()
