@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="60sp"
+            android:layout_width="63dp"
             android:layout_height="60sp"
-            android:layout_margin="0sp"
             android:layout_gravity="center"
-            android:layout_weight="0.1"
-            android:padding="1sp"
-            android:src="@drawable/logo2"
+            android:layout_margin="0sp"
             android:layout_marginLeft="10sp"
+            android:padding="1sp"
+            android:clickable="true"
+            android:src="@drawable/arrow"
 
             />
 
