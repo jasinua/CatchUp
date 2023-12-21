@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.values
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
@@ -35,60 +37,76 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         holder.postText.text = currentID.desc
         holder.postLikes.text = currentID.likes
         holder.postComments.text = currentID.comments
+//        holder.likeButton. = currentID
 //        holder.postTime.text = currentID.posttime
+
+
+        val postId = currentID.publicKey
+
+
+        holder.postComments.setOnClickListener() {
+
+            holder.showToast(postId.toString())
+        }
 
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
 
+
+
         holder.likeButton.setOnClickListener() {
 
+
+            holder.showToast(postId.toString())
+
+
             if (!liked) {
-
-                dbRef.child("-Nm6o2_CN8eQpV6SG6dR").addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-
+                dbRef.child(postId.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        dbRef.child("-Nm6o2_CN8eQpV6SG6dR").child("likes")
-                            .setValue(snapshot.child("likes").getValue().toString().toInt() + 1)
+                        val currentLikes = snapshot.child("likes").value.toString().toInt()
+                        dbRef.child(postId.toString()).child("likes").setValue(""+(currentLikes + 1))
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-
+                        // Handle error
                     }
-
                 })
-                liked=true
-
-            } else if(liked){
-
-                dbRef.child("-Nm6o2_CN8eQpV6SG6dR").addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-
+                liked = true
+            } else {
+                dbRef.child(postId.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        dbRef.child("-Nm6o2_CN8eQpV6SG6dR").child("likes")
-                            .setValue(snapshot.child("likes").getValue().toString().toInt() - 1)
 
+                        val currentLikes = snapshot.child("likes").value.toString().toInt()
+                        dbRef.child(postId.toString()).child("likes").setValue(""+(currentLikes - 1))
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-
+                        // Handle error
                     }
                 })
-
-                liked=false
+                liked = false
             }
+
+            
         }
     }
+
 
     override fun getItemCount(): Int {
         return idList.size
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val postTitle: TextView = itemView.findViewById(R.id.PostTitle)
         val postText: TextView = itemView.findViewById(R.id.PostContext)
         val postLikes: TextView = itemView.findViewById(R.id.likeCount)
-        val postComments: TextView = itemView.findViewById(R.id.commentCount)
-//        val postTime: TextView = itemView.findViewById(R.id.)
         val likeButton: ImageView = itemView.findViewById(R.id.likeButton)
+        val postComments: TextView = itemView.findViewById(R.id.commentCount)
+
+        fun showToast(message: String) {
+            Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
+        }
+//        val postTime: TextView = itemView.findViewById(R.id.)
     }
+
 }

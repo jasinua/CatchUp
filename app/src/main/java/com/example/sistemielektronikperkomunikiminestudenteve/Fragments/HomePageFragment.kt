@@ -62,11 +62,12 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                                 val title = snap2.child("title").getValue().toString()
                                 val desc =snap2.child("desc").getValue().toString()
                                 val likes =snap2.child("likes").getValue().toString()
+                                val postID =snap2.child("publicKey").getValue().toString()
                                 val comments = snap2.child("comments").getValue().toString()
                                 val posttime = snap2.child("posttime").getValue().toString()
 
-                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis(),posttime))) {
-                                postList.add(GetPostsModel(title, desc, likes, comments,System.currentTimeMillis(),posttime))
+                            if(!postList.contains(GetPostsModel(title, desc, likes, comments,postID,System.currentTimeMillis(),posttime))) {
+                                postList.add(GetPostsModel(title, desc, likes, comments,postID,System.currentTimeMillis(),posttime))
                             }
 
                     }

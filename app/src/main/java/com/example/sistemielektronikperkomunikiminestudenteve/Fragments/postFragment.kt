@@ -58,7 +58,7 @@ class postFragment : Fragment(R.layout.fragment_post) {
         val timeFormat = SimpleDateFormat("dd/M hh:mm:ss")
         val time = timeFormat.format(Date())
 
-        val post = GetPostsModel(title, description, "0" , "0",System.currentTimeMillis(),time)
+        val post = GetPostsModel(title, description, "0" , "0",postID,System.currentTimeMillis(),time)
 
             databaseReference.child(postID).setValue(post).addOnCompleteListener{
                 Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
