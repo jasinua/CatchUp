@@ -154,7 +154,7 @@
                 android:fontFamily="@font/gotham_bold"
                 android:gravity = "left"
                 android:textSize = "15sp"
-                android:layout_marginLeft="5sp"
+                android:layout_marginLeft="7sp"
 
                 />
 

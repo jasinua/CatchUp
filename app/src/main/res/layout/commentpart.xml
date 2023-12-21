@@ -29,6 +29,8 @@
             android:hint="Add a comment"
             android:paddingLeft="7sp"
             android:textColor="@color/menu"
+            android:textColorHint="@color/hint"
+            android:textStyle="bold"
             android:textSize="20sp"
 
             />
@@ -40,7 +42,6 @@
             android:layout_gravity="center"
             android:text="0"
             android:textSize="30sp"
-            android:paddingTop="0sp"
             android:textColor="@color/menu"/>
 
         <ImageView
@@ -49,9 +50,7 @@
             android:layout_height="39dp"
             android:layout_gravity=""
             android:layout_weight="0"
+            android:layout_marginTop="2sp"
             app:srcCompat="@drawable/thumbsup" />
-
-
-        <!--    </LinearLayout>-->
 
 </LinearLayout>
