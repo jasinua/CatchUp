@@ -33,31 +33,18 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val currentID = idList[position]
+        holder.postName.text = currentID.poster
         holder.postTitle.text = currentID.title
         holder.postText.text = currentID.desc
         holder.postLikes.text = currentID.likes
         holder.postComments.text = currentID.comments
-//        holder.likeButton. = currentID
-//        holder.postTime.text = currentID.posttime
-
+        holder.postTime.text = currentID.posttime
 
         val postId = currentID.publicKey
 
-
-        holder.postComments.setOnClickListener() {
-
-            holder.showToast(postId.toString())
-        }
-
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
 
-
-
         holder.likeButton.setOnClickListener() {
-
-
-            holder.showToast(postId.toString())
-
 
             if (!liked) {
                 dbRef.child(postId.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -97,16 +84,18 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val postName: TextView = itemView.findViewById(R.id.postName)
         val postTitle: TextView = itemView.findViewById(R.id.PostTitle)
         val postText: TextView = itemView.findViewById(R.id.PostContext)
         val postLikes: TextView = itemView.findViewById(R.id.likeCount)
         val likeButton: ImageView = itemView.findViewById(R.id.likeButton)
         val postComments: TextView = itemView.findViewById(R.id.commentCount)
+        val postTime: TextView = itemView.findViewById(R.id.postTime)
+
 
         fun showToast(message: String) {
             Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
         }
-//        val postTime: TextView = itemView.findViewById(R.id.)
     }
 
 }

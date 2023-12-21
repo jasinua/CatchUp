@@ -35,7 +35,7 @@
 
 
                 <TextView
-                    android:id="@+id/PostTitle"
+                    android:id="@+id/postName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -65,7 +65,7 @@
             android:layout_margin="5sp">
 
             <TextView
-                android:id="@+id/PostName"
+                android:id="@+id/PostTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title"

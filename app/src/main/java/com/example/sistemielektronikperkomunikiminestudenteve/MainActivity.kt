@@ -2,6 +2,7 @@ package com.example.sistemielektronikperkomunikiminestudenteve
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -18,32 +19,35 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var navigation: BottomNavigationView
     lateinit var loginID: EditText
-    lateinit var idInfo : String
+    lateinit var loginPass: EditText
+    var idInfo : String? =null
+    var loggedIn by Delegates.notNull<Boolean>()
+
     val database = Firebase.database
     val ref = database.getReference("USERS")
 
-    @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in)
 
         val login = findViewById<Button>(R.id.logInButton)
         loginID = findViewById<EditText>(R.id.idInput)
-        val loginPass = findViewById<EditText>(R.id.identity)
+        loginPass = findViewById<EditText>(R.id.identity)
         val idLength = 12
 
-        var switchPass = 1
-
-        var loggedIn = false
-
+        loggedIn = false
+        Log.d("mainactivity","loggedIn $loggedIn")
 
         if (!loggedIn) {
             login.setOnClickListener {
+                Log.d("mainactivitiy","clicked login")
 
                 ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -152,6 +156,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getUserId(): String {
-        return idInfo
+        return idInfo.toString()
     }
+
+    fun resetUserInfo(){
+        this.recreate()
+    }
+
 }
