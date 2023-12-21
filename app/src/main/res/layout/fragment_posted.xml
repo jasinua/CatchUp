@@ -34,17 +34,17 @@
 
 
 
-                <TextView
-                    android:id="@+id/postName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="Emri"
-                    android:fontFamily="@font/gotham_bold"
-                    android:paddingEnd="10sp"
-                    android:textColor="@color/menu"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="25sp"/>
+            <TextView
+                android:id="@+id/PostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:text="Emri"
+                android:fontFamily="@font/gotham_bold"
+                android:paddingEnd="10sp"
+                android:textColor="@color/menu"
+                android:layout_marginLeft="10dp"
+                android:textSize="25sp"/>
 
 
         </LinearLayout>
@@ -65,7 +65,7 @@
             android:layout_margin="5sp">
 
             <TextView
-                android:id="@+id/PostTitle"
+                android:id="@+id/PostName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title"
