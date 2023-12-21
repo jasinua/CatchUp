@@ -11,8 +11,8 @@
         android:id="@+id/MainMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@drawable/profile_background"
+        android:orientation="vertical"
 
         >
 
@@ -45,10 +45,10 @@
                     android:id="@+id/quesetion"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="left"
                     android:layout_weight="1"
                     android:fontFamily="@font/gotham_bold"
-                    android:layout_gravity="left"
-                    android:gravity = "bottom"
+                    android:gravity="bottom"
                     android:padding="10sp"
                     android:paddingEnd="10sp"
                     android:text="Your Profile"
@@ -62,14 +62,12 @@
         </LinearLayout>
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10sp"
             android:layout_marginTop="74sp"
+            android:layout_marginBottom="10sp"
+            android:orientation="horizontal"
             android:padding="10sp">
 
             <ImageView
@@ -77,8 +75,8 @@
                 android:layout_width="45sp"
                 android:layout_height="45sp"
                 android:layout_gravity="center"
-                android:src="@drawable/personred"
                 android:layout_marginRight="10sp"
+                android:src="@drawable/personred"
 
                 />
 
@@ -87,22 +85,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:padding="15sp"
-                android:text="Emri dhe Mbiemri"
-                android:textSize="15sp"
-                android:textStyle="bold"
                 android:fontFamily="@font/gotham_light"
+                android:padding="15sp"
+                android:paddingLeft="20sp"
+                android:paddingTop="18sp"
+                android:text="Emri dhe Mbiemri"
                 android:textColor="@color/menu"
-                android:paddingLeft = "20sp"
-                android:paddingTop = "18sp"
-                />
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="10sp"
+            android:orientation="horizontal"
             android:padding="10sp">
 
             <ImageView
@@ -110,9 +107,9 @@
                 android:layout_width="45sp"
                 android:layout_height="45sp"
                 android:layout_gravity="center"
+                android:layout_marginRight="10sp"
                 android:padding="5sp"
                 android:src="@drawable/idimg"
-                android:layout_marginRight="10sp"
 
                 />
 
@@ -121,14 +118,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:padding="15sp"
-                android:textStyle="bold"
-                android:text="ID"
-                android:textSize="15sp"
-                android:textColor="@color/menu"
                 android:fontFamily="@font/gotham_light"
-                android:paddingLeft = "20sp"
-                android:paddingTop = "18sp"
+                android:padding="15sp"
+                android:paddingLeft="20sp"
+                android:paddingTop="18sp"
+                android:text="ID"
+                android:textColor="@color/menu"
+                android:textSize="15sp"
+                android:textStyle="bold"
 
                 />
         </LinearLayout>
@@ -136,10 +133,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="10sp"
-            android:padding="10sp"
-            >
+            android:orientation="horizontal"
+            android:padding="10sp">
 
 
             <ImageView
@@ -147,8 +143,8 @@
                 android:layout_width="45sp"
                 android:layout_height="45sp"
                 android:layout_gravity="center"
-                android:src="@drawable/book2"
                 android:layout_marginRight="10sp"
+                android:src="@drawable/book2"
 
                 />
 
@@ -157,14 +153,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:fontFamily="@font/gotham_light"
                 android:padding="15sp"
+                android:paddingLeft="20sp"
+                android:paddingTop="18sp"
                 android:text="Drejtimi"
+                android:textColor="@color/menu"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:textColor="@color/menu"
-                android:fontFamily="@font/gotham_light"
-                android:paddingLeft = "20sp"
-                android:paddingTop = "18sp"
 
                 />
         </LinearLayout>
@@ -192,21 +188,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:fontFamily="@font/gotham_light"
                 android:padding="15sp"
                 android:paddingLeft="20sp"
-                android:fontFamily="@font/gotham_light"
                 android:paddingTop="18sp"
                 android:text="Email"
                 android:textColor="@color/menu"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
+
         <LinearLayout
-            android:layout_width="260dp"
+            android:layout_width="match_parent"
             android:layout_height="74dp"
             android:layout_gravity="center"
+            android:layout_marginTop="15sp"
             android:layout_marginBottom="10sp"
             android:orientation="horizontal"
             android:padding="10sp"
@@ -215,16 +213,31 @@
 
             <Button
                 android:id="@+id/logOutButton"
-                android:layout_width="300dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5sp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/menu"
                 android:padding="5dp"
                 android:text="Log Out"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintWidth_percent="0.6" />
+
+            <Button
+                android:id="@+id/changepassword"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5sp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/menu"
+                android:padding="5dp"
+                android:text="Change Password"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintWidth_percent="0.6" />
         </LinearLayout>
