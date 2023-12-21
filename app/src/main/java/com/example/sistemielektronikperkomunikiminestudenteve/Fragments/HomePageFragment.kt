@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.PostsAdapter
+import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.example.sistemielektronikperkomunikiminestudenteve.databinding.FragmentLogInBinding
@@ -26,6 +27,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     private lateinit var postList:ArrayList<GetPostsModel>
     private lateinit var databaseReference: Query
     private lateinit var mAdapter : PostsAdapter
+    private lateinit var idInfo : String
 
 
     private val binding by viewBinding(FragmentLogInBinding::bind)
@@ -39,6 +41,11 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         mAdapter = PostsAdapter(postList)
         recyclerView.adapter = mAdapter
 
+        val activity : MainActivity = activity as MainActivity
+        idInfo = activity.getUserId()
+
+
+
         getListData()
 
     }
@@ -46,12 +53,11 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
 
     private fun getListData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
         databaseReference.addValueEventListener(object :ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
-
 
                 if (snapshot.exists()) {
 
@@ -67,9 +73,8 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                                 val comments = snap2.child("comments").getValue().toString()
                                 val posttime = snap2.child("posttime").getValue().toString()
 
-
-                            if(!postList.contains(GetPostsModel(title, desc, poster, likes, comments,postID,System.currentTimeMillis(),posttime))) {
-                                postList.add(GetPostsModel(title, desc, poster, likes, comments,postID,System.currentTimeMillis(),posttime))
+                            if(!postList.contains(GetPostsModel(title, desc, poster, idInfo, likes, comments,postID,System.currentTimeMillis(),posttime))) {
+                                postList.add(GetPostsModel(title, desc, poster, idInfo, likes, comments,postID,System.currentTimeMillis(),posttime))
                             }
 
                     }
@@ -82,6 +87,8 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
             }
 
         })
+
+
     }
 
 
