@@ -15,15 +15,17 @@ import com.google.firebase.database.ValueEventListener
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
-
+    lateinit var id : TextView
+    lateinit var mainactivity : MainActivity
+    lateinit var idInfo : String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val activity : MainActivity = activity as MainActivity
-        val idInfo = activity.getUserId()
+        mainactivity = activity as MainActivity
+        idInfo = mainactivity.getUserId()
 
         val name = view.findViewById<TextView>(R.id.profileName)
-        val id = view.findViewById<TextView>(R.id.profileId)
+        id = view.findViewById<TextView>(R.id.profileId)
         val drejtimi = view.findViewById<TextView>(R.id.profileDrejtim)
         val email = view.findViewById<TextView>(R.id.profileEmail)
 
@@ -55,8 +57,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         })
 
         logout.setOnClickListener(){
-            activity.resetUserInfo()
-            activity.setContentView(R.layout.fragment_log_in)
+            mainactivity.resetUserInfo()
+            mainactivity.setContentView(R.layout.fragment_log_in)
         }
     }
 

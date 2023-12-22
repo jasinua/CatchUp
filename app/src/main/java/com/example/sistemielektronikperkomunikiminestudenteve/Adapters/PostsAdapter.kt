@@ -4,23 +4,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
+import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.values
-import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlin.properties.Delegates
 
-class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
+class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
@@ -28,7 +28,9 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         return ViewHolder(itemView)
     }
 
-    var liked : Boolean = false
+    var liked by Delegates.notNull<Boolean>()
+    var userId = idInfo
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
@@ -40,44 +42,43 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
 
-        val postId = currentID.publicKey
 
-        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
+        val postId = currentID.publicKey
+        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
         holder.likeButton.setOnClickListener() {
+            Log.d("$userId","")
+            liked=false
 
-            if (!liked) {
-                dbRef.child(postId.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val currentLikes = snapshot.child("likes").value.toString().toInt()
-                        dbRef.child(postId.toString()).child("likes").setValue(""+(currentLikes + 1))
-                    }
+                dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
 
-                    override fun onCancelled(error: DatabaseError) {
-                        // Handle error
-                    }
-                })
-                liked = true
-            } else {
-                dbRef.child(postId.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
+                        override fun onDataChange(snapshot: DataSnapshot) {
 
-                        val currentLikes = snapshot.child("likes").value.toString().toInt()
-                        dbRef.child(postId.toString()).child("likes").setValue(""+(currentLikes - 1))
-                    }
+                            val currentLikes = snapshot.child("likes").getValue().toString().toInt()
 
-                    override fun onCancelled(error: DatabaseError) {
-                        // Handle error
-                    }
-                })
-                liked = false
+                                for(snap in snapshot.child("likedUsers").children) {
+                                    if(snap.key.toString().equals("$userId")) {
+
+                                        dbRef.child("likes").setValue("" + (currentLikes - 1))
+                                        dbRef.child("likedUsers").child("$userId").removeValue()
+                                        liked = false
+                                        return
+                                    }
+                                }
+
+                            if(!liked) {
+                                dbRef.child("likes").setValue("" + (currentLikes + 1))
+                                dbRef.child("likedUsers").child("$userId").setValue("")
+                                liked = true
+                            }
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError){
+                        }
+                    })
             }
-
-            
-        }
     }
-
-
     override fun getItemCount(): Int {
         return idList.size
     }
@@ -92,10 +93,10 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>):
         val postComments: TextView = itemView.findViewById(R.id.commentCount)
         val postTime: TextView = itemView.findViewById(R.id.postTime)
 
-
         fun showToast(message: String) {
             Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
         }
+
     }
 
 }

@@ -22,10 +22,11 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mainactivity : MainActivity
     lateinit var navigation: BottomNavigationView
     lateinit var loginID: EditText
     lateinit var loginPass: EditText
-    var idInfo : String? =null
+    var idInfo : String? = null
     var loggedIn by Delegates.notNull<Boolean>()
 
     val database = Firebase.database
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in)
+
 
         val login = findViewById<Button>(R.id.logInButton)
         loginID = findViewById<EditText>(R.id.idInput)

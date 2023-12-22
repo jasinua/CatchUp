@@ -27,7 +27,9 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     private lateinit var postList:ArrayList<GetPostsModel>
     private lateinit var databaseReference: Query
     private lateinit var mAdapter : PostsAdapter
-    private lateinit var idInfo : String
+    lateinit var mainactivity : MainActivity
+    lateinit var idInfo : String
+
 
 
     private val binding by viewBinding(FragmentLogInBinding::bind)
@@ -38,11 +40,13 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         postList = arrayListOf<GetPostsModel>()
-        mAdapter = PostsAdapter(postList)
+
+        mainactivity = activity as MainActivity
+        idInfo = mainactivity.getUserId()
+
+        mAdapter = PostsAdapter(postList,idInfo)
         recyclerView.adapter = mAdapter
 
-        val activity : MainActivity = activity as MainActivity
-        idInfo = activity.getUserId()
 
 
 
@@ -54,8 +58,9 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
     private fun getListData() {
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
-        databaseReference.addValueEventListener(object :ValueEventListener{
+        databaseReference =
+            FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
+        databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -63,25 +68,51 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
                     postList.clear()
 
-                        for (snap2 in snapshot.children) {//for loopi per user posts
+                    for (snap2 in snapshot.children) {//for loopi per user posts
 
-                                val title = snap2.child("title").getValue().toString()
-                                val desc =snap2.child("desc").getValue().toString()
-                                val poster = snap2.child("poster").getValue().toString()
-                                val likes =snap2.child("likes").getValue().toString()
-                                val postID =snap2.child("publicKey").getValue().toString()
-                                val comments = snap2.child("comments").getValue().toString()
-                                val posttime = snap2.child("posttime").getValue().toString()
+                        val title = snap2.child("title").getValue().toString()
+                        val desc = snap2.child("desc").getValue().toString()
+                        val poster = snap2.child("poster").getValue().toString()
+                        val likes = snap2.child("likes").getValue().toString()
+                        val postID = snap2.child("publicKey").getValue().toString()
+                        val comments = snap2.child("comments").getValue().toString()
+                        val posttime = snap2.child("posttime").getValue().toString()
 
-                            if(!postList.contains(GetPostsModel(title, desc, poster, idInfo, likes, comments,postID,System.currentTimeMillis(),posttime))) {
-                                postList.add(GetPostsModel(title, desc, poster, idInfo, likes, comments,postID,System.currentTimeMillis(),posttime))
-                            }
+                        if (!postList.contains(
+                                GetPostsModel(
+                                    title,
+                                    desc,
+                                    poster,
+                                    idInfo,
+                                    likes,
+                                    comments,
+                                    postID,
+                                    System.currentTimeMillis(),
+                                    posttime
+                                )
+                            )
+                        ) {
+                            postList.add(
+                                GetPostsModel(
+                                    title,
+                                    desc,
+                                    poster,
+                                    idInfo,
+                                    likes,
+                                    comments,
+                                    postID,
+                                    System.currentTimeMillis(),
+                                    posttime
+                                )
+                            )
+                        }
 
                     }
                     postList.reverse()
                     mAdapter.notifyDataSetChanged()
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -90,6 +121,5 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
 
     }
-
 
 }
