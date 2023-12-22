@@ -28,12 +28,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         id = view.findViewById<TextView>(R.id.profileId)
         val drejtimi = view.findViewById<TextView>(R.id.profileDrejtim)
         val email = view.findViewById<TextView>(R.id.profileEmail)
+        val passwordchange=view.findViewById<Button>(R.id.changepassword)
 
         val logout = view.findViewById<Button>(R.id.logOutButton)
 
         id.text=idInfo
 
         val dbRef = FirebaseDatabase.getInstance().getReference("USERS")
+
+        passwordchange.setOnClickListener {
+
+        }
+
 
         dbRef.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
