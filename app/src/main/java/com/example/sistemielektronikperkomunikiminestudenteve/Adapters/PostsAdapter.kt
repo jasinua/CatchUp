@@ -1,6 +1,6 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Adapters
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,16 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
-class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String):
+class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String , myContext: Context?):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
 
@@ -30,6 +30,7 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String):
 
     var liked by Delegates.notNull<Boolean>()
     var userId = idInfo
+    var thisContext = myContext
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -41,13 +42,22 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String):
         holder.postLikes.text = currentID.likes
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
+        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
+        FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE").addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Picasso.with(thisContext).load(snapshot.getValue().toString()).into(holder.commentLogo)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
 
         val postId = currentID.publicKey
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
         holder.likeButton.setOnClickListener() {
-            Log.d("$userId","")
             liked=false
 
                 dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -92,6 +102,8 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String):
         val likeButton: ImageView = itemView.findViewById(R.id.likeButton)
         val postComments: TextView = itemView.findViewById(R.id.commentCount)
         val postTime: TextView = itemView.findViewById(R.id.postTime)
+        val postProfile: ImageView = itemView.findViewById(R.id.postProfile)
+        val commentLogo : ImageView = itemView.findViewById(R.id.loggedInCommentLogo)
 
         fun showToast(message: String) {
             Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()

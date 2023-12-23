@@ -1,11 +1,9 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.PostsAdapter
@@ -15,13 +13,12 @@ import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.example.sistemielektronikperkomunikiminestudenteve.databinding.FragmentLogInBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 
-class HomePageFragment : Fragment(R.layout.fragment_home_page) {
+class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetPostsModel>
@@ -29,6 +26,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     private lateinit var mAdapter : PostsAdapter
     lateinit var mainactivity : MainActivity
     lateinit var idInfo : String
+    var postContext = context
 
 
 
@@ -44,7 +42,9 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
 
-        mAdapter = PostsAdapter(postList,idInfo)
+        postContext = context
+        Log.d("$postContext","checking")
+        mAdapter = PostsAdapter(postList,idInfo,postContext)
         recyclerView.adapter = mAdapter
 
 
@@ -77,12 +77,14 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                         val postID = snap2.child("publicKey").getValue().toString()
                         val comments = snap2.child("comments").getValue().toString()
                         val posttime = snap2.child("posttime").getValue().toString()
+                        val profileURL = snap2.child("profileURL").getValue().toString()
 
                         if (!postList.contains(
                                 GetPostsModel(
                                     title,
                                     desc,
                                     poster,
+                                    profileURL,
                                     idInfo,
                                     likes,
                                     comments,
@@ -97,6 +99,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                                     title,
                                     desc,
                                     poster,
+                                    profileURL,
                                     idInfo,
                                     likes,
                                     comments,

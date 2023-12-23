@@ -19,50 +19,72 @@
         >
 
 
-        <LinearLayout
-            android:id="@+id/topMenuStuff"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="176dp"
-
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="100sp"
-                android:layout_height="100sp"
-                android:layout_gravity="bottom"
-                android:layout_margin="0sp"
-                android:layout_marginLeft="10sp"
-                android:padding="1sp"
-                android:src="@drawable/profile" />
+            android:layout_height="176sp">
 
             <LinearLayout
+                android:id="@+id/topMenuStuff"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:orientation="vertical">
+                android:layout_height="176dp"
 
-                <TextView
-                    android:id="@+id/quesetion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/gotham_bold"
-                    android:gravity="bottom"
-                    android:padding="10sp"
-                    android:paddingEnd="10sp"
-                    android:text="Your Profile"
-                    android:textColor="@color/menu"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="35sp"
+                    android:layout_marginBottom="10sp"
+                    android:padding="1sp"
+                    android:src="@drawable/profile"
+                    android:foreground="@drawable/profileoverlay"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/quesetion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gotham_bold"
+                        android:gravity="bottom"
+                        android:padding="10sp"
+                        android:paddingEnd="10sp"
+                        android:text="Your Profile"
+                        android:textColor="@color/menu"
+                        android:textSize="35sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profileOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="176dp"
+                android:orientation="horizontal"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+
             </LinearLayout>
 
 
-        </LinearLayout>
-
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

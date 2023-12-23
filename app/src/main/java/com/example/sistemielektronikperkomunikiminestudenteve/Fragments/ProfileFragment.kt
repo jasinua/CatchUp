@@ -7,9 +7,9 @@ import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.R
@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -27,15 +28,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
 
         val name = view.findViewById<TextView>(R.id.profileName)
-        id = view.findViewById<TextView>(R.id.profileId)
+        id = view.findViewById(R.id.profileId)
         val drejtimi = view.findViewById<TextView>(R.id.profileDrejtim)
         val email = view.findViewById<TextView>(R.id.profileEmail)
         val changePassButton=view.findViewById<Button>(R.id.changePassButton)
+        val profile = view.findViewById<ImageView>(R.id.profileImage)
 
         val logout = view.findViewById<Button>(R.id.logOutButton)
 
@@ -52,6 +53,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         name.text=snap.child("EMRI").getValue().toString()
                         drejtimi.text=snap.child("DREJTIMI").getValue().toString()
                         email.text=snap.child("EMAIL").getValue().toString()
+                        Picasso.with(context).load(snap.child("PROFILE").getValue().toString()).into(profile)
                     }
 
                 }

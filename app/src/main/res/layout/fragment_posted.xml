@@ -26,11 +26,14 @@
 
             >
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <ImageView
+                android:id="@+id/postProfile"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/profile"/>
+                android:src="@drawable/profile"
+                android:foreground="@drawable/profileoverlay"
+                />
 
 
 
@@ -203,12 +206,12 @@
 
 
             <ImageView
-                android:id="@+id/commentLogo"
+                android:id="@+id/loggedInCommentLogo"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:layout_weight="0"
                 android:src="@drawable/profile"
-
+                android:foreground="@drawable/profileoverlay"
                 />
 
             <EditText
