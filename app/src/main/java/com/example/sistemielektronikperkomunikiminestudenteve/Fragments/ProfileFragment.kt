@@ -2,9 +2,14 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.R
@@ -18,6 +23,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     lateinit var id : TextView
     lateinit var mainactivity : MainActivity
     lateinit var idInfo : String
+    var changingPass : Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,18 +35,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         id = view.findViewById<TextView>(R.id.profileId)
         val drejtimi = view.findViewById<TextView>(R.id.profileDrejtim)
         val email = view.findViewById<TextView>(R.id.profileEmail)
-        val passwordchange=view.findViewById<Button>(R.id.changepassword)
+        val changePassButton=view.findViewById<Button>(R.id.changePassButton)
 
         val logout = view.findViewById<Button>(R.id.logOutButton)
 
         id.text=idInfo
 
         val dbRef = FirebaseDatabase.getInstance().getReference("USERS")
-
-        passwordchange.setOnClickListener {
-
-        }
-
 
         dbRef.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -62,11 +64,72 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         })
 
-        logout.setOnClickListener(){
-            mainactivity.resetUserInfo()
-            mainactivity.setContentView(R.layout.fragment_log_in)
+        changePassButton.setOnClickListener() {
+            changingPass = true
+            val passLayout = view.findViewById<FrameLayout>(R.id.passLayout)
+
+            passLayout.visibility = VISIBLE
+
+            val oldPass = passLayout.findViewById<EditText>(R.id.oldPassword)
+            val newPass = passLayout.findViewById<EditText>(R.id.newPassword)
+            val repeatPass = passLayout.findViewById<EditText>(R.id.repeatPassword)
+
+            val passChangeCancelButton = passLayout.findViewById<Button>(R.id.passChangeCancel)
+            val passChangeConfirmButton = passLayout.findViewById<Button>(R.id.passChangeConfirm)
+
+            passChangeCancelButton.setOnClickListener() {
+                oldPass.setText("")
+                newPass.setText("")
+                repeatPass.setText("")
+                passLayout.visibility = INVISIBLE
+                changingPass = false
+            }
+
+            passChangeConfirmButton.setOnClickListener(){
+                //min 5 char
+                //max 20 char
+                dbRef.child(id.text.toString()).addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(!oldPass.text.toString().equals(  snapshot.child("PASS").getValue().toString()  )) {
+                            Toast.makeText(context, "Old password doesn't match the current password", Toast.LENGTH_SHORT).show()
+                        }else if(newPass.text.toString().contains(" ")){
+                            Toast.makeText(context, "Password must not contain empty spaces", Toast.LENGTH_SHORT).show()
+                        }else if(newPass.text.toString().length<5){
+                            Toast.makeText(context,"New password length must be at least 5 characters",Toast.LENGTH_SHORT).show()
+                        }else if(newPass.text.toString().length>20){
+                            Toast.makeText(context,"New password length must be less than 20 characters",Toast.LENGTH_SHORT).show()
+                        }else if(!newPass.text.toString().equals(repeatPass.text.toString())){
+                            Toast.makeText(context,"New password confirmation is incorrect",Toast.LENGTH_SHORT).show()
+                        }else if(newPass.text.toString().equals(   snapshot.child("PASS").getValue().toString()    )){
+                            Toast.makeText(context,"New password can't be the same as old password",Toast.LENGTH_SHORT).show()
+                        }else {
+                            Toast.makeText(context,"Password has been changed",Toast.LENGTH_SHORT).show()
+                            dbRef.child(id.text.toString()).child("PASS").setValue(newPass.text.toString())
+
+                            oldPass.setText("")
+                            newPass.setText("")
+                            repeatPass.setText("")
+
+                            passLayout.visibility = INVISIBLE
+                            changingPass = false
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+            }
+
         }
+
+            logout.setOnClickListener() {
+                if (!changingPass) {
+                    mainactivity.resetUserInfo()
+                    mainactivity.setContentView(R.layout.fragment_log_in)
+                }
+            }
     }
 
 }
+
 
