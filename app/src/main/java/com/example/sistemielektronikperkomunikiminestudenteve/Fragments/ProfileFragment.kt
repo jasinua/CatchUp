@@ -94,7 +94,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             Toast.makeText(context, "Old password doesn't match the current password", Toast.LENGTH_SHORT).show()
                         }else if(newPass.text.toString().contains(" ")){
                             Toast.makeText(context, "Password must not contain empty spaces", Toast.LENGTH_SHORT).show()
-                        }else if(newPass.text.toString().length<5){
+                        }else if(newPass.text.toString().length<8){
                             Toast.makeText(context,"New password length must be at least 5 characters",Toast.LENGTH_SHORT).show()
                         }else if(newPass.text.toString().length>20){
                             Toast.makeText(context,"New password length must be less than 20 characters",Toast.LENGTH_SHORT).show()

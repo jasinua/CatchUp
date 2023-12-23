@@ -258,10 +258,11 @@
         android:visibility="invisible">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="350sp"
             android:layout_height="600sp"
             android:orientation="vertical"
-            android:background="@drawable/changepassbackground"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background_changepass"
             android:layout_marginTop="55sp"
             android:layout_marginLeft="25sp"
             android:layout_marginRight="25sp">
