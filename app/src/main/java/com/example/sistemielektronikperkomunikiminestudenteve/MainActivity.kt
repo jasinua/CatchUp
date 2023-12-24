@@ -130,13 +130,13 @@ class MainActivity : AppCompatActivity() {
     private fun startNavBar(){
         setContentView(R.layout.activity_main)
         navigation = findViewById(R.id.bottomNavigationView)
-        setCurrentFragment(HomePageFragment(0))
+        setCurrentFragment(HomePageFragment(0,false))
 
 
         navigation.setOnNavigationItemSelectedListener() {
 
 
-            val homePage = HomePageFragment(0)
+            val homePage = HomePageFragment(0,false)
             val notificationPage = notificationsPage()
             val profilePage= ProfileFragment()
             val documentPage= DocumentsFragment()

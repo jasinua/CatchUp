@@ -37,7 +37,6 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
     var userId = idInfo
     var thisContext = myContext
     var mainactivity = mainactivity
-    val homepage = homepage
 
 
 
@@ -105,7 +104,6 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
                             }
 
                         }
-
                         override fun onCancelled(error: DatabaseError){
                         }
                     })

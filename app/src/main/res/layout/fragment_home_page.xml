@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="0.1"
                 android:padding="1sp"
-                android:src="@drawable/logo2"
+                android:src="@drawable/logo"
                 android:layout_marginLeft="10sp"
 
                 />

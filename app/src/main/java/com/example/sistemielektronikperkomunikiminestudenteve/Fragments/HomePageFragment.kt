@@ -18,7 +18,7 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 
-class HomePageFragment(position:Int) : Fragment(R.layout.fragment_home_page) {
+class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fragment_home_page) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetPostsModel>
@@ -28,6 +28,7 @@ class HomePageFragment(position:Int) : Fragment(R.layout.fragment_home_page) {
     lateinit var idInfo : String
     var postContext = context
     var currentposition = position
+    var backClicked = backClicked
 
 
 
@@ -50,7 +51,6 @@ class HomePageFragment(position:Int) : Fragment(R.layout.fragment_home_page) {
         recyclerView.adapter = mAdapter
 
         getListData()
-
 
 
     }
@@ -79,54 +79,25 @@ class HomePageFragment(position:Int) : Fragment(R.layout.fragment_home_page) {
                         val profileURL = snap2.child("profileURL").getValue().toString()
 
                         if (!postList.contains(
-                                GetPostsModel(
-                                    title,
-                                    desc,
-                                    poster,
-                                    profileURL,
-                                    idInfo,
-                                    likes,
-                                    comments,
-                                    postID,
-                                    System.currentTimeMillis(),
-                                    posttime
-                                )
+                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID, System.currentTimeMillis(), posttime)
                             )
-                        ) {
+                        )  {
                             postList.add(
-                                GetPostsModel(
-                                    title,
-                                    desc,
-                                    poster,
-                                    profileURL,
-                                    idInfo,
-                                    likes,
-                                    comments,
-                                    postID,
-                                    System.currentTimeMillis(),
-                                    posttime
-                                )
-                            )
-                        }
+                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID,System.currentTimeMillis(),posttime))}
 
                     }
                     postList.reverse()
                     mAdapter.notifyDataSetChanged()
                     Log.d(currentposition.toString(),"checking homepage")
-                    scrollToLastPosition()
+                    if(backClicked){
+                        scrollToLastPosition()
+                        backClicked=false
+                    }
                 }
             }
-
-
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
-
-
-
     }
 
     fun scrollToLastPosition(){

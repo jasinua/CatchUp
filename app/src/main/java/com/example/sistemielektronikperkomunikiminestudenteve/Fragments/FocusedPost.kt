@@ -106,8 +106,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         }
 
         backButton.setOnClickListener(){
-
-            mainactivity.setCurrentFragment(HomePageFragment(position))
+            mainactivity.setCurrentFragment(HomePageFragment(position,true))
         }
 
     }
