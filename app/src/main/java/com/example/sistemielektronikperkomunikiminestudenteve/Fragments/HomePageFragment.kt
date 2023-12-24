@@ -18,7 +18,7 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 
-class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
+class HomePageFragment(position:Int) : Fragment(R.layout.fragment_home_page) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetPostsModel>
@@ -27,6 +27,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
     lateinit var mainactivity : MainActivity
     lateinit var idInfo : String
     var postContext = context
+    var currentposition = position
 
 
 
@@ -36,6 +37,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
 
         recyclerView = view.findViewById(R.id.recyclerViewPosts)
         recyclerView.layoutManager = LinearLayoutManager(context)
+
         recyclerView.setHasFixedSize(true)
         postList = arrayListOf<GetPostsModel>()
 
@@ -44,17 +46,14 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
 
         postContext = context
         Log.d("$postContext","checking")
-        mAdapter = PostsAdapter(postList,idInfo,postContext)
+        mAdapter = PostsAdapter(postList,idInfo,postContext,mainactivity,this)
         recyclerView.adapter = mAdapter
-
-
-
 
         getListData()
 
+
+
     }
-
-
 
     private fun getListData() {
 
@@ -113,8 +112,12 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
                     }
                     postList.reverse()
                     mAdapter.notifyDataSetChanged()
+                    Log.d(currentposition.toString(),"checking homepage")
+                    scrollToLastPosition()
                 }
             }
+
+
 
             override fun onCancelled(error: DatabaseError) {
 
@@ -123,6 +126,10 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page,) {
         })
 
 
+
     }
 
+    fun scrollToLastPosition(){
+        recyclerView.layoutManager?.scrollToPosition(currentposition)
+    }
 }

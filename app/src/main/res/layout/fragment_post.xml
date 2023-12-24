@@ -23,12 +23,13 @@
             android:padding="4sp"
             >
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <ImageView
+                android:id="@+id/postProfile"
                 android:layout_height="50sp"
                 android:layout_width="50sp"
                 android:layout_margin="4sp"
-                android:src="@drawable/logo"
-                android:background="@drawable/roundborder"
+                android:src="@drawable/personn"
+                android:foreground="@drawable/profileoverlaydark"
                 />
 
             <EditText

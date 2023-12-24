@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import java.util.Date
 
 class postFragment : Fragment(R.layout.fragment_post) {
@@ -22,17 +24,19 @@ class postFragment : Fragment(R.layout.fragment_post) {
     private lateinit var title:EditText
     private lateinit var description:EditText
     private lateinit var idInfo : String
+    lateinit var mainactivity: MainActivity
 
     private lateinit var databaseReference:DatabaseReference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val activity = activity as MainActivity
-        idInfo = activity.getUserId()
+        mainactivity = activity as MainActivity
+        idInfo = mainactivity.getUserId()
 
         title = view.findViewById(R.id.title)
         description = view.findViewById(R.id.postDescription)
+        val postProfile = view.findViewById<ImageView>(R.id.postProfile)
 
         databaseReference = FirebaseDatabase.getInstance().getReference("POSTS")
 
@@ -46,11 +50,21 @@ class postFragment : Fragment(R.layout.fragment_post) {
             }
         }
 
+        FirebaseDatabase.getInstance().getReference("USERS").child("$idInfo").child("PROFILE").addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Picasso.with(context).load(snapshot.getValue().toString()).into(postProfile)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+
     }
     private fun savePostData() {
 
-        val title = title.text.toString()
-        val description = description.text.toString()
+        var posttitle = title.text.toString()
+        var postdescription = description.text.toString()
         var poster = ""
         var profileURL = ""
 
@@ -69,18 +83,15 @@ class postFragment : Fragment(R.layout.fragment_post) {
                 val timeFormat = SimpleDateFormat("dd/M hh:mm:ss")
                 val time = timeFormat.format(Date())
 
-                val post = GetPostsModel(title, description, poster, profileURL, idInfo, "0" , "0",postID,System.currentTimeMillis(),time)
+                val post = GetPostsModel(posttitle, postdescription, poster, profileURL, idInfo, "0" , "0",postID,System.currentTimeMillis(),time)
 
                 databaseReference.child(postID).setValue(post).addOnCompleteListener{
+                    mainactivity.setCurrentFragment(FocusedPost(0,postID,poster,posttitle,postdescription,"0","0",time,profileURL))
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
-
-
-
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
 

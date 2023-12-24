@@ -13,7 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundborder"
         android:orientation="vertical"
         android:layout_margin="7sp"
 
@@ -38,22 +37,27 @@
                 >
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/backButton"
                     android:layout_width="50sp"
                     android:layout_height="50sp"
                     android:layout_margin="4sp"
                     android:paddingLeft="4sp"
-                    android:src="@drawable/arrowblack"
+                    android:src="@drawable/arrowred"
                     />
 
 
                 <ImageView
-                    android:id="@+id/imageView12"
+                    android:id="@+id/posterProfile"
                     android:layout_width="50sp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/profile" />
+                    android:layout_height="50sp"
+                    android:layout_marginTop="5sp"
+                    android:src="@drawable/profile"
+                    android:foreground="@drawable/profileoverlay"
+
+                    />
 
                 <TextView
-                    android:id="@+id/PostTitle"
+                    android:id="@+id/PostName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -82,10 +86,10 @@
                 android:paddingBottom="5sp">
 
                 <TextView
-                    android:id="@+id/PostName"
+                    android:id="@+id/PostTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4sp"
+                    android:layout_marginHorizontal="4sp"
                     android:fontFamily="@font/gotham_bold"
                     android:gravity="top"
                     android:inputType="textMultiLine"
@@ -102,11 +106,11 @@
                     android:id="@+id/PostContext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4sp"
+                    android:layout_marginHorizontal="4sp"
                     android:fontFamily="@font/gotham_bold"
                     android:gravity="top"
                     android:inputType="textMultiLine"
-                    android:lines="5"
+                    android:lines="10"
                     android:paddingStart="15sp"
                     android:paddingTop="5sp"
                     android:paddingEnd="15sp"
@@ -203,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5sp"
                     android:src="@drawable/comment"
+                    android:layout_marginTop="1sp"
 
                     />
 
@@ -222,6 +227,7 @@
                     android:layout_height="50sp"
                     android:layout_weight="0"
                     android:src="@drawable/profile"
+                    android:foreground="@drawable/profileoverlay"
 
                     />
 

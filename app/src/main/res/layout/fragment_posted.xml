@@ -80,7 +80,7 @@
                 android:fontFamily="@font/gotham_bold"
                 android:inputType="textMultiLine"
                 android:textColor = "@color/menu"
-                android:layout_margin="4sp"
+                android:layout_marginHorizontal="4sp"
 
                 />
 
@@ -98,7 +98,7 @@
                 android:fontFamily="@font/gotham_bold"
                 android:inputType="textMultiLine"
                 android:textColor = "@color/menu"
-                android:layout_margin="4sp"
+                android:layout_marginHorizontal="4sp"
 
                 />
 
