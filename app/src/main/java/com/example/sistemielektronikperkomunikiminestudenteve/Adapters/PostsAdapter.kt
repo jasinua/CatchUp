@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import kotlin.properties.Delegates
 
 class PostsAdapter(
     private val idList: ArrayList<GetPostsModel>,
@@ -81,34 +80,23 @@ class PostsAdapter(
         val postId = currentID.publicKey
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
+
+
         holder.likeButton.setOnClickListener() {
-
                 dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-
                         override fun onDataChange(snapshot: DataSnapshot) {
-
                             val currentLikes = snapshot.child("likes").getValue().toString().toInt()
-
                                 for(snap in snapshot.child("likedUsers").children) {
                                     if(snap.key.toString().equals("$userId")) {
-
                                         dbRef.child("likes").setValue("" + (currentLikes - 1))
                                         dbRef.child("likedUsers").child("$userId").removeValue()
-
-                                        holder.likeButton.setImageResource(R.drawable.thumbsup2)
-
+                                        holder.likeButton.setImageResource(R.drawable.blankthumbsup)
                                         return
                                     }
                                 }
-
-
                                 dbRef.child("likes").setValue("" + (currentLikes + 1))
                                 dbRef.child("likedUsers").child("$userId").setValue("")
-                                holder.likeButton.setImageResource(R.drawable.thumbsup)
-
-
-
-
+                            holder.likeButton.setImageResource(R.drawable.thumbsup)
                         }
                         override fun onCancelled(error: DatabaseError){
                         }
@@ -116,31 +104,19 @@ class PostsAdapter(
             }
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
-
-
                 for(snap in snapshot.child("likedUsers").children) {
                     if(snap.key.toString().equals("$userId")) {
-
-                        holder.likeButton.setImageResource(R.drawable.thumbsup2)
-
+                        holder.likeButton.setImageResource(R.drawable.thumbsup)
                         return
                     }
-
-
-                    holder.likeButton.setImageResource(R.drawable.thumbsup2)
-
                 }
-
-
-
-
-
             }
             override fun onCancelled(error: DatabaseError){
             }
         })
+
+
 
     }
     override fun getItemCount(): Int {

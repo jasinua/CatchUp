@@ -65,7 +65,7 @@
                     android:gravity="left|center"
                     android:paddingEnd="10sp"
                     android:text="Emri"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textSize="25sp" />
 
 
@@ -97,7 +97,7 @@
                     android:paddingTop="5sp"
                     android:paddingEnd="15sp"
                     android:text="Title"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textSize="25sp"
 
                     />
@@ -115,7 +115,7 @@
                     android:paddingTop="5sp"
                     android:paddingEnd="15sp"
                     android:text="Text"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
 
                     />
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Shkenca Kompjuterike"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
@@ -150,7 +150,7 @@
                     android:gravity="right"
                     android:paddingRight="10sp"
                     android:text="time"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -166,37 +166,38 @@
 
                 <TextView
                     android:id="@+id/likeCount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7sp"
                     android:fontFamily="@font/gotham_bold"
-                    android:gravity="left"
+                    android:gravity="center"
+                    android:paddingTop="4.5sp"
                     android:text="0"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
 
                     />
 
                 <ImageView
                     android:id="@+id/likeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginLeft="5sp"
                     android:gravity="center"
-                    android:src="@drawable/thumbsup"
+                    android:src="@drawable/blankthumbsup"
 
                     />
 
                 <TextView
                     android:id="@+id/commentCount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="23sp"
                     android:fontFamily="@font/gotham_bold"
-                    android:gravity="right"
+                    android:gravity="center"
                     android:paddingTop="4.5sp"
                     android:text="0"
-                    android:textColor="@color/menu"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
 
                     />

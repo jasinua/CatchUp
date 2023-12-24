@@ -12,7 +12,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import kotlin.properties.Delegates
 
 class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,desc: String?,likes: String?,comments: String?,posttime: String?,profileURL: String?) : Fragment(R.layout.fragment_focused_post) {
 
@@ -25,8 +24,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     val posttime = posttime
     val profileURL = profileURL
     val position = position
-
-    var liked by Delegates.notNull<Boolean>()
 
     lateinit var mainactivity : MainActivity
 
@@ -72,34 +69,23 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString())
 
         likeButton.setOnClickListener() {
-            liked=false
-
             dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-
                 override fun onDataChange(snapshot: DataSnapshot) {
-
                     val currentLikes = snapshot.child("likes").getValue().toString().toInt()
-
                     for(snap in snapshot.child("likedUsers").children) {
                         if(snap.key.toString().equals("$userId")) {
-
                             dbRef.child("likes").setValue("" + (currentLikes - 1))
                             likeCount.text = (currentLikes - 1).toString()
                             dbRef.child("likedUsers").child("$userId").removeValue()
-                            liked = false
+                            likeButton.setImageResource(R.drawable.blankthumbsup)
                             return
                         }
                     }
-
-                    if(!liked) {
                         dbRef.child("likes").setValue("" + (currentLikes + 1))
                         likeCount.text = (currentLikes + 1).toString()
                         dbRef.child("likedUsers").child("$userId").setValue("")
-                        liked = true
-                    }
-
+                        likeButton.setImageResource(R.drawable.thumbsup)
                 }
-
                 override fun onCancelled(error: DatabaseError){
                 }
             })
