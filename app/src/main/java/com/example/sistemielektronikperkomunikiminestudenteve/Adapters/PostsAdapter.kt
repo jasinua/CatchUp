@@ -20,7 +20,12 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
-class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String , myContext: Context?, mainactivity : MainActivity):
+class PostsAdapter(
+    private val idList: ArrayList<GetPostsModel>,
+    idInfo: String,
+    myContext: Context?,
+    mainactivity: MainActivity
+):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
 
@@ -32,7 +37,6 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
         return ViewHolder(itemView)
     }
 
-    var liked by Delegates.notNull<Boolean>()
     var userId = idInfo
     var thisContext = myContext
     var mainactivity = mainactivity
@@ -78,7 +82,6 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
         holder.likeButton.setOnClickListener() {
-            liked=false
 
                 dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -91,22 +94,53 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
 
                                         dbRef.child("likes").setValue("" + (currentLikes - 1))
                                         dbRef.child("likedUsers").child("$userId").removeValue()
-                                        liked = false
+
+                                        holder.likeButton.setImageResource(R.drawable.thumbsup2)
+
                                         return
                                     }
                                 }
 
-                            if(!liked) {
+
                                 dbRef.child("likes").setValue("" + (currentLikes + 1))
                                 dbRef.child("likedUsers").child("$userId").setValue("")
-                                liked = true
-                            }
+                                holder.likeButton.setImageResource(R.drawable.thumbsup)
+
+
+
 
                         }
                         override fun onCancelled(error: DatabaseError){
                         }
                     })
             }
+
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                for(snap in snapshot.child("likedUsers").children) {
+                    if(snap.key.toString().equals("$userId")) {
+
+                        holder.likeButton.setImageResource(R.drawable.thumbsup2)
+
+                        return
+                    }
+
+
+                    holder.likeButton.setImageResource(R.drawable.thumbsup2)
+
+                }
+
+
+
+
+
+            }
+            override fun onCancelled(error: DatabaseError){
+            }
+        })
 
     }
     override fun getItemCount(): Int {
@@ -133,3 +167,5 @@ class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String ,
     }
 
 }
+
+

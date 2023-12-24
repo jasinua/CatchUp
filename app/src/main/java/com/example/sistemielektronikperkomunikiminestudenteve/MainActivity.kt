@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     var idInfo : String? = null
     var loggedIn by Delegates.notNull<Boolean>()
 
+
+
     val database = Firebase.database
     val ref = database.getReference("USERS")
 
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in)
+
+
+
 
 
         val login = findViewById<Button>(R.id.logInButton)
@@ -129,6 +134,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun startNavBar(){
         setContentView(R.layout.activity_main)
+
+
+
         navigation = findViewById(R.id.bottomNavigationView)
         setCurrentFragment(HomePageFragment(0,false))
 
@@ -143,12 +151,15 @@ class MainActivity : AppCompatActivity() {
             val postPage = postFragment()
 
 
+
             when (it.itemId) {
                 R.id.home -> setCurrentFragment(homePage)
                 R.id.notification -> setCurrentFragment(notificationPage)
                 R.id.profile -> setCurrentFragment(profilePage)
                 R.id.documnets -> setCurrentFragment(documentPage)
                 R.id.post -> setCurrentFragment(postPage)
+
+
 
             }
             true
@@ -163,5 +174,6 @@ class MainActivity : AppCompatActivity() {
     fun resetUserInfo(){
         this.recreate()
     }
+
 
 }
