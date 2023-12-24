@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.FocusedPost
-import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
@@ -21,7 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlin.properties.Delegates
 
-class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String , myContext: Context?, mainactivity : MainActivity, homepage:HomePageFragment):
+class PostsAdapter (private val idList:ArrayList<GetPostsModel>, idInfo:String , myContext: Context?, mainactivity : MainActivity):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
 

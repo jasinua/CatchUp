@@ -47,7 +47,7 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
 
         postContext = context
         Log.d("$postContext","checking")
-        mAdapter = PostsAdapter(postList,idInfo,postContext,mainactivity,this)
+        mAdapter = PostsAdapter(postList,idInfo,postContext,mainactivity)
         recyclerView.adapter = mAdapter
 
         getListData()
