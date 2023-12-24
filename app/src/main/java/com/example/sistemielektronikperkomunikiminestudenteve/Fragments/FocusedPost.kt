@@ -68,6 +68,20 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         //like thing
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString())
 
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(snap in snapshot.child("likedUsers").children) {
+                    if (snap.key.toString().equals("$userId")) {
+                        likeButton.setImageResource(R.drawable.thumbsup)
+                        return
+                    }
+                }
+                likeButton.setImageResource(R.drawable.blankthumbsup)
+            }
+            override fun onCancelled(error: DatabaseError){
+            }
+        })
+
         likeButton.setOnClickListener() {
             dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

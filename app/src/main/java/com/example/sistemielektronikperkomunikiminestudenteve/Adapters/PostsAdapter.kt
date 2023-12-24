@@ -41,7 +41,6 @@ class PostsAdapter(
     var mainactivity = mainactivity
 
 
-
     @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
@@ -80,6 +79,19 @@ class PostsAdapter(
         val postId = currentID.publicKey
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(snap in snapshot.child("likedUsers").children) {
+                    if (snap.key.toString().equals("$userId")) {
+                        holder.likeButton.setImageResource(R.drawable.thumbsup)
+                        return
+                    }
+                }
+                holder.likeButton.setImageResource(R.drawable.blankthumbsup)
+            }
+            override fun onCancelled(error: DatabaseError){
+            }
+        })
 
 
         holder.likeButton.setOnClickListener() {
@@ -96,25 +108,15 @@ class PostsAdapter(
                                 }
                                 dbRef.child("likes").setValue("" + (currentLikes + 1))
                                 dbRef.child("likedUsers").child("$userId").setValue("")
-                            holder.likeButton.setImageResource(R.drawable.thumbsup)
+                                holder.likeButton.setImageResource(R.drawable.thumbsup)
                         }
                         override fun onCancelled(error: DatabaseError){
                         }
-                    })
-            }
+                })
 
-        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.child("likedUsers").children) {
-                    if(snap.key.toString().equals("$userId")) {
-                        holder.likeButton.setImageResource(R.drawable.thumbsup)
-                        return
-                    }
-                }
-            }
-            override fun onCancelled(error: DatabaseError){
-            }
-        })
+        }
+
+
 
 
 
