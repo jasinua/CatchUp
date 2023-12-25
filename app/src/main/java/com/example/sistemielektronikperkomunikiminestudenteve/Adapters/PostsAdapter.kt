@@ -52,6 +52,8 @@ class PostsAdapter(
         holder.postLikes.text = currentID.likes
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
+
+
         Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
         holder.postText.setOnClickListener(){

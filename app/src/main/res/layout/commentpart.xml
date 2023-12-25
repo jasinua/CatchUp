@@ -1,56 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/commentlayout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="7sp"
-    android:background="@drawable/roundborder">
+    android:paddingBottom="2dp"
+    android:background="@color/menu"
+    android:layout_marginHorizontal="7dp"
+    >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:padding="10dp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/commentLogo"
+            android:id="@+id/commentprofilelogo"
             android:layout_width="50sp"
             android:layout_height="50sp"
             android:layout_weight="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:foreground="@drawable/profileoverlay"
             android:src="@drawable/personred"
             />
 
         <TextView
-            android:id="@+id/commentText"
+            app:layout_constraintLeft_toRightOf="@id/commentprofilelogo"
+            android:id="@+id/namelastname"
             android:layout_width="200sp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginRight="15sp"
             android:layout_weight="1"
-            android:background="@drawable/roundborder"
-            android:fontFamily="@font/gotham_light"
+            android:text="Emri Mbiemri"
+            android:fontFamily="@font/gotham_bold"
             android:gravity="center|left"
             android:hint="Add a comment"
             android:paddingLeft="7sp"
             android:textColor="@color/menu"
             android:textColorHint="@color/hint"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="15sp"
 
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/commentdescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/commentprofilelogo"
+            app:layout_constraintRight_toLeftOf="@id/commentlikes"
+            app:layout_constraintTop_toBottomOf="@id/namelastname"
+            android:layout_marginHorizontal="55sp"
+            android:textColor="@color/black"
+
+            android:text="This is dummy text, hi im jasin edhe jam djali ma i mire ne kosove hah a ju krejt ma keni inatin se jam ma i miri ne bote"
             />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/commentlikes"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="0"
-            android:textSize="30sp"
-            android:textColor="@color/menu"/>
+            android:layout_marginTop="14sp"
+            android:textColor="@color/menu"
+            android:textSize="20sp"
+            app:layout_constraintRight_toLeftOf="@id/commentlikebutton"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="49dp"
-            android:layout_height="39dp"
+            android:id="@+id/commentlikebutton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity=""
             android:layout_weight="0"
-            android:layout_marginTop="2sp"
-            app:srcCompat="@drawable/thumbsup" />
+            android:layout_marginTop="14sp"
+            app:srcCompat="@drawable/thumbsup"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

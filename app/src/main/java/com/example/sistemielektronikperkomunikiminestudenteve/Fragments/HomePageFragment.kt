@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.CommentsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.PostsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
@@ -49,6 +50,7 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
         Log.d("$postContext","checking")
         mAdapter = PostsAdapter(postList,idInfo,postContext, mainactivity)
         recyclerView.adapter = mAdapter
+
 
         getListData()
 
