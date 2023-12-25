@@ -1,97 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/commentlayout"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="2dp"
-    android:background="@color/menu"
     android:layout_marginHorizontal="7dp"
+    android:background="@color/white"
+    android:layout_marginTop="7dp"
     >
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:padding="10dp"
-            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/commentprofilelogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    android:foreground="@drawable/profileoverlay"
+                    android:src="@drawable/personred"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/namelastname"
+                            android:layout_width="225dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gotham_bold"
+                            android:text="Emri Mbiemri"
+                            android:textColor="@color/black"
+                            android:paddingVertical="3dp"
+                            android:textColorHint="@color/hint"
+                            android:layout_gravity="left"
+                            android:textSize="15sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/commentdescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingVertical="3dp"
+                            android:text="Comment"
+                            android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/commentlikes"
+                                    android:layout_width="35dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_gravity="top|center_horizontal"
+                                    android:text="0"
+                                    android:paddingHorizontal="5dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp"
+                                    tools:ignore="MissingConstraints" />
+
+                                <ImageView
+                                    android:id="@+id/commentlikebutton"
+                                    android:layout_width="24sp"
+                                    android:layout_height="24sp"
+                                    android:layout_gravity="top|center_horizontal"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/thumbsup" />
+
+                        </LinearLayout>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/menu"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="4dp"
             >
 
+        </LinearLayout>
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/commentprofilelogo"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_weight="0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            android:foreground="@drawable/profileoverlay"
-            android:src="@drawable/personred"
-            />
-
-        <TextView
-            app:layout_constraintLeft_toRightOf="@id/commentprofilelogo"
-            android:id="@+id/namelastname"
-            android:layout_width="200sp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15sp"
-            android:layout_weight="1"
-            android:text="Emri Mbiemri"
-            android:fontFamily="@font/gotham_bold"
-            android:gravity="center|left"
-            android:hint="Add a comment"
-            android:paddingLeft="7sp"
-            android:textColor="@color/menu"
-            android:textColorHint="@color/hint"
-            android:textStyle="bold"
-            android:textSize="15sp"
-
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/commentdescription"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@id/commentprofilelogo"
-            app:layout_constraintRight_toLeftOf="@id/commentlikes"
-            app:layout_constraintTop_toBottomOf="@id/namelastname"
-            android:layout_marginHorizontal="55sp"
-            android:textColor="@color/black"
+            android:orientation="horizontal"
+            android:paddingVertical="3dp">
 
-            android:text="This is dummy text, hi im jasin edhe jam djali ma i mire ne kosove hah a ju krejt ma keni inatin se jam ma i miri ne bote"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Shkenca Kompjuterike"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/commentlikes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:layout_marginTop="14sp"
-            android:textColor="@color/menu"
-            android:textSize="20sp"
-            app:layout_constraintRight_toLeftOf="@id/commentlikebutton"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/postTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="10sp"
+                    android:text="24/07 09:14:10"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/commentlikebutton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity=""
-            android:layout_weight="0"
-            android:layout_marginTop="14sp"
-            app:srcCompat="@drawable/thumbsup"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

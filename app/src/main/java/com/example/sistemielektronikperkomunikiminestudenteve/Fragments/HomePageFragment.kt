@@ -1,12 +1,10 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.CommentsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.PostsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
@@ -47,7 +45,6 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
         idInfo = mainactivity.getUserId()
 
         postContext = context
-        Log.d("$postContext","checking")
         mAdapter = PostsAdapter(postList,idInfo,postContext, mainactivity)
         recyclerView.adapter = mAdapter
 
@@ -90,7 +87,6 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
                     }
                     postList.reverse()
                     mAdapter.notifyDataSetChanged()
-                    Log.d(currentposition.toString(),"checking homepage")
                     if(backClicked){
                         scrollToLastPosition()
                         backClicked=false

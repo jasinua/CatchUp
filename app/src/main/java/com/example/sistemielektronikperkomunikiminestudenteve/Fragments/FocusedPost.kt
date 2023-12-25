@@ -1,7 +1,7 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.CommentsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetCommentsModel
-import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import java.util.Date
 
 class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,desc: String?,likes: String?,comments: String?,posttime: String?,profileURL: String?) : Fragment(R.layout.fragment_focused_post) {
 
@@ -48,7 +48,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     lateinit var getCommentText:EditText
 
 
-    private lateinit var databaseReference: DatabaseReference
+    private lateinit var databaseReference: Query
 
     lateinit var mainactivity : MainActivity
 
@@ -93,10 +93,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         getCommentText =  view.findViewById(R.id.commentText)
 
         postCommentButton.setOnClickListener {
-
             postComment()
-            
-
+            getCommentText.setText("")
         }
 
 
@@ -128,6 +126,16 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
         //like thing
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString())
+        val commentRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection")
+
+        commentRef.addListenerForSingleValueEvent(object:ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val currentComments = snapshot.childrenCount
+                dbRef.child("comments").setValue(currentComments).toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -171,11 +179,12 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
             mainactivity.setCurrentFragment(HomePageFragment(position,true))
         }
 
+
     }
 
     private fun loadComments() {
         databaseReference =
-            FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection")
+            FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").orderByChild("commentLike")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -190,18 +199,19 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                         val commentLikes = snap2.child("commentLike").getValue().toString()
                         val comments = snap2.child("commentDescription").getValue().toString()
                         val profileURL = snap2.child("commenterProfileURL").getValue().toString()
-
+                        val commentTime = snap2.child("commentTime").getValue().toString()
 
                         if (!postList.contains(
-                                GetCommentsModel(comments, commentLikes, profileURL, username,username)
+                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime)
                             )
                         )  {
                             postList.add(
-
-                                GetCommentsModel(comments, commentLikes, profileURL, username,username)
+                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime)
                             )}
 
                     }
+                    postList.reverse()
+                    mAdapter.notifyDataSetChanged()
 
                 }
             }
@@ -232,17 +242,21 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                 userName = snapshot.child("EMRI").getValue().toString()
                 profileURL = snapshot.child("PROFILE").getValue().toString()
                 //post id
-                val postID2 = databaseReference.push().key!!
+                val postID2 = FirebaseDatabase.getInstance().getReference("POSTS").push().key!!
 
 
-                val post = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName)
+                //post time
+                val timeFormat = SimpleDateFormat("dd/M hh:mm:ss")
+                val time = timeFormat.format(Date())
 
-                databaseReference.child(postID.toString()).child("commentSection").child(postID2).setValue(post).addOnCompleteListener{
+                val post = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
 
+                FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(post).addOnCompleteListener{
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
+
             }
             override fun onCancelled(error: DatabaseError) {
             }

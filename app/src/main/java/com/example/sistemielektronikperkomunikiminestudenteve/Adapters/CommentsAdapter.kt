@@ -8,15 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.FocusedPost
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetCommentsModel
-import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class CommentsAdapter(
@@ -47,8 +41,7 @@ class CommentsAdapter(
         holder.commentLikes.text = currentID.commentLike
         holder.commentDescription.text = currentID.commentDescription
         holder.userName.text = currentID.commentuserName
-
-
+        holder.postTime.text = currentID.commentTime
         Picasso.with(thisContext).load(currentID.commenterProfileURL).into(holder.commentLogo)
 
     }
@@ -64,6 +57,7 @@ class CommentsAdapter(
         val commentLikes: TextView = itemView.findViewById(R.id.commentlikes)
         val commentLogo: ImageView = itemView.findViewById(R.id.commentprofilelogo)
         val likeButton: ImageView = itemView.findViewById(R.id.commentlikebutton)
+        val postTime: TextView = itemView.findViewById(R.id.postTime)
 
 
 

@@ -9,6 +9,6 @@ data class GetPostsModel (
     var likes: String? = null,
     var comments: String? = null,
     var publicKey:String? = null,
-    var timestamp: Long? = null,
+    var commentTimeStamp: Long? = null,
     var posttime: String? = null
 )

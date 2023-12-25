@@ -81,6 +81,15 @@ class PostsAdapter(
         val postId = currentID.publicKey
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
 
+        dbRef.addListenerForSingleValueEvent(object:ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val currentComments = snapshot.child("commentSection").childrenCount
+                dbRef.child("comments").setValue(currentComments).toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(snap in snapshot.child("likedUsers").children) {
