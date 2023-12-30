@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.CommentsAdapter
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetCommentsModel
+import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetNotificationsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -253,9 +254,27 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
                 FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(post).addOnCompleteListener{
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+
+                    FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val posterid = snapshot.child("posterID").getValue().toString()
+                            val notificationID = FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").push().key!!
+
+                            val notification = GetNotificationsModel(posterid,userName,postID,"comment","$time",profileURL)
+
+                            FirebaseDatabase.getInstance().getReference("USERS").child("$posterid").child("NOTIFICATIONS").child("$notificationID").setValue(notification)
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
+
                 }.addOnFailureListener {
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
+
 
             }
             override fun onCancelled(error: DatabaseError) {

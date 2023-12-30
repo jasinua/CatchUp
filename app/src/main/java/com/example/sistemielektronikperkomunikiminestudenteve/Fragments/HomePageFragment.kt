@@ -57,7 +57,7 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
     private fun getListData() {
 
         databaseReference =
-            FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("timestamp")
+            FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("posttime")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {

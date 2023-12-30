@@ -68,8 +68,6 @@ class postFragment : Fragment(R.layout.fragment_post) {
         var poster = ""
         var profileURL = ""
 
-
-
         //poster name
         FirebaseDatabase.getInstance().getReference("USERS").child("$idInfo").addListenerForSingleValueEvent(object:ValueEventListener{
 

@@ -1,69 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/commentlayout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.NotificationFragment">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="7dp"
+    android:background="@color/white"
+    android:layout_marginTop="7dp"
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/roundborderdark"
-        android:layout_margin="5sp"
-        >
+        android:background="@color/blue"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="55sp"
-            android:layout_height="55sp"
-            android:layout_marginLeft="8sp"
-            android:layout_marginTop="18sp"
-            android:src="@drawable/personn"
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/notificationProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="top"
+            android:foreground="@drawable/profileoverlay"
+            android:src="@drawable/personred"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:background="@drawable/roundborderdark"
             android:orientation="vertical"
-
-            >
-
+            android:layout_gravity="center"
+            android:paddingLeft="10dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/notificationName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="7dp"
-                android:paddingTop="7sp"
-                android:text="Marijan Kolaj"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:fontFamily="@font/gotham_bold"
+                android:text="Emri Mbiemri"
+                android:textColor="@color/black"
+                android:paddingVertical="3dp"
+                android:textColorHint="@color/hint"
+                android:layout_gravity="left"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/textView7"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:layout_marginTop="10sp"
-                android:layout_weight="1"
-                android:background="@drawable/roundborder"
-                android:paddingLeft="10dp"
-                android:paddingTop="1sp"
-                android:paddingBottom="10sp"
-                android:text="Liked your post... "
-                android:textStyle="bold"
-                android:textColor="@color/menu"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/blue">
 
+                <TextView
+                    android:id="@+id/notificationContext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingVertical="3dp"
+                    android:text="Comented on your post"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
 
-                />
+                <TextView
+                    android:id="@+id/notificationTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:paddingRight="10sp"
+                    android:text="24/07 09:14:10"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

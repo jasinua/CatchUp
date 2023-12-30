@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetCommentsModel
@@ -20,8 +19,6 @@ class CommentsAdapter(
     mainactivity: MainActivity
 ):
     RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
-
-
 
     var thisContext = myContext
 
@@ -49,8 +46,6 @@ class CommentsAdapter(
         return idList.size
     }
 
-
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val userName: TextView = itemView.findViewById(R.id.namelastname)
         val commentDescription: TextView = itemView.findViewById(R.id.commentdescription)
@@ -58,13 +53,6 @@ class CommentsAdapter(
         val commentLogo: ImageView = itemView.findViewById(R.id.commentprofilelogo)
         val likeButton: ImageView = itemView.findViewById(R.id.commentlikebutton)
         val postTime: TextView = itemView.findViewById(R.id.postTime)
-
-
-
-
-        fun showToast(message: String) {
-            Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
-        }
 
     }
 
