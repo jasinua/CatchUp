@@ -78,7 +78,7 @@ class postFragment : Fragment(R.layout.fragment_post) {
                 val postID = databaseReference.push().key!!
 
                 //post time
-                val timeFormat = SimpleDateFormat("dd/M hh:mm:ss")
+                val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                 val time = timeFormat.format(Date())
 
                 val post = GetPostsModel(posttitle, postdescription, poster, profileURL, idInfo, "0" , "0",postID,System.currentTimeMillis(),time)

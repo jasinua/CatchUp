@@ -66,6 +66,7 @@
                     android:layout_gravity="center_horizontal"
                     android:paddingVertical="3dp"
                     android:text="Comented on your post"
+                    android:textSize = "13dp"
                     android:layout_weight="1"
                     android:textColor="@color/black" />
 

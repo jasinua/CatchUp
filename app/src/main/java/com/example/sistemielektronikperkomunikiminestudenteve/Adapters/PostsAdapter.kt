@@ -2,15 +2,21 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.FocusedPost
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
+import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetCommentsModel
+import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetNotificationsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.database.DataSnapshot
@@ -18,6 +24,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import java.util.Date
 
 class PostsAdapter(
     private val idList: ArrayList<GetPostsModel>,
@@ -53,7 +60,6 @@ class PostsAdapter(
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
 
-
         Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
         holder.postText.setOnClickListener(){
@@ -68,6 +74,8 @@ class PostsAdapter(
             mainactivity.setCurrentFragment(FocusedPost(position,currentID.publicKey,currentID.poster,currentID.title,currentID.desc,currentID.likes,currentID.comments,currentID.posttime,currentID.profileURL))
         }
 
+
+
         FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE").addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 Picasso.with(thisContext).load(snapshot.getValue().toString()).into(holder.commentLogo)
@@ -77,9 +85,7 @@ class PostsAdapter(
             }
 
         })
-
-        val postId = currentID.publicKey
-        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postId.toString())
+        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(currentID.publicKey.toString())
 
         dbRef.addListenerForSingleValueEvent(object:ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -120,6 +126,61 @@ class PostsAdapter(
                                 dbRef.child("likes").setValue("" + (currentLikes + 1))
                                 dbRef.child("likedUsers").child("$userId").setValue("")
                                 holder.likeButton.setImageResource(R.drawable.thumbsup)
+
+                            ///////////////
+                            //sender name
+                            FirebaseDatabase.getInstance().getReference("USERS").child("$userId").addListenerForSingleValueEvent(object:ValueEventListener{
+
+                                override fun onDataChange(snapshot: DataSnapshot) {
+
+                                    val userName = snapshot.child("EMRI").getValue().toString()
+                                    val profileURL = snapshot.child("PROFILE").getValue().toString()
+
+                                    //post time
+                                    val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
+                                    val time = timeFormat.format(Date())
+
+                                    //sends notification
+                                    FirebaseDatabase.getInstance().getReference("POSTS").child(currentID.publicKey.toString()).addListenerForSingleValueEvent(object:ValueEventListener{
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            val posterid = snapshot.child("posterID").getValue().toString()
+                                            if(userId.equals(posterid)){
+
+                                            }else {
+                                                val notificationID = FirebaseDatabase.getInstance()
+                                                    .getReference("USERS").child(posterid)
+                                                    .child("NOTIFICATIONS").push().key!!
+                                                Log.d(
+                                                    posterid,
+                                                    "checking posting like notification"
+                                                )
+                                                val notification = GetNotificationsModel(
+                                                    posterid,
+                                                    userName,
+                                                    currentID.publicKey.toString(),
+                                                    "like",
+                                                    "$time",
+                                                    profileURL
+                                                )
+
+                                                FirebaseDatabase.getInstance().getReference("USERS")
+                                                    .child("$posterid").child("NOTIFICATIONS")
+                                                    .child("$notificationID").setValue(notification)
+                                            }
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                        }
+
+                                    })
+
+                                }
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                            })
+                            /////////////////////////////////////////////////////////
+
                         }
                         override fun onCancelled(error: DatabaseError){
                         }
@@ -127,15 +188,86 @@ class PostsAdapter(
 
         }
 
+        holder.commentButton.setOnClickListener(){
+
+                var getCommentText = holder.commentText.text.toString()
+
+                var getUserID =  userId
+                var userName = ""
+                var profileURL =""
+
+                val postID = currentID.publicKey
+
+                //poster name
+                FirebaseDatabase.getInstance().getReference("USERS").child("$getUserID").addListenerForSingleValueEvent(object:ValueEventListener{
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        var commentsLike = "0"
+
+                        userName = snapshot.child("EMRI").getValue().toString()
+                        profileURL = snapshot.child("PROFILE").getValue().toString()
+                        //post id
+                        val postID2 = FirebaseDatabase.getInstance().getReference("POSTS").push().key!!
 
 
+                        //post time
+                        val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
+                        val time = timeFormat.format(Date())
+
+                        val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
+
+                        FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(comment).addOnCompleteListener{
+                            Toast.makeText(thisContext, "Added", Toast.LENGTH_SHORT).show()
+
+                            //sends notification
+                            FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    val posterid = snapshot.child("posterID").getValue().toString()
+                                    if(userId.equals(posterid)){
+
+                                    }else {
+                                        val notificationID =
+                                            FirebaseDatabase.getInstance().getReference("USERS")
+                                                .child(posterid).child("NOTIFICATIONS").push().key!!
+
+                                        val notification = GetNotificationsModel(
+                                            posterid,
+                                            userName,
+                                            postID,
+                                            "comment",
+                                            "$time",
+                                            profileURL
+                                        )
+
+                                        FirebaseDatabase.getInstance().getReference("USERS")
+                                            .child("$posterid").child("NOTIFICATIONS")
+                                            .child("$notificationID").setValue(notification)
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                            })
+
+                            holder.commentText.setText("")
+
+                        }.addOnFailureListener {
+                            Toast.makeText(thisContext, "Failed", Toast.LENGTH_SHORT).show()
+                        }
 
 
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+        }
     }
     override fun getItemCount(): Int {
         return idList.size
     }
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val postName: TextView = itemView.findViewById(R.id.postName)
@@ -147,11 +279,8 @@ class PostsAdapter(
         val postTime: TextView = itemView.findViewById(R.id.postTime)
         val postProfile: ImageView = itemView.findViewById(R.id.postProfile)
         val commentLogo : ImageView = itemView.findViewById(R.id.loggedInCommentLogo)
-
-
-        fun showToast(message: String) {
-            Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
-        }
+        val commentButton : Button = itemView.findViewById(R.id.postCommentButton)
+        val commentText : EditText = itemView.findViewById(R.id.commentText)
 
     }
 

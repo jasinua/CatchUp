@@ -224,7 +224,7 @@
                 android:textColorHint="@color/hint"
                 android:paddingLeft = "7sp"
                 android:textSize="15sp"
-                android:textColor="@color/menu"
+                android:textColor="@color/black"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
                 android:fontFamily="@font/gotham_bold"

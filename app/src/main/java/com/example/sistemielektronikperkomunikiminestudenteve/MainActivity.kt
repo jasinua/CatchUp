@@ -1,7 +1,6 @@
 package com.example.sistemielektronikperkomunikiminestudenteve
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -39,21 +38,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in)
 
-
-
-
-
         val login = findViewById<Button>(R.id.logInButton)
         loginID = findViewById<EditText>(R.id.idInput)
         loginPass = findViewById<EditText>(R.id.identity)
         val idLength = 12
 
         loggedIn = false
-        Log.d("mainactivity","loggedIn $loggedIn")
 
         if (!loggedIn) {
             login.setOnClickListener {
-                Log.d("mainactivitiy","clicked login")
 
                 ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -77,15 +70,27 @@ class MainActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                        } else {
-
+                        }else if (!(loginID.text.toString().length == idLength)) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Invalid student ID",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }else {
                             var count = 0
                             for (user: DataSnapshot in dataSnapshot.children) {
                                 count++
                                 val id = user.key.toString()
                                 val pass = user.child("PASS").value.toString()
 
-                                if (id.equals(loginID.text.toString()) && pass.equals(loginPass.text.toString())) {
+                                if(id.equals(loginID.text.toString())&&!pass.equals(loginPass.text.toString())){
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Password is incorrect",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    break
+                                } else if (id.equals(loginID.text.toString()) && pass.equals(loginPass.text.toString())) {
                                     Toast.makeText(
                                         applicationContext,
                                         "Login successful",
@@ -97,29 +102,18 @@ class MainActivity : AppCompatActivity() {
                                 }else if(!id.equals(loginID.text.toString()) && !pass.equals(loginPass.text.toString()) && count==dataSnapshot.childrenCount.toInt()){
                                     Toast.makeText(
                                         applicationContext,
-                                        "User doesn't exsist",
+                                        "User doesn't exist",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
 
                             }
 
-                            if (!(loginID.text.toString().length == idLength)) {
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Invalid student ID",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-
-
                         }
                     }
-
                     override fun onCancelled(error: DatabaseError) {
 
                     }
-
                 })
             }
         }
@@ -135,14 +129,10 @@ class MainActivity : AppCompatActivity() {
     private fun startNavBar(){
         setContentView(R.layout.activity_main)
 
-
-
         navigation = findViewById(R.id.bottomNavigationView)
         setCurrentFragment(HomePageFragment(0,false))
 
-
         navigation.setOnNavigationItemSelectedListener() {
-
 
             val homePage = HomePageFragment(0,false)
             val notificationPage = notificationsPage()
@@ -150,16 +140,12 @@ class MainActivity : AppCompatActivity() {
             val documentPage= DocumentsFragment()
             val postPage = postFragment()
 
-
-
             when (it.itemId) {
                 R.id.home -> setCurrentFragment(homePage)
                 R.id.notification -> setCurrentFragment(notificationPage)
                 R.id.profile -> setCurrentFragment(profilePage)
                 R.id.documnets -> setCurrentFragment(documentPage)
                 R.id.post -> setCurrentFragment(postPage)
-
-
 
             }
             true

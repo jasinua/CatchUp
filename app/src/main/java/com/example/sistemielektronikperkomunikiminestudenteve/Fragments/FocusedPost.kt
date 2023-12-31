@@ -36,8 +36,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     val profileURL = profileURL
     val position = position
 
-
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetCommentsModel>
     private lateinit var mAdapter : CommentsAdapter
@@ -52,6 +50,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     private lateinit var databaseReference: Query
 
     lateinit var mainactivity : MainActivity
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,9 +95,9 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         postCommentButton.setOnClickListener {
             postComment()
             getCommentText.setText("")
+            commentCount.text = (commentCount.text.toString().toInt()+1).toString()
+            mainactivity.setCurrentFragment(this)
         }
-
-
 
         //setting data to show on the focus post
         postName.text = poster
@@ -108,13 +107,10 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         commentCount.text = comments
         likeCount.text = likes
 
-
-
         //get profile picture
         Picasso.with(context).load(profileURL).into(posterProfile)
 
-        FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE").addListenerForSingleValueEvent(object:
-            ValueEventListener {
+        FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE").addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Picasso.with(context).load(snapshot.getValue().toString()).into(commentLogo)
             }
@@ -123,7 +119,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
             }
 
         })
-
 
         //like thing
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString())
@@ -169,6 +164,59 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                         likeCount.text = (currentLikes + 1).toString()
                         dbRef.child("likedUsers").child("$userId").setValue("")
                         likeButton.setImageResource(R.drawable.thumbsup)
+
+                    ///////////////
+                    //sender name
+                    FirebaseDatabase.getInstance().getReference("USERS").child("$userId").addListenerForSingleValueEvent(object:ValueEventListener{
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+
+                            val userName = snapshot.child("EMRI").getValue().toString()
+                            val profileURL = snapshot.child("PROFILE").getValue().toString()
+
+                            //post time
+                            val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
+                            val time = timeFormat.format(Date())
+
+                               //sends notification
+                                FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        val posterid = snapshot.child("posterID").getValue().toString()
+                                        if(userId.equals(posterid)){
+
+                                        }else {
+                                            val notificationID =
+                                                FirebaseDatabase.getInstance().getReference("USERS")
+                                                    .child(posterid).child("NOTIFICATIONS")
+                                                    .push().key!!
+
+                                            val notification = GetNotificationsModel(
+                                                posterid,
+                                                userName,
+                                                postID,
+                                                "like",
+                                                "$time",
+                                                profileURL
+                                            )
+
+                                            FirebaseDatabase.getInstance().getReference("USERS")
+                                                .child("$posterid").child("NOTIFICATIONS")
+                                                .child("$notificationID").setValue(notification)
+                                        }
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                    }
+
+                                })
+
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
+                    /////////////////////////////////////////////////////////
+
                 }
                 override fun onCancelled(error: DatabaseError){
                 }
@@ -179,7 +227,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         backButton.setOnClickListener(){
             mainactivity.setCurrentFragment(HomePageFragment(position,true))
         }
-
 
     }
 
@@ -247,23 +294,38 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
 
                 //post time
-                val timeFormat = SimpleDateFormat("dd/M hh:mm:ss")
+                val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                 val time = timeFormat.format(Date())
 
-                val post = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
+                val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
 
-                FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(post).addOnCompleteListener{
+                FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(comment).addOnCompleteListener{
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
 
+                    //sends notification
                     FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
                         override fun onDataChange(snapshot: DataSnapshot) {
                             val posterid = snapshot.child("posterID").getValue().toString()
-                            val notificationID = FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").push().key!!
+                            if(userId.equals(posterid)){
 
-                            val notification = GetNotificationsModel(posterid,userName,postID,"comment","$time",profileURL)
+                            }else {
+                                val notificationID =
+                                    FirebaseDatabase.getInstance().getReference("USERS")
+                                        .child(posterid).child("NOTIFICATIONS").push().key!!
 
-                            FirebaseDatabase.getInstance().getReference("USERS").child("$posterid").child("NOTIFICATIONS").child("$notificationID").setValue(notification)
+                                val notification = GetNotificationsModel(
+                                    posterid,
+                                    userName,
+                                    postID,
+                                    "comment",
+                                    "$time",
+                                    profileURL
+                                )
 
+                                FirebaseDatabase.getInstance().getReference("USERS")
+                                    .child("$posterid").child("NOTIFICATIONS")
+                                    .child("$notificationID").setValue(notification)
+                            }
                         }
 
                         override fun onCancelled(error: DatabaseError) {
@@ -281,8 +343,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
             }
 
         })
-
-
 
     }
 

@@ -1,8 +1,9 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,11 +38,18 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
 
-        val myContext: Context? = context
-        mAdapter = NotificationsAdapter(postList,myContext)
+        mAdapter = NotificationsAdapter(postList,context)
         recyclerView.adapter = mAdapter
 
         getListData()
+
+        view.findViewById<Button>(R.id.clearNotifications).setOnClickListener(){
+            FirebaseDatabase.getInstance().getReference("USERS").child("$idInfo").child("NOTIFICATIONS").removeValue().addOnCompleteListener(){
+                Toast.makeText(context,"Notifications have been cleared", Toast.LENGTH_SHORT).show()
+                mainactivity.setCurrentFragment(notificationsPage())
+            }
+        }
+
     }
 
     private fun getListData() {
