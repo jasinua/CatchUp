@@ -179,7 +179,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                             val time = timeFormat.format(Date())
 
                                //sends notification
-                                FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
+                            FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         val posterid = snapshot.child("posterID").getValue().toString()
                                         if(userId.equals(posterid)){
