@@ -8,6 +8,7 @@ data class GetCommentsModel(
     var commentuserID:String? = null,
     var commentuserName:String? = null,
     var commentTimeStamp: Long? = null,
-    var commentTime: String? = null
+    var commentTime: String? = null,
+    var commentID: String? = null
 
 )

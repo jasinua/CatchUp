@@ -58,7 +58,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         mainactivity = activity as MainActivity
         userId = mainactivity.getUserId()
 
-
         recyclerView = view.findViewById(R.id.recyclerViewPosts)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -68,7 +67,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
 
-        mAdapter = CommentsAdapter(postList,idInfo,context,mainactivity)
+        mAdapter = CommentsAdapter(postList,idInfo,context,mainactivity,postID.toString())
         recyclerView.adapter = mAdapter
 
         loadComments()
@@ -232,7 +231,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
     private fun loadComments() {
         databaseReference =
-            FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").orderByChild("commentLike")
+            FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").orderByChild("commentTimeStamp")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -248,13 +247,14 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                         val comments = snap2.child("commentDescription").getValue().toString()
                         val profileURL = snap2.child("commenterProfileURL").getValue().toString()
                         val commentTime = snap2.child("commentTime").getValue().toString()
+                        val commentID = snap2.child("commentID").getValue().toString()
 
                         if (!postList.contains(
-                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime)
+                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime,commentID)
                             )
                         )  {
                             postList.add(
-                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime)
+                                GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime,commentID)
                             )}
 
                     }
@@ -290,16 +290,16 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                 userName = snapshot.child("EMRI").getValue().toString()
                 profileURL = snapshot.child("PROFILE").getValue().toString()
                 //post id
-                val postID2 = FirebaseDatabase.getInstance().getReference("POSTS").push().key!!
+                val commentID = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").push().key!!.toString()
 
 
                 //post time
                 val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                 val time = timeFormat.format(Date())
 
-                val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
+                val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time,commentID)
 
-                FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(comment).addOnCompleteListener{
+                FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(commentID).setValue(comment).addOnCompleteListener{
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
 
                     //sends notification

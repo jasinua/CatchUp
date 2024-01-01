@@ -9,13 +9,11 @@ import com.example.sistemielektronikperkomunikiminestudenteve.Adapters.PostsAdap
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetPostsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
-import com.example.sistemielektronikperkomunikiminestudenteve.databinding.FragmentLogInBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
-import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 
 class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fragment_home_page) {
 
@@ -29,9 +27,6 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
     var currentposition = position
     var backClicked = backClicked
 
-
-
-    private val binding by viewBinding(FragmentLogInBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +52,7 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
     private fun getListData() {
 
         databaseReference =
-            FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("posttime")
+            FirebaseDatabase.getInstance().getReference("POSTS").orderByChild("postTimeStamp")
         databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
