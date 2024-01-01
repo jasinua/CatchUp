@@ -222,12 +222,11 @@
                 android:layout_weight="1"
                 android:hint="Leave a comment..."
                 android:textColorHint="@color/hint"
-                android:paddingLeft = "7sp"
+                android:paddingHorizontal="7dp"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
-                android:fontFamily="@font/gotham_bold"
 
                 />
 
