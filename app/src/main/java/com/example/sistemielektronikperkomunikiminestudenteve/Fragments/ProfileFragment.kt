@@ -20,13 +20,14 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment() : Fragment(R.layout.fragment_profile) {
     lateinit var id : TextView
     lateinit var mainactivity : MainActivity
     lateinit var idInfo : String
     var changingPass : Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
@@ -126,8 +127,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             logout.setOnClickListener() {
                 if (!changingPass) {
-                    mainactivity.resetUserInfo()
-                    mainactivity.setContentView(R.layout.fragment_log_in)
+                    val editor = mainactivity.returnPref().edit()
+                    editor.clear(); //clear all stored data
+                    editor.commit();
+                    mainactivity.resetInfo()
                 }
             }
     }
