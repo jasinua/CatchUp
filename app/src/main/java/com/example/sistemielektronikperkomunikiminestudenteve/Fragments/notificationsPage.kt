@@ -75,7 +75,7 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
                         val notificationSent = snap2.child("notificationSent").getValue().toString().toBoolean()
 
                         if (!postList.contains(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,"*.",notificationSenderProfileURL,notificationSent)
                             )
                         )  {
                             postList.add(

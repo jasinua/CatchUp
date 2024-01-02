@@ -186,8 +186,8 @@ class MainActivity : AppCompatActivity() {
 
 
         var builder = NotificationCompat.Builder(context,channelId)
-            .setSmallIcon(R.mipmap.ic_launcher_foreground)
-            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.mipmap.ic_launcher_foreground))
+            .setSmallIcon(R.drawable.roundlogo)
+            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.roundlogo))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         navigation = findViewById(R.id.bottomNavigationView)
@@ -212,8 +212,20 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+        var notificationID = 0
+        FirebaseDatabase.getInstance().getReference("USERS")
+            .child(sharedPref!!.getString(Username, "").toString())
+            .addValueEventListener(object:ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    notificationID = snapshot.child("NOTIFICATIONS").childrenCount.toInt()
+                    Log.d("$notificationID", "nr of id")
+                }
 
-        var count = 0
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
     FirebaseDatabase.getInstance().getReference("USERS")
         .child(sharedPref!!.getString(Username, "").toString())
         .child("NOTIFICATIONS").orderByChild("notificationTime")
@@ -245,7 +257,7 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             return
                         }
-                        notify(1, builder.build())
+                        notify(notificationID, builder.build())
 
                         FirebaseDatabase.getInstance().getReference("USERS")
                             .child(sharedPref!!.getString(Username, "").toString())
