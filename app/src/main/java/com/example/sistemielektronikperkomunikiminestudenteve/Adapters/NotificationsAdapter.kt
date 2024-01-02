@@ -45,6 +45,14 @@ class NotificationsAdapter(
         return idList.size
     }
 
+    fun returnList(): ArrayList<GetNotificationsModel>{
+        return idList
+    }
+
+    fun returnNewestItem(): GetNotificationsModel{
+        return idList.get(0)
+    }
+
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

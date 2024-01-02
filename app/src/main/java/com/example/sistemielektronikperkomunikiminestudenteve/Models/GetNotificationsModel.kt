@@ -7,5 +7,6 @@ data class GetNotificationsModel(
     var notificationType: String? = null,//like ose comment
     var notificationTime: String? = null,//time qe u ardh notification
     var notificationSenderProfileURL: String? = null,//profile pic
+    var notificationSent: Boolean? = false,
 
 )

@@ -50,7 +50,8 @@ class CommentsAdapter(
 
 
         //ref for every comment
-        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID).child("commentSection").child(currentID.commentID.toString())
+        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID)
+            .child("commentSection").child(currentID.commentID.toString())
 
         //i qet images per likes te comments
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {

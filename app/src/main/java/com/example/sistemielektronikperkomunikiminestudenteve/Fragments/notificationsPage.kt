@@ -72,13 +72,14 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
                         val notificationType = snap2.child("notificationType").getValue().toString()
                         val notificationTime = snap2.child("notificationTime").getValue().toString()
                         val notificationSenderProfileURL = snap2.child("notificationSenderProfileURL").getValue().toString()
+                        val notificationSent = snap2.child("notificationSent").getValue().toString().toBoolean()
 
                         if (!postList.contains(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent)
                             )
                         )  {
                             postList.add(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent)
                             )}
 
                     }
@@ -90,5 +91,4 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
             }
         })
     }
-
 }

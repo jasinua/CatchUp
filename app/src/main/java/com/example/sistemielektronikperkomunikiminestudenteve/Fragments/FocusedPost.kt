@@ -195,7 +195,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                                 postID,
                                                 "like",
                                                 "$time",
-                                                profileURL
+                                                profileURL,
+                                                false
                                             )
 
                                             FirebaseDatabase.getInstance().getReference("USERS")
@@ -319,7 +320,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                     postID,
                                     "comment",
                                     "$time",
-                                    profileURL
+                                    profileURL,
+                                    false
                                 )
 
                                 FirebaseDatabase.getInstance().getReference("USERS")

@@ -160,7 +160,8 @@ class PostsAdapter(
                                                     currentID.publicKey.toString(),
                                                     "like",
                                                     "$time",
-                                                    profileURL
+                                                    profileURL,
+                                                    false
                                                 )
 
                                                 FirebaseDatabase.getInstance().getReference("USERS")
@@ -237,7 +238,8 @@ class PostsAdapter(
                                             postID,
                                             "comment",
                                             "$time",
-                                            profileURL
+                                            profileURL,
+                                            false
                                         )
 
                                         FirebaseDatabase.getInstance().getReference("USERS")
