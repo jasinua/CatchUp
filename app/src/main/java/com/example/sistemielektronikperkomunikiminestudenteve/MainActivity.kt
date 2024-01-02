@@ -249,7 +249,7 @@ class MainActivity : AppCompatActivity() {
 
                         FirebaseDatabase.getInstance().getReference("USERS")
                             .child(sharedPref!!.getString(Username, "").toString())
-                            .child("NOTIFICATIONS").child(snapshot.key.toString()).setValue(true)
+                            .child("NOTIFICATIONS").child(snapshot.key.toString()).child("notificationSent").setValue(true)
                     }
                 }else{
 
