@@ -36,17 +36,8 @@ class ServiceRunner: Service() {
         override fun handleMessage(msg: Message) {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
-            try {
-                Thread.sleep(100000)
-            } catch (e: InterruptedException) {
-                // Restore interrupt status.
-
-                Thread.currentThread().interrupt()
-            }
-
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
-            stopSelf(msg.arg1)
         }
     }
 
@@ -107,7 +98,6 @@ class ServiceRunner: Service() {
                         } else {
                             builder.setContentTitle("New comment!")
                             val notificationText = snapshot.child("notificationText").getValue().toString()
-                            builder.setContentText("$sender")
                             builder.setStyle(NotificationCompat.BigTextStyle().bigText("$sender: $notificationText"))
                         }
 

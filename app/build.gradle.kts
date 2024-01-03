@@ -51,10 +51,10 @@ android {
 dependencies {
 
     implementation("com.github.Zhuinden:fragmentviewbindingdelegate-kt:1.0.2")
-    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
-    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 
 
     implementation("com.squareup.picasso:picasso:2.5.2")
