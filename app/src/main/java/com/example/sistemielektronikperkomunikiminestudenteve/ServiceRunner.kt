@@ -11,7 +11,6 @@ import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -76,7 +75,6 @@ class ServiceRunner: Service() {
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     notificationID = snapshot.child("NOTIFICATIONS").childrenCount.toInt()
-                    Log.d("$notificationID", "nr of id")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -108,7 +106,9 @@ class ServiceRunner: Service() {
                             builder.setContentText("$sender liked your post")
                         } else {
                             builder.setContentTitle("New comment!")
-                            builder.setContentText("$sender commented on your post")
+                            val notificationText = snapshot.child("notificationText").getValue().toString()
+                            builder.setContentText("$sender")
+                            builder.setStyle(NotificationCompat.BigTextStyle().bigText("$sender: $notificationText"))
                         }
 
 

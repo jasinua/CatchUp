@@ -3,7 +3,6 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +44,6 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
 
         view.findViewById<Button>(R.id.clearNotifications).setOnClickListener(){
             FirebaseDatabase.getInstance().getReference("USERS").child("$idInfo").child("NOTIFICATIONS").removeValue().addOnCompleteListener(){
-                Toast.makeText(context,"Notifications have been cleared", Toast.LENGTH_SHORT).show()
                 mainactivity.setCurrentFragment(notificationsPage())
             }
         }
@@ -73,13 +71,14 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
                         val notificationTime = snap2.child("notificationTime").getValue().toString()
                         val notificationSenderProfileURL = snap2.child("notificationSenderProfileURL").getValue().toString()
                         val notificationSent = snap2.child("notificationSent").getValue().toString().toBoolean()
+                        val notificationText = snap2.child("notificationText").getValue().toString()
 
                         if (!postList.contains(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText)
                             )
                         )  {
                             postList.add(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText)
                             )}
 
                     }

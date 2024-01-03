@@ -1,6 +1,7 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +40,6 @@ class CommentsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
-
         val currentID = idList[position]
         holder.commentLikes.text = currentID.commentLike
         holder.commentDescription.text = currentID.commentDescription
@@ -48,10 +47,11 @@ class CommentsAdapter(
         holder.postTime.text = currentID.commentTime
         Picasso.with(thisContext).load(currentID.commenterProfileURL).into(holder.commentLogo)
 
-
         //ref for every comment
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(postID)
             .child("commentSection").child(currentID.commentID.toString())
+
+        Log.d(currentID.commentID.toString(),"this is the current comment id")
 
         //i qet images per likes te comments
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,17 +73,19 @@ class CommentsAdapter(
             dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                    val currentCommentLikes = snapshot.child("commentLike").getValue().toString().toInt()
+                    val currentCommentLikes = snapshot.child("commentLike").value.toString().toInt()
 
                     for(snap in snapshot.child("likedUsers").children) {
                         if(snap.key.toString().equals("$userId")) {
-                            dbRef.child("commentLike").setValue("" + (currentCommentLikes - 1))
+
+                            dbRef.child("commentLike").setValue((currentCommentLikes - 1).toString())
                             dbRef.child("likedUsers").child("$userId").removeValue()
                             holder.likeButton.setImageResource(R.drawable.blankthumbsup)
                             return
                         }
                     }
-                    dbRef.child("commentLike").setValue("" + (currentCommentLikes + 1))
+
+                    dbRef.child("commentLike").setValue((currentCommentLikes + 1).toString())
                     dbRef.child("likedUsers").child("$userId").setValue("")
                     holder.likeButton.setImageResource(R.drawable.thumbsup)
 

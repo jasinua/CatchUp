@@ -43,9 +43,7 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
         mAdapter = PostsAdapter(postList,idInfo,postContext, mainactivity)
         recyclerView.adapter = mAdapter
 
-
         getListData()
-
 
     }
 

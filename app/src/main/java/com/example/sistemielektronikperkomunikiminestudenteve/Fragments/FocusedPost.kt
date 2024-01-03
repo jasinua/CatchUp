@@ -145,8 +145,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
             override fun onCancelled(error: DatabaseError){
             }
         })
-        var dataSnapshot2: DataSnapshot? = null
-
         likeButton.setOnClickListener() {
             dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -173,7 +171,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
                             val userName = snapshot.child("EMRI").getValue().toString()
                             val profileURL = snapshot.child("PROFILE").getValue().toString()
-                            dataSnapshot2 = snapshot
                             //post time
                             val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                             val time = timeFormat.format(Date())
@@ -197,7 +194,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                                 "like",
                                                 "$time",
                                                 profileURL,
-                                                false
+                                                false,
+                                                ""
                                             )
                                             FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").addListenerForSingleValueEvent(object:ValueEventListener{
                                                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -340,7 +338,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                     "comment",
                                     "$time",
                                     profileURL,
-                                    false
+                                    false,
+                                    getCommentText
                                 )
 
                                 FirebaseDatabase.getInstance().getReference("USERS")

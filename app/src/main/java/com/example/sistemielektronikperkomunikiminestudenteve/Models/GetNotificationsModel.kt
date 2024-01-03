@@ -8,5 +8,6 @@ data class GetNotificationsModel(
     var notificationTime: String? = null,//time qe u ardh notification
     var notificationSenderProfileURL: String? = null,//profile pic
     var notificationSent: Boolean? = false,
+    var notificationText: String? = null,
 
 )

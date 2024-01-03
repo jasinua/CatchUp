@@ -33,7 +33,7 @@ class NotificationsAdapter(
         if(currentID.notificationType.equals("like")){
             holder.notificationContext.text = "Liked your post"
         }else if(currentID.notificationType.equals("comment")){
-            holder.notificationContext.text = "Commented on your post"
+            holder.notificationContext.text = currentID.notificationText.toString()
         }
 
         holder.notificationTime.text = currentID.notificationTime
@@ -44,16 +44,6 @@ class NotificationsAdapter(
     override fun getItemCount(): Int {
         return idList.size
     }
-
-    fun returnList(): ArrayList<GetNotificationsModel>{
-        return idList
-    }
-
-    fun returnNewestItem(): GetNotificationsModel{
-        return idList.get(0)
-    }
-
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notificationName = itemView.findViewById<TextView>(R.id.notificationName)

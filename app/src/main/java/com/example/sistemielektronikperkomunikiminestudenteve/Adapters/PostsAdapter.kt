@@ -128,7 +128,7 @@ class PostsAdapter(
 
 
                             ///////////////
-                            //sender name
+                            //notification
                             FirebaseDatabase.getInstance().getReference("USERS").child("$userId").addListenerForSingleValueEvent(object:ValueEventListener{
 
                                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -158,7 +158,8 @@ class PostsAdapter(
                                                     "like",
                                                     "$time",
                                                     profileURL,
-                                                    false
+                                                    false,
+                                                    ""
                                                 )
 
                                                 FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").addListenerForSingleValueEvent(object:ValueEventListener{
@@ -224,16 +225,16 @@ class PostsAdapter(
                         userName = snapshot.child("EMRI").getValue().toString()
                         profileURL = snapshot.child("PROFILE").getValue().toString()
                         //post id
-                        val postID2 = FirebaseDatabase.getInstance().getReference("POSTS").push().key!!
+                        val commentID = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").push().key!!.toString()
 
 
                         //post time
                         val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                         val time = timeFormat.format(Date())
 
-                        val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time)
+                        val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time,commentID)
 
-                        FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(postID2).setValue(comment).addOnCompleteListener{
+                        FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(commentID).setValue(comment).addOnCompleteListener{
                             Toast.makeText(thisContext, "Added", Toast.LENGTH_SHORT).show()
 
                             //sends notification
@@ -254,7 +255,8 @@ class PostsAdapter(
                                             "comment",
                                             "$time",
                                             profileURL,
-                                            false
+                                            false,
+                                            getCommentText
                                         )
 
                                         FirebaseDatabase.getInstance().getReference("USERS")
