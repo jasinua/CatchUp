@@ -1,13 +1,11 @@
 package com.example.sistemielektronikperkomunikiminestudenteve
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,9 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.DocumentsFragment
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.HomePageFragment
@@ -26,10 +21,8 @@ import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.notifica
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import kotlin.properties.Delegates
@@ -51,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     var sharedPref : SharedPreferences? = null
     val Username = "username"
     val Password = "password"
-    val lastKey = "key"
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,12 +176,6 @@ class MainActivity : AppCompatActivity() {
 
         createNotificationChannel()
 
-
-        var builder = NotificationCompat.Builder(context,channelId)
-            .setSmallIcon(R.drawable.roundlogo)
-            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.roundlogo))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
         navigation = findViewById(R.id.bottomNavigationView)
         setCurrentFragment(HomePageFragment(0,false))
 
@@ -212,75 +198,8 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
-        var notificationID = 0
-        FirebaseDatabase.getInstance().getReference("USERS")
-            .child(sharedPref!!.getString(Username, "").toString())
-            .addValueEventListener(object:ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    notificationID = snapshot.child("NOTIFICATIONS").childrenCount.toInt()
-                    Log.d("$notificationID", "nr of id")
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
-
-    FirebaseDatabase.getInstance().getReference("USERS")
-        .child(sharedPref!!.getString(Username, "").toString())
-        .child("NOTIFICATIONS").orderByChild("notificationTime")
-        .addChildEventListener(object : ChildEventListener {
-
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
-                notificationsPage()
-                //qtu me ba notificatio
-                if(snapshot.child("notificationSent").getValue()==false) {
-
-                    val notificationType = snapshot.child("notificationType").getValue().toString()
-                    val sender = snapshot.child("notificationSenderName").getValue()
-
-                    if (notificationType.equals("like")) {
-                        builder.setContentTitle("New like!")
-                        builder.setContentText("$sender liked your post")
-                    } else {
-                        builder.setContentTitle("New comment!")
-                        builder.setContentText("$sender commented on your post")
-                    }
-
-
-                    with(NotificationManagerCompat.from(context)) {
-                        if (ActivityCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.POST_NOTIFICATIONS
-                            ) != PackageManager.PERMISSION_GRANTED
-                        ) {
-                            return
-                        }
-                        notify(notificationID, builder.build())
-
-                        FirebaseDatabase.getInstance().getReference("USERS")
-                            .child(sharedPref!!.getString(Username, "").toString())
-                            .child("NOTIFICATIONS").child(snapshot.key.toString()).child("notificationSent").setValue(true)
-                    }
-                }else{
-
-                }
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
+        startService(Intent(this, ServiceRunner::class.java))
 
     }
 
