@@ -3,7 +3,6 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -127,6 +126,7 @@ class PostsAdapter(
                                 dbRef.child("likedUsers").child("$userId").setValue("")
                                 holder.likeButton.setImageResource(R.drawable.thumbsup)
 
+
                             ///////////////
                             //sender name
                             FirebaseDatabase.getInstance().getReference("USERS").child("$userId").addListenerForSingleValueEvent(object:ValueEventListener{
@@ -135,7 +135,6 @@ class PostsAdapter(
 
                                     val userName = snapshot.child("EMRI").getValue().toString()
                                     val profileURL = snapshot.child("PROFILE").getValue().toString()
-
                                     //post time
                                     val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                                     val time = timeFormat.format(Date())
@@ -147,13 +146,11 @@ class PostsAdapter(
                                             if(userId.equals(posterid)){
 
                                             }else {
+
                                                 val notificationID = FirebaseDatabase.getInstance()
                                                     .getReference("USERS").child(posterid)
                                                     .child("NOTIFICATIONS").push().key!!
-                                                Log.d(
-                                                    posterid,
-                                                    "checking posting like notification"
-                                                )
+
                                                 val notification = GetNotificationsModel(
                                                     posterid,
                                                     userName,
@@ -164,9 +161,27 @@ class PostsAdapter(
                                                     false
                                                 )
 
-                                                FirebaseDatabase.getInstance().getReference("USERS")
-                                                    .child("$posterid").child("NOTIFICATIONS")
-                                                    .child("$notificationID").setValue(notification)
+                                                FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").addListenerForSingleValueEvent(object:ValueEventListener{
+                                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                                        for(snap in snapshot.children) {
+                                                            if(snap.child("notificationType").getValue().toString().equals("like")
+                                                                && snap.child("notificationSenderID").getValue().toString().equals(posterid)
+                                                                && snap.child("notificationOfPost").getValue().toString().equals(currentID.publicKey.toString())){
+                                                                return
+                                                            }
+                                                        }
+
+                                                        FirebaseDatabase.getInstance().getReference("USERS")
+                                                            .child("$posterid").child("NOTIFICATIONS")
+                                                            .child("$notificationID").setValue(notification)
+                                                        return
+
+                                                    }
+
+                                                    override fun onCancelled(error: DatabaseError) {
+                                                    }
+
+                                                })
                                             }
                                         }
 
