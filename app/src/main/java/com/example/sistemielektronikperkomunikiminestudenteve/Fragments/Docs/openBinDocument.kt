@@ -36,7 +36,7 @@ class openBinDocument(context: Context) : Fragment(R.layout.fragment_bin_doc) {
         recyclerView.setHasFixedSize(true)
 
         docList = arrayListOf<GetDocumentsModel>()
-        mAdapter = DocumentAdapter(docList,myContext,group)
+        mAdapter = DocumentAdapter(docList,myContext)
         recyclerView.adapter = mAdapter
 
 

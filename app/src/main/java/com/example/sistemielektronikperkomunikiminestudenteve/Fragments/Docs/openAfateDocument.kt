@@ -37,7 +37,7 @@ class openAfateDocument(context: Context) : Fragment(R.layout.fragment_afate_doc
         recyclerView.setHasFixedSize(true)
 
         docList = arrayListOf<GetDocumentsModel>()
-        mAdapter = DocumentAdapter(docList,myContext,group)
+        mAdapter = DocumentAdapter(docList,myContext)
         recyclerView.adapter = mAdapter
 
 

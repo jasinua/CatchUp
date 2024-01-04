@@ -4,7 +4,6 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sistemielektronikperkomunikiminestudenteve.Models.GetDocumentsModel
 import com.example.sistemielektronikperkomunikiminestudenteve.R
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class DocumentAdapter(
-    private val items: ArrayList<GetDocumentsModel>, myContext: Context, group: String?):
+    private val items: ArrayList<GetDocumentsModel>, myContext: Context):
     RecyclerView.Adapter<DocumentAdapter.ViewHolder>() {
 
         var myContext = myContext
-        var groupType = group
-
-        lateinit var storageReference: StorageReference
-        lateinit var ref: StorageReference
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView =
@@ -49,7 +43,6 @@ class DocumentAdapter(
 
             holder.downloadButton.setOnClickListener(){
                 downloadFile("document",item.documentURL.toString())
-                Log.d("docURL:",item.documentURL.toString())
             }
 
         }

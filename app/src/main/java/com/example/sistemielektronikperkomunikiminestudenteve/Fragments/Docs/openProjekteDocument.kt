@@ -36,7 +36,7 @@ class openProjekteDocument(context: Context) : Fragment(R.layout.fragment_projek
         recyclerView.setHasFixedSize(true)
 
         docList = arrayListOf<GetDocumentsModel>()
-        mAdapter = DocumentAdapter(docList,myContext,group)
+        mAdapter = DocumentAdapter(docList,myContext)
         recyclerView.adapter = mAdapter
 
 

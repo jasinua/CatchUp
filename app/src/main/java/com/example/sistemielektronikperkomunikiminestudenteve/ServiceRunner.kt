@@ -11,7 +11,6 @@ import android.os.HandlerThread
 import android.os.IBinder
 import android.os.Looper
 import android.os.Message
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -37,9 +36,15 @@ class ServiceRunner: Service() {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
 
+            try{
+                Thread.sleep(100000)
+            }catch(e:Exception){
+                Thread.interrupted()
+            }
+
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
-            stopSelf()
+            stopSelf(msg.arg1)
         }
     }
 
@@ -139,8 +144,6 @@ class ServiceRunner: Service() {
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show()
-
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
         serviceHandler?.obtainMessage()?.also { msg ->
@@ -158,7 +161,7 @@ class ServiceRunner: Service() {
     }
 
     override fun onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
+        startService(Intent(applicationContext,ServiceRunner::class.java))
     }
 
 }

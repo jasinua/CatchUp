@@ -156,6 +156,7 @@ class MainActivity : AppCompatActivity() {
                                                         updateUI(null)
                                                     }
                                                 }
+                                            auth.signOut()
                                         }
 
                                         override fun onCancelled(error: DatabaseError) {
@@ -210,9 +211,9 @@ class MainActivity : AppCompatActivity() {
 
     fun updateUI(account: FirebaseUser?) {
         if (account != null) {
-            Toast.makeText(this, "You Signed In successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Authentication successful", Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(this, "You Didnt signed in", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Authentication unsuccessful", Toast.LENGTH_LONG).show()
         }
     }
 
