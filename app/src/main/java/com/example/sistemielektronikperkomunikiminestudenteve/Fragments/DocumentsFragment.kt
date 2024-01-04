@@ -24,14 +24,15 @@ class DocumentsFragment(applicationContext : Context) : Fragment(R.layout.fragme
 
         mainactivity = activity as MainActivity
 
-        val ligjerata = view.findViewById<ImageButton>(R.id.ligjerata).setOnClickListener { mainactivity.setCurrentFragment(openLigjerataDocument(myContext)) }
-        val afate = view.findViewById<ImageButton>(R.id.afate).setOnClickListener { mainactivity.setCurrentFragment(openAfateDocument(myContext))}
-        val projekte = view.findViewById<ImageButton>(R.id.projekte).setOnClickListener { mainactivity.setCurrentFragment(openProjekteDocument(myContext)) }
-        val kuiz = view.findViewById<ImageButton>(R.id.kuize).setOnClickListener { mainactivity.setCurrentFragment(openKuizDocument(myContext)) }
-        val libra = view.findViewById<ImageButton>(R.id.libra).setOnClickListener{ mainactivity.setCurrentFragment(openLibraDocument(myContext)) }
-        val bin = view.findViewById<ImageButton>(R.id.bin).setOnClickListener { mainactivity.setCurrentFragment(openBinDocument(myContext)) }
-
+        view.findViewById<ImageButton>(R.id.ligjerata).setOnClickListener { mainactivity.setCurrentFragment(openLigjerataDocument(myContext)) }
+        view.findViewById<ImageButton>(R.id.afate).setOnClickListener { mainactivity.setCurrentFragment(openAfateDocument(myContext))}
+        view.findViewById<ImageButton>(R.id.projekte).setOnClickListener { mainactivity.setCurrentFragment(openProjekteDocument(myContext)) }
+        view.findViewById<ImageButton>(R.id.kuize).setOnClickListener { mainactivity.setCurrentFragment(openKuizDocument(myContext)) }
+        view.findViewById<ImageButton>(R.id.libra).setOnClickListener{ mainactivity.setCurrentFragment(openLibraDocument(myContext)) }
+        view.findViewById<ImageButton>(R.id.bin).setOnClickListener { mainactivity.setCurrentFragment(openBinDocument(myContext)) }
 
     }
+
+
 
 }

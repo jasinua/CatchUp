@@ -36,8 +36,10 @@ class ServiceRunner: Service() {
         override fun handleMessage(msg: Message) {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
+
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
+            stopSelf()
         }
     }
 
@@ -84,7 +86,6 @@ class ServiceRunner: Service() {
             .addChildEventListener(object : ChildEventListener {
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
                     notificationsPage()
                     //qtu me ba notificatio
                     if(snapshot.child("notificationSent").getValue()==false) {

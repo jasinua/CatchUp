@@ -102,15 +102,6 @@
             android:paddingVertical="3dp">
 
                 <TextView
-                    android:id="@+id/documentLand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Analize numerike"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/documentSize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
