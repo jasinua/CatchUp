@@ -138,6 +138,7 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                     val auth = Firebase.auth
                     auth.signOut()
 
+                    mainactivity.serviceStopper()
                     mainactivity.resetInfo()
                 }
             }

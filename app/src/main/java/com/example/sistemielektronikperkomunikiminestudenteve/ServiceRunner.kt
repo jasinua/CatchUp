@@ -21,13 +21,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-
 private const val channelId = "i.apps.notifications"
 
 class ServiceRunner: Service() {
     private var serviceLooper: Looper? = null
     private var serviceHandler: ServiceHandler? = null
     lateinit var context : Context
+    lateinit var mainactivity : MainActivity
 
     // Handler that receives messages from the thread
     private inner class ServiceHandler(looper: Looper) : Handler(looper) {
@@ -37,14 +37,13 @@ class ServiceRunner: Service() {
             // For our sample, we just sleep for 5 seconds.
 
             try{
-                Thread.sleep(100000)
+                Thread.sleep(1000)
             }catch(e:Exception){
                 Thread.interrupted()
             }
 
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
-            stopSelf(msg.arg1)
         }
     }
 
@@ -61,6 +60,12 @@ class ServiceRunner: Service() {
             serviceLooper = looper
             serviceHandler = ServiceHandler(looper)
         }
+
+    }
+
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        // For each start request, send a message to start a job and deliver the
+        // start ID so we know which request we're stopping when we finish the job
 
         val sharedPrefUser = getSharedPreferences("login",Context.MODE_PRIVATE).getString("username","").toString()
         context = applicationContext
@@ -92,10 +97,11 @@ class ServiceRunner: Service() {
 
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     notificationsPage()
-                    //qtu me ba notificatio
+                    //qtu me ba notification
                     if(snapshot.child("notificationSent").getValue()==false) {
 
-                        val notificationType = snapshot.child("notificationType").getValue().toString()
+                        val notificationType =
+                            snapshot.child("notificationType").getValue().toString()
                         val sender = snapshot.child("notificationSenderName").getValue()
 
                         if (notificationType.equals("like")) {
@@ -103,10 +109,13 @@ class ServiceRunner: Service() {
                             builder.setContentText("$sender liked your post")
                         } else {
                             builder.setContentTitle("New comment!")
-                            val notificationText = snapshot.child("notificationText").getValue().toString()
-                            builder.setStyle(NotificationCompat.BigTextStyle().bigText("$sender: $notificationText"))
+                            val notificationText =
+                                snapshot.child("notificationText").getValue().toString()
+                            builder.setStyle(
+                                NotificationCompat.BigTextStyle()
+                                    .bigText("$sender: $notificationText")
+                            )
                         }
-
 
                         with(NotificationManagerCompat.from(context)) {
                             if (ActivityCompat.checkSelfPermission(
@@ -141,16 +150,6 @@ class ServiceRunner: Service() {
 
             })
 
-    }
-
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        // For each start request, send a message to start a job and deliver the
-        // start ID so we know which request we're stopping when we finish the job
-        serviceHandler?.obtainMessage()?.also { msg ->
-            msg.arg1 = startId
-            serviceHandler?.sendMessage(msg)
-        }
-
         // If we get killed, after returning from here, restart
         return START_STICKY
     }
@@ -161,7 +160,6 @@ class ServiceRunner: Service() {
     }
 
     override fun onDestroy() {
-        startService(Intent(applicationContext,ServiceRunner::class.java))
     }
 
 }

@@ -249,6 +249,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun serviceStopper(){
+        stopService(Intent(this, ServiceRunner::class.java))
+    }
+
     private fun createNotificationChannel(){
         if(Build.VERSION.SDK_INT >= 0){
             val  channel = NotificationChannel(channelId,"Notifications channel",
