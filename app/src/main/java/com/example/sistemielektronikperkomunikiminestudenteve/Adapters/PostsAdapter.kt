@@ -205,83 +205,114 @@ class PostsAdapter(
 
         }
 
-        holder.commentButton.setOnClickListener(){
 
-                var getCommentText = holder.commentText.text.toString()
 
-                var getUserID =  userId
+        holder.commentButton.setOnClickListener() {
+            var getCommentText = holder.commentText.text.toString()
+
+                if(holder.commentText.text.toString().trim().equals("")){
+                    Toast.makeText(thisContext,"Enter a comment first",Toast.LENGTH_SHORT).show()
+                }else {
+                var getUserID = userId
                 var userName = ""
-                var profileURL =""
+                var profileURL = ""
 
                 val postID = currentID.publicKey
 
                 //poster name
-                FirebaseDatabase.getInstance().getReference("USERS").child("$getUserID").addListenerForSingleValueEvent(object:ValueEventListener{
+                FirebaseDatabase.getInstance().getReference("USERS").child("$getUserID")
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
 
-                    override fun onDataChange(snapshot: DataSnapshot) {
+                        override fun onDataChange(snapshot: DataSnapshot) {
 
-                        var commentsLike = "0"
+                            var commentsLike = "0"
 
-                        userName = snapshot.child("EMRI").getValue().toString()
-                        profileURL = snapshot.child("PROFILE").getValue().toString()
-                        //post id
-                        val commentID = FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").push().key!!.toString()
+                            userName = snapshot.child("EMRI").getValue().toString()
+                            profileURL = snapshot.child("PROFILE").getValue().toString()
+                            //post id
+                            val commentID = FirebaseDatabase.getInstance().getReference("POSTS")
+                                .child(postID.toString()).child("commentSection")
+                                .push().key!!.toString()
 
 
-                        //post time
-                        val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
-                        val time = timeFormat.format(Date())
+                            //post time
+                            val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
+                            val time = timeFormat.format(Date())
 
-                        val comment = GetCommentsModel(getCommentText, commentsLike,profileURL,getUserID, userName,System.currentTimeMillis(),time,commentID)
+                            val comment = GetCommentsModel(
+                                getCommentText,
+                                commentsLike,
+                                profileURL,
+                                getUserID,
+                                userName,
+                                System.currentTimeMillis(),
+                                time,
+                                commentID
+                            )
 
-                        FirebaseDatabase.getInstance().getReference("POSTS").child(postID.toString()).child("commentSection").child(commentID).setValue(comment).addOnCompleteListener{
-                            Toast.makeText(thisContext, "Added", Toast.LENGTH_SHORT).show()
+                            FirebaseDatabase.getInstance().getReference("POSTS")
+                                .child(postID.toString()).child("commentSection").child(commentID)
+                                .setValue(comment).addOnCompleteListener {
+                                    Toast.makeText(thisContext, "Added", Toast.LENGTH_SHORT).show()
 
-                            //sends notification
-                            FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").addListenerForSingleValueEvent(object:ValueEventListener{
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    val posterid = snapshot.child("posterID").getValue().toString()
-                                    if(userId.equals(posterid)){
+                                    //sends notification
+                                    FirebaseDatabase.getInstance().getReference("POSTS")
+                                        .child("$postID")
+                                        .addListenerForSingleValueEvent(object :
+                                            ValueEventListener {
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                val posterid =
+                                                    snapshot.child("posterID").getValue().toString()
+                                                if (userId.equals(posterid)) {
 
-                                    }else {
-                                        val notificationID =
-                                            FirebaseDatabase.getInstance().getReference("USERS")
-                                                .child(posterid).child("NOTIFICATIONS").push().key!!
+                                                } else {
+                                                    val notificationID =
+                                                        FirebaseDatabase.getInstance()
+                                                            .getReference("USERS")
+                                                            .child(posterid).child("NOTIFICATIONS")
+                                                            .push().key!!
 
-                                        val notification = GetNotificationsModel(
-                                            posterid,
-                                            userName,
-                                            postID,
-                                            "comment",
-                                            "$time",
-                                            profileURL,
-                                            false,
-                                            getCommentText
-                                        )
+                                                    val notification = GetNotificationsModel(
+                                                        posterid,
+                                                        userName,
+                                                        postID,
+                                                        "comment",
+                                                        "$time",
+                                                        profileURL,
+                                                        false,
+                                                        getCommentText
+                                                    )
 
-                                        FirebaseDatabase.getInstance().getReference("USERS")
-                                            .child("$posterid").child("NOTIFICATIONS")
-                                            .child("$notificationID").setValue(notification)
-                                    }
+                                                    FirebaseDatabase.getInstance()
+                                                        .getReference("USERS")
+                                                        .child("$posterid").child("NOTIFICATIONS")
+                                                        .child("$notificationID")
+                                                        .setValue(notification)
+                                                }
+
+                                            }
+
+
+                                            override fun onCancelled(error: DatabaseError) {
+                                            }
+
+                                        })
+
+                                    holder.commentText.setText("")
+
+                                }.addOnFailureListener {
+                                    Toast.makeText(thisContext, "Failed", Toast.LENGTH_SHORT).show()
                                 }
 
-                                override fun onCancelled(error: DatabaseError) {
-                                }
 
-                            })
-
-                            holder.commentText.setText("")
-
-                        }.addOnFailureListener {
-                            Toast.makeText(thisContext, "Failed", Toast.LENGTH_SHORT).show()
                         }
 
+                        override fun onCancelled(error: DatabaseError) {
+                        }
 
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                    }
+                    })
 
-                })
+            }
         }
     }
     override fun getItemCount(): Int {

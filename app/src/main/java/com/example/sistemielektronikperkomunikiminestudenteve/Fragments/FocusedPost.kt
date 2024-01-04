@@ -91,12 +91,18 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
         getCommentText =  view.findViewById(R.id.commentText)
 
+
         postCommentButton.setOnClickListener {
-            postComment()
-            getCommentText.setText("")
-            commentCount.text = (commentCount.text.toString().toInt()+1).toString()
-            mainactivity.setCurrentFragment(this)
+            if (getCommentText.toString().trim().equals("")) {
+                Toast.makeText(context, "Enter a comment first", Toast.LENGTH_SHORT).show()
+            } else {
+                postComment()
+                getCommentText.setText("")
+                commentCount.text = (commentCount.text.toString().toInt() + 1).toString()
+                mainactivity.setCurrentFragment(this)
+            }
         }
+
 
         //setting data to show on the focus post
         postName.text = poster
