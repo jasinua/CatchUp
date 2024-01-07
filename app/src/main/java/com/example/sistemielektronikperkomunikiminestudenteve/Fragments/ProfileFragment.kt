@@ -13,8 +13,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.R
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -111,8 +109,6 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                             Toast.makeText(context,"Password has been changed",Toast.LENGTH_SHORT).show()
                             dbRef.child(id.text.toString()).child("PASS").setValue(newPass.text.toString())
 
-                             Firebase.auth.currentUser!!.updatePassword(snapshot.child("PASS").getValue().toString())
-
                             oldPass.setText("")
                             newPass.setText("")
                             repeatPass.setText("")
@@ -134,9 +130,6 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                     val editor = mainactivity.returnPref().edit()
                     editor.clear(); //clear all stored data
                     editor.commit();
-
-                    val auth = Firebase.auth
-                    auth.signOut()
 
                     mainactivity.serviceStopper()
                     mainactivity.resetInfo()

@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,12 +20,8 @@ import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.notifica
 import com.example.sistemielektronikperkomunikiminestudenteve.Fragments.postFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import kotlin.properties.Delegates
@@ -44,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     val database = Firebase.database
     val ref = database.getReference("USERS")
-    private lateinit var auth: FirebaseAuth
 
     val fileName = "login"
     var sharedPref : SharedPreferences? = null
@@ -57,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         val context : Context = this
         mainactivity = this
-        auth = Firebase.auth
+
 
         sharedPref = getSharedPreferences(fileName, Context.MODE_PRIVATE)
 
@@ -134,37 +128,6 @@ class MainActivity : AppCompatActivity() {
                                     editor.putString(Password,pass)
                                     editor.commit()
 
-                                    FirebaseDatabase.getInstance().getReference("USERS").child(sharedPref!!.getString(Username,"").toString()).addListenerForSingleValueEvent(object:ValueEventListener{
-                                        override fun onDataChange(snapshot: DataSnapshot) {
-                                            Log.d(snapshot.child("EMAIL").getValue().toString(),"account shit email")
-                                            Log.d(snapshot.child("PASS").getValue().toString(),"account shit password")
-                                            auth.signInWithEmailAndPassword(snapshot.child("EMAIL").getValue().toString(), snapshot.child("PASS").getValue().toString())
-                                                .addOnCompleteListener(mainactivity) { task ->
-                                                    if (task.isSuccessful) {
-                                                        // Sign in success, update UI with the signed-in user's information
-                                                        Log.d("TAG", "signInWithEmail:success")
-                                                        val user = auth.currentUser
-                                                        updateUI(user)
-                                                    } else {
-                                                        // If sign in fails, display a message to the user.
-                                                        Log.w("TAG", "signInWithEmail:failure", task.exception)
-                                                        Toast.makeText(
-                                                            baseContext,
-                                                            "Authentication failed.",
-                                                            Toast.LENGTH_SHORT,
-                                                        ).show()
-                                                        updateUI(null)
-                                                    }
-                                                }
-                                            auth.signOut()
-                                        }
-
-                                        override fun onCancelled(error: DatabaseError) {
-                                        }
-
-                                    })
-
-
                                     startNavBar(context)
                                     break
                                 }else if(!id.equals(loginID.text.toString()) && !pass.equals(loginPass.text.toString()) && count==dataSnapshot.childrenCount.toInt()){
@@ -192,11 +155,9 @@ class MainActivity : AppCompatActivity() {
             loginID = findViewById<EditText>(R.id.idInput)
             loginID.setText(sharedPref!!.getString(Username,""))
             idInfo = loginID.text.toString()
-            Log.d(loginID.text.toString(),"Login id")
 
             loginPass = findViewById<EditText>(R.id.identity)
             loginPass.setText(sharedPref!!.getString(Password,""))
-            Log.d(loginPass.text.toString(),"loginpass:")
 
             startNavBar(context)
         }
@@ -208,14 +169,6 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.flFragment,fragment)
             commit()
         }
-
-    fun updateUI(account: FirebaseUser?) {
-        if (account != null) {
-            Toast.makeText(this, "Authentication successful", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "Authentication unsuccessful", Toast.LENGTH_LONG).show()
-        }
-    }
 
     private fun startNavBar(context:Context){
         setContentView(R.layout.activity_main)
