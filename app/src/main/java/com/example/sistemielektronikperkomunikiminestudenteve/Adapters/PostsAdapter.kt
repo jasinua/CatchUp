@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +28,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import java.util.Date
 
+
 class PostsAdapter(
     private val idList: ArrayList<GetPostsModel>,
     idInfo: String,
@@ -32,7 +36,6 @@ class PostsAdapter(
     mainactivity: MainActivity
 ):
     RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -52,6 +55,7 @@ class PostsAdapter(
 
 
         val currentID = idList[position]
+
         holder.postName.text = currentID.poster
         holder.postTitle.text = currentID.title
         holder.postText.text = currentID.desc
@@ -59,45 +63,99 @@ class PostsAdapter(
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
 
-        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
-
-        holder.postText.setOnClickListener(){
-            mainactivity.setCurrentFragment(FocusedPost(position,currentID.publicKey,currentID.poster,currentID.title,currentID.desc,currentID.likes,currentID.comments,currentID.posttime,currentID.profileURL))
-        }
-
-        holder.postTitle.setOnClickListener(){
-            mainactivity.setCurrentFragment(FocusedPost(position,currentID.publicKey,currentID.poster,currentID.title,currentID.desc,currentID.likes,currentID.comments,currentID.posttime,currentID.profileURL))
-        }
-
-        holder.postComments.setOnClickListener(){
-            mainactivity.setCurrentFragment(FocusedPost(position,currentID.publicKey,currentID.poster,currentID.title,currentID.desc,currentID.likes,currentID.comments,currentID.posttime,currentID.profileURL))
-        }
-
-
-
-        FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE").addListenerForSingleValueEvent(object:ValueEventListener{
+        FirebaseDatabase.getInstance().getReference("POSTS").addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                Picasso.with(thisContext).load(snapshot.getValue().toString()).into(holder.commentLogo)
+                for(snap in snapshot.children){
+                    if (snap.child("posterID").getValue().toString().equals(userId)) {
+                        holder.removeButton.visibility = VISIBLE;
+                        //qtu spom ban se imma kms ong
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
-
         })
-        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS").child(currentID.publicKey.toString())
 
-        dbRef.addListenerForSingleValueEvent(object:ValueEventListener {
+        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
+
+        holder.postText.setOnClickListener() {
+            mainactivity.setCurrentFragment(
+                FocusedPost(
+                    position,
+                    currentID.publicKey,
+                    currentID.poster,
+                    currentID.title,
+                    currentID.desc,
+                    currentID.likes,
+                    currentID.comments,
+                    currentID.posttime,
+                    currentID.profileURL
+                )
+            )
+        }
+
+        holder.postTitle.setOnClickListener() {
+            mainactivity.setCurrentFragment(
+                FocusedPost(
+                    position,
+                    currentID.publicKey,
+                    currentID.poster,
+                    currentID.title,
+                    currentID.desc,
+                    currentID.likes,
+                    currentID.comments,
+                    currentID.posttime,
+                    currentID.profileURL
+                )
+            )
+        }
+
+        holder.postComments.setOnClickListener() {
+            mainactivity.setCurrentFragment(
+                FocusedPost(
+                    position,
+                    currentID.publicKey,
+                    currentID.poster,
+                    currentID.title,
+                    currentID.desc,
+                    currentID.likes,
+                    currentID.comments,
+                    currentID.posttime,
+                    currentID.profileURL
+                )
+            )
+        }
+
+        //loads comment picture
+        FirebaseDatabase.getInstance().getReference("USERS").child("$userId").child("PROFILE")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    Picasso.with(thisContext).load(snapshot.getValue().toString())
+                        .into(holder.commentLogo)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
+        val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
+            .child(currentID.publicKey.toString())
+
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentComments = snapshot.child("commentSection").childrenCount
                 dbRef.child("comments").setValue(currentComments).toString()
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.child("likedUsers").children) {
+                for (snap in snapshot.child("likedUsers").children) {
                     if (snap.key.toString().equals("$userId")) {
                         holder.likeButton.setImageResource(R.drawable.thumbsup)
                         return
@@ -105,47 +163,51 @@ class PostsAdapter(
                 }
                 holder.likeButton.setImageResource(R.drawable.blankthumbsup)
             }
-            override fun onCancelled(error: DatabaseError){
+
+            override fun onCancelled(error: DatabaseError) {
             }
         })
 
-
         holder.likeButton.setOnClickListener() {
-                dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            val currentLikes = snapshot.child("likes").getValue().toString().toInt()
-                                for(snap in snapshot.child("likedUsers").children) {
-                                    if(snap.key.toString().equals("$userId")) {
-                                        dbRef.child("likes").setValue("" + (currentLikes - 1))
-                                        dbRef.child("likedUsers").child("$userId").removeValue()
-                                        holder.likeButton.setImageResource(R.drawable.blankthumbsup)
-                                        return
-                                    }
-                                }
-                                dbRef.child("likes").setValue("" + (currentLikes + 1))
-                                dbRef.child("likedUsers").child("$userId").setValue("")
-                                holder.likeButton.setImageResource(R.drawable.thumbsup)
+            dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val currentLikes = snapshot.child("likes").getValue().toString().toInt()
+                    for (snap in snapshot.child("likedUsers").children) {
+                        if (snap.key.toString().equals("$userId")) {
+                            dbRef.child("likes").setValue("" + (currentLikes - 1))
+                            dbRef.child("likedUsers").child("$userId").removeValue()
+                            holder.likeButton.setImageResource(R.drawable.blankthumbsup)
+                            return
+                        }
+                    }
+                    dbRef.child("likes").setValue("" + (currentLikes + 1))
+                    dbRef.child("likedUsers").child("$userId").setValue("")
+                    holder.likeButton.setImageResource(R.drawable.thumbsup)
 
 
-                            ///////////////
-                            //notification
-                            FirebaseDatabase.getInstance().getReference("USERS").child("$userId").addListenerForSingleValueEvent(object:ValueEventListener{
+                    ///////////////
+                    //notification
+                    FirebaseDatabase.getInstance().getReference("USERS").child("$userId")
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
 
-                                override fun onDataChange(snapshot: DataSnapshot) {
+                            override fun onDataChange(snapshot: DataSnapshot) {
 
-                                    val userName = snapshot.child("EMRI").getValue().toString()
-                                    val profileURL = snapshot.child("PROFILE").getValue().toString()
-                                    //post time
-                                    val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
-                                    val time = timeFormat.format(Date())
+                                val userName = snapshot.child("EMRI").getValue().toString()
+                                val profileURL = snapshot.child("PROFILE").getValue().toString()
+                                //post time
+                                val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
+                                val time = timeFormat.format(Date())
 
-                                    //sends notification
-                                    FirebaseDatabase.getInstance().getReference("POSTS").child(currentID.publicKey.toString()).addListenerForSingleValueEvent(object:ValueEventListener{
+                                //sends notification
+                                FirebaseDatabase.getInstance().getReference("POSTS")
+                                    .child(currentID.publicKey.toString())
+                                    .addListenerForSingleValueEvent(object : ValueEventListener {
                                         override fun onDataChange(snapshot: DataSnapshot) {
-                                            val posterid = snapshot.child("posterID").getValue().toString()
-                                            if(userId.equals(posterid)){
+                                            val posterid =
+                                                snapshot.child("posterID").getValue().toString()
+                                            if (userId.equals(posterid)) {
 
-                                            }else {
+                                            } else {
 
                                                 val notificationID = FirebaseDatabase.getInstance()
                                                     .getReference("USERS").child(posterid)
@@ -162,27 +224,40 @@ class PostsAdapter(
                                                     ""
                                                 )
 
-                                                FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").addListenerForSingleValueEvent(object:ValueEventListener{
-                                                    override fun onDataChange(snapshot: DataSnapshot) {
-                                                        for(snap in snapshot.children) {
-                                                            if(snap.child("notificationType").getValue().toString().equals("like")
-                                                                && snap.child("notificationSenderID").getValue().toString().equals(posterid)
-                                                                && snap.child("notificationOfPost").getValue().toString().equals(currentID.publicKey.toString())){
-                                                                return
+                                                FirebaseDatabase.getInstance().getReference("USERS")
+                                                    .child(posterid).child("NOTIFICATIONS")
+                                                    .addListenerForSingleValueEvent(object :
+                                                        ValueEventListener {
+                                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                                            for (snap in snapshot.children) {
+                                                                if (snap.child("notificationType")
+                                                                        .getValue().toString()
+                                                                        .equals("like")
+                                                                    && snap.child("notificationSenderID")
+                                                                        .getValue().toString()
+                                                                        .equals(posterid)
+                                                                    && snap.child("notificationOfPost")
+                                                                        .getValue().toString()
+                                                                        .equals(currentID.publicKey.toString())
+                                                                ) {
+                                                                    return
+                                                                }
                                                             }
+
+                                                            FirebaseDatabase.getInstance()
+                                                                .getReference("USERS")
+                                                                .child("$posterid")
+                                                                .child("NOTIFICATIONS")
+                                                                .child("$notificationID")
+                                                                .setValue(notification)
+                                                            return
+
                                                         }
 
-                                                        FirebaseDatabase.getInstance().getReference("USERS")
-                                                            .child("$posterid").child("NOTIFICATIONS")
-                                                            .child("$notificationID").setValue(notification)
-                                                        return
+                                                        override fun onCancelled(error: DatabaseError) {
+                                                        }
 
-                                                    }
-
-                                                    override fun onCancelled(error: DatabaseError) {
-                                                    }
-
-                                                })
+                                                    })
                                             }
                                         }
 
@@ -191,28 +266,28 @@ class PostsAdapter(
 
                                     })
 
-                                }
-                                override fun onCancelled(error: DatabaseError) {
-                                }
+                            }
 
-                            })
-                            /////////////////////////////////////////////////////////
+                            override fun onCancelled(error: DatabaseError) {
+                            }
 
-                        }
-                        override fun onCancelled(error: DatabaseError){
-                        }
-                })
+                        })
+                    /////////////////////////////////////////////////////////
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
         }
-
-
 
         holder.commentButton.setOnClickListener() {
             var getCommentText = holder.commentText.text.toString()
 
-                if(holder.commentText.text.toString().trim().equals("")){
-                    Toast.makeText(thisContext,"Enter a comment first",Toast.LENGTH_SHORT).show()
-                }else {
+            if (holder.commentText.text.toString().trim().equals("")) {
+                Toast.makeText(thisContext, "Enter a comment first", Toast.LENGTH_SHORT).show()
+            } else {
                 var getUserID = userId
                 var userName = ""
                 var profileURL = ""
@@ -314,6 +389,41 @@ class PostsAdapter(
 
             }
         }
+
+        holder.removeButton.setOnClickListener { // Initializing the popup menu and giving the reference as current context
+            val popupMenu = PopupMenu(thisContext, holder.removeButton)
+
+            // Inflating popup menu from popup_menu.xml file
+            popupMenu.getMenuInflater().inflate(R.menu.post_menu, popupMenu.getMenu())
+
+            popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
+
+                override fun onMenuItemClick(menuItem: MenuItem): Boolean {
+                    // Toast message on menu item clicked
+
+                    Toast.makeText(thisContext, "Post has been deleted", Toast.LENGTH_SHORT).show()
+
+                    //remove post
+                    FirebaseDatabase.getInstance().getReference("POSTS").addListenerForSingleValueEvent(object:ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for(snap in snapshot.children){
+                                if(snap.key.toString().equals(currentID.publicKey.toString())){
+                                    FirebaseDatabase.getInstance().getReference("POSTS").child(currentID.publicKey.toString()).removeValue()
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
+                    return true
+                }
+            })
+
+            // Showing the popup menu
+            popupMenu.show()
+        }
     }
     override fun getItemCount(): Int {
         return idList.size
@@ -331,6 +441,7 @@ class PostsAdapter(
         val commentLogo : ImageView = itemView.findViewById(R.id.loggedInCommentLogo)
         val commentButton : Button = itemView.findViewById(R.id.postCommentButton)
         val commentText : EditText = itemView.findViewById(R.id.commentText)
+        val removeButton: ImageView = itemView.findViewById(R.id.removeButton)
 
     }
 

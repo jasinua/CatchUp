@@ -42,7 +42,7 @@ class DocumentAdapter(
             }
 
             holder.downloadButton.setOnClickListener(){
-                downloadFile("document",item.documentURL.toString())
+                downloadFile(holder.documentName.text.toString(),item.documentURL.toString())
             }
 
         }
@@ -63,6 +63,7 @@ class DocumentAdapter(
         val downloadmanager = myContext.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val uri = Uri.parse(url)
         val request = DownloadManager.Request(uri)
+
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         request.setDestinationInExternalFilesDir(
             myContext,
