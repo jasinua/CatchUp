@@ -6,6 +6,7 @@ import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
@@ -65,12 +66,12 @@ class PostsAdapter(
 
         FirebaseDatabase.getInstance().getReference("POSTS").addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.children){
-                    if (snap.child("posterID").getValue().toString().equals(userId)) {
-                        holder.removeButton.visibility = VISIBLE;
-                        //qtu spom ban se imma kms ong
-                    }
-                }
+//                for(snap in snapshot.children){
+//                    if (snap.child("posterID").getValue().toString().equals(userId)) {
+//                        holder.removeButton.visibility = VISIBLE;
+//                        //qtu spom ban se imma kms ong
+//                    }
+//                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -153,13 +154,48 @@ class PostsAdapter(
             }
         })
 
+
+
+        //REMOVE POST DATA CHANGE
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.child("posterID").getValue() == "$userId") {
+
+                    holder.removeButton.visibility = VISIBLE;
+                    return
+                } else {
+                    holder.removeButton.visibility = GONE;
+                    return
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
+
+        //SHOW IF YOU LIKED OR NOT DATA CHANGE
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+
+//                    if(snapshot.child("posterID").getValue() == "$userId") {
+//
+//                        holder.removeButton.visibility = VISIBLE;
+//                        return
+//                    } else {
+//                        holder.removeButton.visibility = GONE;
+//                        return
+//                    }
                 for (snap in snapshot.child("likedUsers").children) {
                     if (snap.key.toString().equals("$userId")) {
                         holder.likeButton.setImageResource(R.drawable.thumbsup)
+
                         return
                     }
+
                 }
                 holder.likeButton.setImageResource(R.drawable.blankthumbsup)
             }
@@ -168,6 +204,8 @@ class PostsAdapter(
             }
         })
 
+
+        //CHANGE ICON AND ADD LIKE IF YOU CLICK LIKE BUTTON
         holder.likeButton.setOnClickListener() {
             dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
