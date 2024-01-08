@@ -1,6 +1,12 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
+import android.app.Activity.RESULT_OK
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.SyncStateContract
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -13,17 +19,27 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.R
+import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class ProfileFragment() : Fragment(R.layout.fragment_profile) {
     lateinit var id : TextView
     lateinit var mainactivity : MainActivity
     lateinit var idInfo : String
+    lateinit var ImageUri: Uri
+//    lateinit var profileURLlink:String
+
+    lateinit var profile:ImageView
     var changingPass : Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,11 +53,12 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
         val drejtimi = view.findViewById<TextView>(R.id.profileDrejtim)
         val email = view.findViewById<TextView>(R.id.profileEmail)
         val changePassButton=view.findViewById<Button>(R.id.changePassButton)
-        val profile = view.findViewById<ImageView>(R.id.profileImage)
-
+        profile= view.findViewById<ImageView>(R.id.profileImage)
         val logout = view.findViewById<Button>(R.id.logOutButton)
 
         id.text=idInfo
+
+//        profileURLlink = ""
 
         val dbRef = FirebaseDatabase.getInstance().getReference("USERS")
 
@@ -135,8 +152,78 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                     mainactivity.resetInfo()
                 }
             }
+
+        profile.setOnClickListener{
+            selectImage()
+        }
+
+        view.findViewById<TextView>(R.id.quesetion).setOnClickListener {
+            uploadImage()
+
+
+
+        }
+
+
+
     }
 
+    private fun uploadImage() {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("Uploading file...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_ss", Locale.getDefault())
+        val now = Date()
+        val fileName = formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("ProfilePictures/$fileName")
+        storageReference.putFile(ImageUri).addOnSuccessListener {
+
+            progressDialog.dismiss()
+            Toast.makeText(context, "Sucessfully added image", Toast.LENGTH_SHORT).show()
+
+            val result = it.metadata!!.reference!!.downloadUrl;
+            result.addOnSuccessListener {
+
+                var profileURLlink = it.toString()
+                Toast.makeText(context, "$profileURLlink", Toast.LENGTH_SHORT).show()
+                FirebaseDatabase.getInstance().getReference("USERS").child(id.text.toString()).child("PROFILE").setValue("$profileURLlink")
+            }
+        } .addOnFailureListener{
+            if(progressDialog.isShowing) {
+                progressDialog.dismiss()
+                Toast.makeText(context, "Failed to upload", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    private fun selectImage() {
+//        val intent = Intent()
+//        intent.type = "images/camera"
+//        intent.action = Intent.ACTION_GET_CONTENT
+
+        val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(pickPhoto, 100)
+
+//        startActivityForResult(intent,100)
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == 100  || resultCode == RESULT_OK) {
+            ImageUri = data?.data!!
+            profile.setImageURI(ImageUri)
+            Toast.makeText(context, "OnActivity", Toast.LENGTH_SHORT).show()
+        } else {
+
+            Toast.makeText(context, "ripActivity", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
 
 
