@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.SyncStateContract
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -19,10 +18,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sistemielektronikperkomunikiminestudenteve.MainActivity
 import com.example.sistemielektronikperkomunikiminestudenteve.R
-import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
@@ -159,12 +156,7 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
 
         view.findViewById<TextView>(R.id.quesetion).setOnClickListener {
             uploadImage()
-
-
-
         }
-
-
 
     }
 
@@ -200,15 +192,9 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
     }
 
     private fun selectImage() {
-//        val intent = Intent()
-//        intent.type = "images/camera"
-//        intent.action = Intent.ACTION_GET_CONTENT
 
         val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(pickPhoto, 100)
-
-//        startActivityForResult(intent,100)
-
 
     }
 

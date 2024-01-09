@@ -64,21 +64,7 @@ class PostsAdapter(
         holder.postComments.text = currentID.comments
         holder.postTime.text = currentID.posttime
 
-        FirebaseDatabase.getInstance().getReference("POSTS").addListenerForSingleValueEvent(object:ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-//                for(snap in snapshot.children){
-//                    if (snap.child("posterID").getValue().toString().equals(userId)) {
-//                        holder.removeButton.visibility = VISIBLE;
-//                        //qtu spom ban se imma kms ong
-//                    }
-//                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-
-        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
+//        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
         holder.postText.setOnClickListener() {
             mainactivity.setCurrentFragment(
@@ -145,6 +131,32 @@ class PostsAdapter(
             .child(currentID.publicKey.toString())
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    FirebaseDatabase.getInstance().getReference("USERS").addListenerForSingleValueEvent(object:ValueEventListener{
+                        override fun onDataChange(snapshot2: DataSnapshot) {
+
+                            if (snapshot.child("posterID").getValue() == snapshot2.key.toString()) {
+                                Picasso.with(thisContext).load(snapshot2.child("PROFILE").getValue().toString())
+                                    .into(holder.commentLogo)
+                                return
+                            } else {
+                                return
+                            }
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
+                }
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
+        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentComments = snapshot.child("commentSection").childrenCount
                 dbRef.child("comments").setValue(currentComments).toString()
@@ -170,7 +182,6 @@ class PostsAdapter(
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
 
@@ -180,15 +191,6 @@ class PostsAdapter(
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-
-//                    if(snapshot.child("posterID").getValue() == "$userId") {
-//
-//                        holder.removeButton.visibility = VISIBLE;
-//                        return
-//                    } else {
-//                        holder.removeButton.visibility = GONE;
-//                        return
-//                    }
                 for (snap in snapshot.child("likedUsers").children) {
                     if (snap.key.toString().equals("$userId")) {
                         holder.likeButton.setImageResource(R.drawable.thumbsup)
