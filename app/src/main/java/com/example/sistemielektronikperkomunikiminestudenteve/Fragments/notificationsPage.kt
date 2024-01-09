@@ -20,6 +20,7 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetNotificationsModel>
+    private lateinit var profileCheckList:ArrayList<Boolean>
     private lateinit var databaseReference: Query
     private lateinit var mAdapter : NotificationsAdapter
     lateinit var mainactivity : MainActivity
@@ -33,6 +34,7 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
 
         recyclerView.setHasFixedSize(true)
         postList = arrayListOf<GetNotificationsModel>()
+        profileCheckList = arrayListOf<Boolean>()
 
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
@@ -72,14 +74,16 @@ class notificationsPage : Fragment(R.layout.fragment_notifications_page) {
                         val notificationSenderProfileURL = snap2.child("notificationSenderProfileURL").getValue().toString()
                         val notificationSent = snap2.child("notificationSent").getValue().toString().toBoolean()
                         val notificationText = snap2.child("notificationText").getValue().toString()
+                        val notificationSentByID = snap2.child("notificationSentByID").getValue().toString()
 
                         if (!postList.contains(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText)
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText,notificationSentByID)
                             )
                         )  {
                             postList.add(
-                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText)
-                            )}
+                                GetNotificationsModel(notificationSenderID,notificationSenderName,notificationOfPost,notificationType,notificationTime,notificationSenderProfileURL,notificationSent,notificationText,notificationSentByID)
+                            )
+                        }
 
                     }
                     postList.reverse()

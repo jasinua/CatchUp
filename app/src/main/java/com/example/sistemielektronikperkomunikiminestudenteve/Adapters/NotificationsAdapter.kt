@@ -28,6 +28,7 @@ class NotificationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentID = idList[position]
+
         holder.notificationName.text = currentID.notificationSenderName
 
         if(currentID.notificationType.equals("like")){
@@ -38,6 +39,7 @@ class NotificationsAdapter(
 
         holder.notificationTime.text = currentID.notificationTime
         Picasso.with(thisContext).load(currentID.notificationSenderProfileURL).into(holder.notificationprofile)
+
     }
 
 

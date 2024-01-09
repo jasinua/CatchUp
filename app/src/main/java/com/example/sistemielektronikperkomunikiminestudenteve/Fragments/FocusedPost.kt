@@ -201,7 +201,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                                 "$time",
                                                 profileURL,
                                                 false,
-                                                ""
+                                                "",
+                                                userId
                                             )
                                             FirebaseDatabase.getInstance().getReference("USERS").child(posterid).child("NOTIFICATIONS").addListenerForSingleValueEvent(object:ValueEventListener{
                                                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -345,7 +346,8 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
                                     "$time",
                                     profileURL,
                                     false,
-                                    getCommentText
+                                    getCommentText,
+                                    userId
                                 )
 
                                 FirebaseDatabase.getInstance().getReference("USERS")

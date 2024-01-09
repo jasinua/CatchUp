@@ -130,31 +130,23 @@ class PostsAdapter(
         val dbRef = FirebaseDatabase.getInstance().getReference("POSTS")
             .child(currentID.publicKey.toString())
 
-        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
+        FirebaseDatabase.getInstance().getReference("USERS").addListenerForSingleValueEvent(object:ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
 
-                    FirebaseDatabase.getInstance().getReference("USERS").addListenerForSingleValueEvent(object:ValueEventListener{
-                        override fun onDataChange(snapshot2: DataSnapshot) {
+                dbRef.addListenerForSingleValueEvent(object:ValueEventListener{
+                    override fun onDataChange(snap: DataSnapshot) {
+                        Picasso.with(thisContext)
+                            .load(snapshot.child(snap.child("posterID").getValue().toString()).child("PROFILE").getValue().toString())
+                            .into(holder.postProfile)
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
 
-                            if (snapshot.child("posterID").getValue() == snapshot2.key.toString()) {
-                                Picasso.with(thisContext).load(snapshot2.child("PROFILE").getValue().toString())
-                                    .into(holder.commentLogo)
-                                return
-                            } else {
-                                return
-                            }
-
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                        }
-
-                    })
-                }
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
+        })
 
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -165,8 +157,6 @@ class PostsAdapter(
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
-
 
         //REMOVE POST DATA CHANGE
         dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -183,8 +173,6 @@ class PostsAdapter(
 
             override fun onCancelled(error: DatabaseError) {
             }
-
-
         })
 
         //SHOW IF YOU LIKED OR NOT DATA CHANGE
@@ -261,7 +249,8 @@ class PostsAdapter(
                                                     "$time",
                                                     profileURL,
                                                     false,
-                                                    ""
+                                                    "",
+                                                    userId
                                                 )
 
                                                 FirebaseDatabase.getInstance().getReference("USERS")
@@ -362,7 +351,7 @@ class PostsAdapter(
                                 userName,
                                 System.currentTimeMillis(),
                                 time,
-                                commentID
+                                commentID,
                             )
 
                             FirebaseDatabase.getInstance().getReference("POSTS")
@@ -395,7 +384,8 @@ class PostsAdapter(
                                                         "$time",
                                                         profileURL,
                                                         false,
-                                                        getCommentText
+                                                        getCommentText,
+                                                        userId
                                                     )
 
                                                     FirebaseDatabase.getInstance()

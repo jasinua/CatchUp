@@ -9,5 +9,6 @@ data class GetNotificationsModel(
     var notificationSenderProfileURL: String? = null,//profile pic
     var notificationSent: Boolean? = false,
     var notificationText: String? = null,
+    var notificationSentByID: String? = null
 
 )

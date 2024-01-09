@@ -154,17 +154,18 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
             selectImage()
         }
 
-        view.findViewById<TextView>(R.id.quesetion).setOnClickListener {
-            uploadImage()
-        }
+//        view.findViewById<TextView>(R.id.question).setOnClickListener {
+//            uploadImage()
+//        }
 
     }
 
     private fun uploadImage() {
         val progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("Uploading file...")
+        progressDialog.setMessage("Setting profile picture...")
         progressDialog.setCancelable(false)
         progressDialog.show()
+
 
         val formatter = SimpleDateFormat("yyyy_MM_dd_HH_ss", Locale.getDefault())
         val now = Date()
@@ -179,8 +180,8 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
             result.addOnSuccessListener {
 
                 var profileURLlink = it.toString()
-                Toast.makeText(context, "$profileURLlink", Toast.LENGTH_SHORT).show()
                 FirebaseDatabase.getInstance().getReference("USERS").child(id.text.toString()).child("PROFILE").setValue("$profileURLlink")
+
             }
         } .addOnFailureListener{
             if(progressDialog.isShowing) {
@@ -204,10 +205,10 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
         if(resultCode == 100  || resultCode == RESULT_OK) {
             ImageUri = data?.data!!
             profile.setImageURI(ImageUri)
-            Toast.makeText(context, "OnActivity", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "OnActivity", Toast.LENGTH_SHORT).show()
+            uploadImage()
         } else {
-
-            Toast.makeText(context, "ripActivity", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "ripActivity", Toast.LENGTH_SHORT).show()
         }
     }
 }
