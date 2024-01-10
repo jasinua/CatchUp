@@ -53,7 +53,6 @@ class NotificationsAdapter(
         val notificationTime = itemView.findViewById<TextView>(R.id.notificationTime)
         val notificationprofile = itemView.findViewById<ImageView>(R.id.notificationProfile)
 
-
     }
 
 }
