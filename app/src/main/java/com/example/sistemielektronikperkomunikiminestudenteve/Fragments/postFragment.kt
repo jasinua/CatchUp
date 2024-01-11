@@ -1,7 +1,12 @@
 package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -16,8 +21,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.util.Date
+import java.util.Locale
 
 class postFragment : Fragment(R.layout.fragment_post) {
 
@@ -25,6 +32,9 @@ class postFragment : Fragment(R.layout.fragment_post) {
     private lateinit var description:EditText
     private lateinit var idInfo : String
     lateinit var mainactivity: MainActivity
+    private lateinit var imageButton:ImageView
+
+    lateinit var ImageUri: Uri
 
     private lateinit var databaseReference:DatabaseReference
 
@@ -36,6 +46,12 @@ class postFragment : Fragment(R.layout.fragment_post) {
 
         title = view.findViewById(R.id.title)
         description = view.findViewById(R.id.postDescription)
+        imageButton = view.findViewById(R.id.insertImage)
+
+        imageButton.setOnClickListener {
+            selectImage()
+        }
+
         val postProfile = view.findViewById<ImageView>(R.id.postProfile)
 
         databaseReference = FirebaseDatabase.getInstance().getReference("POSTS")
@@ -95,6 +111,58 @@ class postFragment : Fragment(R.layout.fragment_post) {
 
         })
 
+    }
+
+
+    private fun uploadImage(string:String) {
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("Setting profile picture...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+
+        val formatter = java.text.SimpleDateFormat("yyyy_MM_dd_HH_ss", Locale.getDefault())
+        val now = Date()
+        val fileName = formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("ProfilePictures/$fileName")
+        storageReference.putFile(ImageUri).addOnSuccessListener {
+
+            progressDialog.dismiss()
+            Toast.makeText(context, "Sucessfully added image", Toast.LENGTH_SHORT).show()
+
+            val result = it.metadata!!.reference!!.downloadUrl;
+            result.addOnSuccessListener {
+
+                var profileURLlink = it.toString()
+                FirebaseDatabase.getInstance().getReference("POSTS").child(string).child("PROFILE").setValue("$profileURLlink")
+
+            }
+        } .addOnFailureListener{
+            if(progressDialog.isShowing) {
+                progressDialog.dismiss()
+                Toast.makeText(context, "Failed to upload", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    private fun selectImage() {
+
+        val pickPhoto = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(pickPhoto, 100)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == 100  || resultCode == Activity.RESULT_OK) {
+            ImageUri = data?.data!!
+//            Toast.makeText(context, "OnActivity", Toast.LENGTH_SHORT).show()
+            uploadImage("")
+        } else {
+//            Toast.makeText(context, "ripActivity", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

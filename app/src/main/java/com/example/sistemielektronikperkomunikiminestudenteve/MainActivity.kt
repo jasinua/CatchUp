@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.fragment_log_in)
 
 
+            //
             val signUpText = findViewById<TextView>(R.id.signUpText)
 
             signUpText.setOnClickListener {
