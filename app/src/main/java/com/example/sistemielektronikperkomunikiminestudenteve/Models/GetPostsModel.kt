@@ -10,5 +10,6 @@ data class GetPostsModel (
     var comments: String? = null,
     var publicKey:String? = null,
     var postTimeStamp: Long? = null,
-    var posttime: String? = null
+    var posttime: String? = null,
+    var fileUrl: String? = null
 )

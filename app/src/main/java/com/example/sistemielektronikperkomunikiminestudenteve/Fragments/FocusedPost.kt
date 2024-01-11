@@ -3,6 +3,8 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -24,7 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import java.util.Date
 
-class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,desc: String?,likes: String?,comments: String?,posttime: String?,profileURL: String?) : Fragment(R.layout.fragment_focused_post) {
+class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,desc: String?,likes: String?,comments: String?,posttime: String?,profileURL: String?,postImageUrl:String?) : Fragment(R.layout.fragment_focused_post) {
 
     val postID = postID
     val poster = poster
@@ -35,6 +37,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     val posttime = posttime
     val profileURL = profileURL
     val position = position
+    val postImageUrl = postImageUrl
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetCommentsModel>
@@ -72,7 +75,6 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
 
         loadComments()
 
-
         databaseReference = FirebaseDatabase.getInstance().getReference("POSTS")
 
 
@@ -88,6 +90,14 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         val posterProfile = view.findViewById<ImageView>(R.id.posterProfile)
         val commentLogo = view.findViewById<ImageView>(R.id.commentLogo)
         val backButton = view.findViewById<ImageView>(R.id.backButton)
+        val postImage = view.findViewById<ImageView>(R.id.postImageFile)
+
+        if(postImageUrl==null){
+            view.findViewById<ImageView>(R.id.postImageFile).visibility = INVISIBLE
+        }else{
+            view.findViewById<ImageView>(R.id.postImageFile).visibility = VISIBLE
+            Picasso.with(requireContext()).load(postImageUrl).into(postImage)
+        }
 
         getCommentText =  view.findViewById(R.id.commentText)
 

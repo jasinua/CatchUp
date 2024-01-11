@@ -3,6 +3,7 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.SimpleDateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -66,6 +67,15 @@ class PostsAdapter(
 
 //        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
+        Log.d(currentID.fileUrl,"THE FILE URLLL")
+
+        if(currentID.fileUrl==null){
+            holder.postImageFile.visibility=GONE
+        }else{
+            holder.postImageFile.visibility=VISIBLE
+            Picasso.with(thisContext).load(currentID.fileUrl).into(holder.postImageFile)
+        }
+
         holder.postText.setOnClickListener() {
             mainactivity.setCurrentFragment(
                 FocusedPost(
@@ -77,7 +87,8 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL
+                    currentID.profileURL,
+                    currentID.fileUrl
                 )
             )
         }
@@ -93,7 +104,8 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL
+                    currentID.profileURL,
+                    currentID.fileUrl
                 )
             )
         }
@@ -109,7 +121,8 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL
+                    currentID.profileURL,
+                    currentID.fileUrl
                 )
             )
         }
@@ -472,6 +485,7 @@ class PostsAdapter(
         val commentButton : Button = itemView.findViewById(R.id.postCommentButton)
         val commentText : EditText = itemView.findViewById(R.id.commentText)
         val removeButton: ImageView = itemView.findViewById(R.id.removeButton)
+        val postImageFile : ImageView = itemView.findViewById(R.id.postImageFile)
 
     }
 

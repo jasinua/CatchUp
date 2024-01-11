@@ -71,6 +71,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
@@ -122,6 +123,13 @@
 
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/postImageFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:src="@tools:sample/avatars" />
 
             <LinearLayout
                 android:layout_width="match_parent"
