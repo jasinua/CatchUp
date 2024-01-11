@@ -3,7 +3,7 @@ package com.example.sistemielektronikperkomunikiminestudenteve.Fragments
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.View
-import android.view.View.INVISIBLE
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
@@ -92,10 +92,10 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         val backButton = view.findViewById<ImageView>(R.id.backButton)
         val postImage = view.findViewById<ImageView>(R.id.postImageFile)
 
-        if(postImageUrl==null){
-            view.findViewById<ImageView>(R.id.postImageFile).visibility = INVISIBLE
+        if(postImageUrl.toString().equals("")){
+            postImage.visibility = GONE
         }else{
-            view.findViewById<ImageView>(R.id.postImageFile).visibility = VISIBLE
+            postImage.visibility = VISIBLE
             Picasso.with(requireContext()).load(postImageUrl).into(postImage)
         }
 

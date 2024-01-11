@@ -69,13 +69,15 @@ class HomePageFragment(position:Int, backClicked:Boolean) : Fragment(R.layout.fr
                         val comments = snap2.child("comments").getValue().toString()
                         val posttime = snap2.child("posttime").getValue().toString()
                         val profileURL = snap2.child("profileURL").getValue().toString()
+                        val fileUrl = snap2.child("fileUrl").getValue().toString()
+
 
                         if (!postList.contains(
-                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID, System.currentTimeMillis(), posttime)
+                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID, System.currentTimeMillis(), posttime,fileUrl)
                             )
                         )  {
                             postList.add(
-                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID,System.currentTimeMillis(),posttime))}
+                                GetPostsModel(title,desc,poster,profileURL,idInfo,likes,comments,postID,System.currentTimeMillis(),posttime,fileUrl))}
 
                     }
                     postList.reverse()

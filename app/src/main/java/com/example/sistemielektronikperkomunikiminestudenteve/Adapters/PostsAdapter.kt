@@ -67,13 +67,13 @@ class PostsAdapter(
 
 //        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
-        Log.d(currentID.fileUrl,"THE FILE URLLL")
+        Log.d(currentID.fileUrl.toString(),"THE FILE URLLL")
 
-        if(currentID.fileUrl==null){
+        if(currentID.fileUrl.toString().equals("")){
             holder.postImageFile.visibility=GONE
         }else{
             holder.postImageFile.visibility=VISIBLE
-            Picasso.with(thisContext).load(currentID.fileUrl).into(holder.postImageFile)
+            Picasso.with(thisContext).load(currentID.fileUrl.toString()).into(holder.postImageFile)
         }
 
         holder.postText.setOnClickListener() {
@@ -88,7 +88,7 @@ class PostsAdapter(
                     currentID.comments,
                     currentID.posttime,
                     currentID.profileURL,
-                    currentID.fileUrl
+                    currentID.fileUrl.toString()
                 )
             )
         }
@@ -105,7 +105,7 @@ class PostsAdapter(
                     currentID.comments,
                     currentID.posttime,
                     currentID.profileURL,
-                    currentID.fileUrl
+                    currentID.fileUrl.toString()
                 )
             )
         }
@@ -122,7 +122,24 @@ class PostsAdapter(
                     currentID.comments,
                     currentID.posttime,
                     currentID.profileURL,
-                    currentID.fileUrl
+                    currentID.fileUrl.toString()
+                )
+            )
+        }
+
+        holder.postImageFile.setOnClickListener(){
+            mainactivity.setCurrentFragment(
+                FocusedPost(
+                    position,
+                    currentID.publicKey,
+                    currentID.poster,
+                    currentID.title,
+                    currentID.desc,
+                    currentID.likes,
+                    currentID.comments,
+                    currentID.posttime,
+                    currentID.profileURL,
+                    currentID.fileUrl.toString()
                 )
             )
         }

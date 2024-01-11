@@ -101,7 +101,6 @@
                 android:layout_height="wrap_content"
                 android:text="Text"
                 android:textSize="15sp"
-                android:lines="5"
                 android:gravity="top"
                 android:paddingStart="15sp"
                 android:paddingEnd="15sp"
@@ -116,7 +115,8 @@
             <ImageView
                 android:id="@+id/postImageFile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
                 android:visibility="gone"
                 tools:src="@tools:sample/avatars"
                 />
