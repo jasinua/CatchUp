@@ -45,6 +45,7 @@ class postFragment : Fragment(R.layout.fragment_post) {
 
         mainactivity = activity as MainActivity
         idInfo = mainactivity.getUserId()
+        fileImageUri = ""
 
         title = view.findViewById(R.id.title)
         description = view.findViewById(R.id.postDescription)
@@ -86,7 +87,6 @@ class postFragment : Fragment(R.layout.fragment_post) {
         var postdescription = description.text.toString()
         var poster = ""
         var profileURL = ""
-        fileImageUri=""
         //poster name
         FirebaseDatabase.getInstance().getReference("USERS").child("$idInfo").addListenerForSingleValueEvent(object:ValueEventListener{
 
@@ -100,14 +100,34 @@ class postFragment : Fragment(R.layout.fragment_post) {
                 val timeFormat = SimpleDateFormat("dd/M HH:mm:ss")
                 val time = timeFormat.format(Date())
 
-                val post = GetPostsModel(posttitle, postdescription, poster, profileURL, idInfo, "0" , "0",postID,System.currentTimeMillis(),time,fileImageUri)
+                val post = GetPostsModel(posttitle, postdescription, poster, profileURL, idInfo, "0" , "0",postID,System.currentTimeMillis(),time)
 
                 databaseReference.child(postID).setValue(post).addOnCompleteListener{
-                    mainactivity.setCurrentFragment(FocusedPost(0,postID,poster,posttitle,postdescription,"0","0",time,profileURL,fileImageUri))
+                    mainactivity.setCurrentFragment(FocusedPost(0,postID,poster,posttitle,postdescription,"0","0",time,profileURL))
                     Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
                 }
+
+                FirebaseDatabase.getInstance().getReference("POSTS").child("fileUrl").child(postID).addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        for (snap in snapshot.children) {
+                            databaseReference.child(postID).child("fileUrl").child(snap.key!!.toString()).setValue(snap.getValue())
+                        }
+
+
+
+                    }
+
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
+                FirebaseDatabase.getInstance().getReference("POSTS").child("fileUrl").child(postID).removeValue()
             }
             override fun onCancelled(error: DatabaseError) {
             }
@@ -141,8 +161,9 @@ class postFragment : Fragment(R.layout.fragment_post) {
 
                 fileImageUri = it.toString()
                 Toast.makeText(context,"$postID",Toast.LENGTH_SHORT).show()
-                FirebaseDatabase.getInstance().getReference("POSTS").child(postID).child("fileUrl")
-                    .setValue("$fileImageUri")
+                var newPostID = databaseReference.push().key!!
+
+                FirebaseDatabase.getInstance().getReference("POSTS").child("fileUrl").child(postID).child(newPostID).setValue(fileImageUri)
 
             }
         }.addOnFailureListener {
@@ -169,6 +190,8 @@ class postFragment : Fragment(R.layout.fragment_post) {
         if(resultCode == 100  || resultCode == Activity.RESULT_OK) {
             ImageUri = data?.data!!
             postImageFile.setImageURI(ImageUri)
+
+
 //            Toast.makeText(context, "OnActivity", Toast.LENGTH_SHORT).show()
             uploadImage()
         } else {

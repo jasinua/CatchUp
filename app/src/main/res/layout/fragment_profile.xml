@@ -13,7 +13,7 @@
         android:id="@+id/MainMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/profile_background"
+        android:background="@color/blue"
         android:orientation="vertical"
 
         >

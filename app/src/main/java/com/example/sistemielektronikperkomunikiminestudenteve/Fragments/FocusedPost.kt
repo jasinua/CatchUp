@@ -26,7 +26,17 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import java.util.Date
 
-class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,desc: String?,likes: String?,comments: String?,posttime: String?,profileURL: String?,postImageUrl:String?) : Fragment(R.layout.fragment_focused_post) {
+class FocusedPost(
+    position: Int,
+    postID: String?,
+    poster: String?,
+    title: String?,
+    desc: String?,
+    likes: String?,
+    comments: String?,
+    posttime: String?,
+    profileURL: String?
+) : Fragment(R.layout.fragment_focused_post) {
 
     val postID = postID
     val poster = poster
@@ -37,7 +47,7 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
     val posttime = posttime
     val profileURL = profileURL
     val position = position
-    val postImageUrl = postImageUrl
+//    val postImageUrl = postImageUrl
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var postList:ArrayList<GetCommentsModel>
@@ -92,12 +102,12 @@ class FocusedPost(position:Int ,postID: String?,poster: String?,title: String?,d
         val backButton = view.findViewById<ImageView>(R.id.backButton)
         val postImage = view.findViewById<ImageView>(R.id.postImageFile)
 
-        if(postImageUrl.toString().equals("")){
-            postImage.visibility = GONE
-        }else{
-            postImage.visibility = VISIBLE
-            Picasso.with(requireContext()).load(postImageUrl).into(postImage)
-        }
+//        if(postImageUrl.toString().equals("")){
+//            postImage.visibility = GONE
+//        }else{
+//            postImage.visibility = VISIBLE
+////            Picasso.with(requireContext()).load(postImageUrl).into(postImage)
+//        }
 
         getCommentText =  view.findViewById(R.id.commentText)
 

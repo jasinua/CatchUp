@@ -87,8 +87,7 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL,
-                    currentID.fileUrl.toString()
+                    currentID.profileURL
                 )
             )
         }
@@ -104,8 +103,7 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL,
-                    currentID.fileUrl.toString()
+                    currentID.profileURL
                 )
             )
         }
@@ -121,8 +119,7 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL,
-                    currentID.fileUrl.toString()
+                    currentID.profileURL
                 )
             )
         }
@@ -138,8 +135,7 @@ class PostsAdapter(
                     currentID.likes,
                     currentID.comments,
                     currentID.posttime,
-                    currentID.profileURL,
-                    currentID.fileUrl.toString()
+                    currentID.profileURL
                 )
             )
         }
