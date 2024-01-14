@@ -39,7 +39,8 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="35sp"
                     android:layout_marginBottom="10sp"
-                    android:padding="1sp"   
+                    android:padding="1sp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/profile"
                     android:foreground="@drawable/profileoverlay"
                     />
