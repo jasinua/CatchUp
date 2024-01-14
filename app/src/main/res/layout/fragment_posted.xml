@@ -247,6 +247,9 @@
                 android:textColor="@color/black"
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/cursor"
+
 
                 />
 

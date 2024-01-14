@@ -303,7 +303,6 @@ class FocusedPost(
                             )}
 
                     }
-                    postList.reverse()
                     mAdapter.notifyDataSetChanged()
 
                 }
