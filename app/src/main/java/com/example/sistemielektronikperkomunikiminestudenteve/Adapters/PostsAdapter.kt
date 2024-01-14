@@ -67,14 +67,29 @@ class PostsAdapter(
 
 //        Picasso.with(thisContext).load(currentID.profileURL).into(holder.postProfile)
 
+        FirebaseDatabase.getInstance().getReference("POSTS").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if(currentID.fileUrl.toString().equals("")){
+                    holder.postImageFile.visibility=GONE
+                }else{
+                    for (snap in snapshot.child(currentID.publicKey.toString()).child("fileUrl").children) {
+
+                        holder.postImageFile.visibility=VISIBLE
+                        Picasso.with(thisContext).load(snap.getValue().toString()).into(holder.postImageFile)
+                        return
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
         Log.d(currentID.fileUrl.toString(),"THE FILE URLLL")
 
-        if(currentID.fileUrl.toString().equals("")){
-            holder.postImageFile.visibility=GONE
-        }else{
-            holder.postImageFile.visibility=VISIBLE
-            Picasso.with(thisContext).load(currentID.fileUrl.toString()).into(holder.postImageFile)
-        }
 
         holder.postText.setOnClickListener() {
             mainactivity.setCurrentFragment(
