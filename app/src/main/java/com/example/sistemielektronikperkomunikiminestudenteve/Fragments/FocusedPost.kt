@@ -102,6 +102,33 @@ class FocusedPost(
         val backButton = view.findViewById<ImageView>(R.id.backButton)
         val postImage = view.findViewById<ImageView>(R.id.postImageFile)
 
+        FirebaseDatabase.getInstance().getReference("POSTS").child("$postID").child("fileUrl").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
+
+
+                    if (snapshot.getValue().toString() == "" ) {
+
+                        postImage.visibility = GONE
+                        return
+                    } else {
+
+                        postImage.visibility = VISIBLE
+
+                        Picasso.with(context).load(snap.getValue().toString()).into(postImage)
+                        return
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
 //        if(postImageUrl.toString().equals("")){
 //            postImage.visibility = GONE
 //        }else{
@@ -293,6 +320,7 @@ class FocusedPost(
                         val profileURL = snap2.child("commenterProfileURL").getValue().toString()
                         val commentTime = snap2.child("commentTime").getValue().toString()
                         val commentID = snap2.child("commentID").getValue().toString()
+
 
                         if (!postList.contains(
                                 GetCommentsModel(comments, commentLikes, profileURL, username,username,System.currentTimeMillis(),commentTime,commentID)

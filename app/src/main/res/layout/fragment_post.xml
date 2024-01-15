@@ -48,6 +48,8 @@
                 android:layout_margin="4sp"
                 android:textColorHint="@color/hint"
 
+                android:textCursorDrawable="@null"
+
                 />
         </LinearLayout>
 
@@ -75,6 +77,8 @@
                 android:textColor = "@color/black"
                 android:layout_margin="5sp"
                 android:textColorHint="@color/hint"
+
+                android:textCursorDrawable="@null"
                 />
 
 

@@ -44,6 +44,8 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
+
                 />
 
             <EditText
@@ -63,6 +65,7 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
 
             <EditText
@@ -82,6 +85,7 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
 
             <EditText
@@ -101,6 +105,7 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
 
 
@@ -121,6 +126,7 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
             <EditText
                 android:id="@+id/repeatPasswordSignUp"
@@ -139,6 +145,7 @@
                 android:textColorHint="@color/menu"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
 
             <Button

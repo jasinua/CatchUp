@@ -33,6 +33,7 @@
                 android:layout_margin="4sp"
                 android:src="@drawable/profile"
                 android:foreground="@drawable/profileoverlay"
+                android:scaleType="centerCrop"
                 />
 
 
@@ -233,6 +234,7 @@
                 android:layout_weight="0"
                 android:src="@drawable/profile"
                 android:foreground="@drawable/profileoverlay"
+                android:scaleType="centerCrop"
                 />
 
             <EditText
@@ -248,7 +250,8 @@
                 android:background="@drawable/roundborder"
                 android:layout_margin="5sp"
                 android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/cursor"
+                android:textCursorDrawable="@null"
+
 
 
                 />

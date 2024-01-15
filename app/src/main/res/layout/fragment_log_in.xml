@@ -71,6 +71,7 @@
                 android:paddingStart="50sp"
                 android:paddingEnd="0dp"
 
+                android:textCursorDrawable="@null"
                 />
 
             <ImageView
@@ -95,7 +96,10 @@
             app:layout_constraintEnd_toEndOf="@+id/passwordInput2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordInput2" />
+            app:layout_constraintTop_toBottomOf="@id/passwordInput2"
+
+            android:textCursorDrawable="@null"
+            />
 
 
 
@@ -119,6 +123,7 @@
             android:textColorHint="@color/menu"
             android:hint="Password"
 
+            android:textCursorDrawable="@null"
 
 
                     >

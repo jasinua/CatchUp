@@ -128,7 +128,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:visibility="gone"
                 tools:src="@tools:sample/avatars"
                 />
 
@@ -255,6 +254,8 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/hint"
                     android:textSize="13sp"
+
+                    android:textCursorDrawable="@null"
 
                     />
 

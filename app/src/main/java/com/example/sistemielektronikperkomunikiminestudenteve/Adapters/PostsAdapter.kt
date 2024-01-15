@@ -78,15 +78,12 @@ class PostsAdapter(
                         holder.postImageFile.visibility=VISIBLE
                         Picasso.with(thisContext).load(snap.getValue().toString()).into(holder.postImageFile)
                         return
-
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
         Log.d(currentID.fileUrl.toString(),"THE FILE URLLL")
 
